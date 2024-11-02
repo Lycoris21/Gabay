@@ -47,8 +47,8 @@
                 {{ __('Sign in') }}
             </x-primary-button>
             
-            <a class="mt-10 flex flex-row text-sm font-semibold text-blue-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-                <p class="font-light text-gray-500 mr-1">Don't have an account?</p>
+            <a class="mt-10 flex flex-row self-center text-sm font-semibold text-blue-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                <p class=" font-extralight text-gray-500 mr-1">Don't have an account?</p>
                 {{ __("Register now") }}
             </a>
         </div>
