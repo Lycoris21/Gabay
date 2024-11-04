@@ -1,7 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+
+// Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
+
+// Route::middleware(['auth'])->group(function () {
+//     return view('dashboard');
+// });
 
 Route::get('/', function () {
     return view('welcome');
