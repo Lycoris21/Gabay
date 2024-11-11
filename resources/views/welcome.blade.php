@@ -15,7 +15,7 @@
     <div class="bg-gray-50 text-black/50 {{-- dark:text-white/50" --}}>
         {{-- <img id="background" class="absolute -left-20 top-0 max-w-[877px]" src="https://laravel.com/assets/img/welcome/background.svg" alt="Laravel background" /> --}}
         
-        <header class="h-auto w-full ">
+        <header class="h-auto w-full">
                 
             @if (Route::has('login'))
             <nav class="pr-10 flex flex-row items-center justify-end bg-white shadow-md h-16">
@@ -26,31 +26,31 @@
                     Dashboard
                 </a>
                 @else
-                <div class="flex flex-row justify-self-start font-bold mr-20">
+                <div class="flex flex-row justify-self-start font-bold mr-40">
                     <a
                         href="{{ route('login') }}"
-                        class="px-5 py-2 text-sky-900 ring-1 ring-transparent hover:underline  hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white mr-5 active:underline underline-offset-4">
+                        class="px-5 py-2 text-sky-900 ring-1 ring-transparent hover:underline  hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] mr-5 active:underline underline-offset-4">
                         Courses
                     </a>
                     <a
                         href="{{ route('login') }}"
-                        class="px-5 py-2 text-sky-900 ring-1 ring-transparent hover:underline  hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white mr-5 active:underline underline-offset-4">
+                        class="px-5 py-2 text-sky-900 ring-1 ring-transparent hover:underline  hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] mr-5 active:underline underline-offset-4">
                         How it Works
                     </a>
                     <a
                         href="{{ route('login') }}"
-                        class="px-5 py-2 text-sky-900 ring-1 ring-transparent hover:underline  hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white mr-5 active:underline underline-offset-4">
+                        class="px-5 py-2 text-sky-900 ring-1 ring-transparent hover:underline  hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20]  mr-5 active:underline underline-offset-4">
                         Contact us
                     </a>
                 </div>
                 <a
                     href="{{ route('login') }}"
-                    class="border border-solid border-sky-900 font-bold rounded-full px-5 py-2 text-sky-900 ring-1 ring-transparent transition hover:border-sky-700 hover:bg-sky-700 hover:text-white hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white mr-5 hover:shadow-md">
+                    class="border border-solid border-sky-900 font-bold rounded-full px-5 py-2 text-sky-900 ring-1 ring-transparent transition hover:border-sky-700 hover:bg-sky-700 hover:text-white hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] mr-5 hover:shadow-md">
                     Log in
                 </a>
 
                 @if (Route::has('register'))
-                <div class="border border-transparent rounded-full px-5 py-2 text-white ring-1 font-bold ring-transparent transition hover:bg-sky-700 hover:duration-500 hover:shadow-md focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white bg-sky-900">
+                <div class="border border-transparent rounded-full px-5 py-2 text-white ring-1 font-bold ring-transparent transition hover:bg-sky-700 hover:duration-500 hover:shadow-md focus:outline-none focus-visible:ring-[#FF2D20] bg-sky-900">
                     <a
                     href="{{ route('register') }}"
                     {{-- class="border border-solid border-black rounded-full px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white " --}}>
