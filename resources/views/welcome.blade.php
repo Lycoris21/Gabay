@@ -87,8 +87,8 @@
                             </a>
                         </div>
                     </div>
-                    <div class="w-1/2">
-                        <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current max-h-20">
+                    <div class="absolute top-1 left-2/3">
+                        <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current scale-150">
                     </div>
                 </div>
             </section>
