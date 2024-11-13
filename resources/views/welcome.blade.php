@@ -50,19 +50,22 @@
                     </a>
                 </div>
                 <div class="flex justify-start font-bold">
-                    <a
-                        href="{{ route('login') }}"
-                        class="justify-self-end border border-solid border-sky-900 font-bold rounded-full px-5 py-2 text-sky-900 ring-1 ring-transparent transition hover:border-sky-700 hover:bg-sky-700 hover:text-white hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] mr-5 hover:shadow-md">
-                        Log in
-                    </a>
+                    
+                    <x-secondary-button class="mx-5">
+                        <a
+                            href="{{ route('login') }}"
+                            >
+                            Log in
+                        </a>
+                    </x-secondary-button>
 
                     @if (Route::has('register'))
-                    <div class="justify-self-end border border-transparent rounded-full px-5 py-2 text-white ring-1 font-bold ring-transparent transition hover:bg-sky-700 hover:duration-500 hover:shadow-md focus:outline-none focus-visible:ring-[#FF2D20] bg-sky-900">
+                    <x-primary-button>
                         <a
                         href="{{ route('register') }}">
                             Register
                         </a>
-                    </div>
+                    </x-primary-button>
                 </div>
                 @endif
                 @endauth
@@ -80,12 +83,12 @@
                         <p class="my-5 text-lg font-normal text-gray-500">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae dapibus nunc, in tristique lorem.
                         </p>
-                        <div class="justify-self-start border border-transparent rounded-full px-5 py-2 text-white ring-1 font-bold ring-transparent transition hover:bg-sky-700 hover:duration-500 hover:shadow-md focus:outline-none focus-visible:ring-[#FF2D20] bg-sky-900">
+                        <x-primary-button>
                             <a
                             href="{{ route('register') }}">
                                 Book a tutor
                             </a>
-                        </div>
+                        </x-primary-button>
                     </div>
                     <div class="absolute top-1 left-2/3">
                         <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current scale-150">

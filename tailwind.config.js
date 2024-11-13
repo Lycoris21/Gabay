@@ -16,6 +16,7 @@ export default {
             },
             colors:{
                 customOrange: '#BD7D45', // or 'rgb(189, 125, 69)'
+            
             },
         },
     },
