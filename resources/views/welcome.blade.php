@@ -77,9 +77,9 @@
             <section class="{{-- bg-blue-100 --}} h-[calc(100vh-350px)] relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <div class="flex flex-row">
                     <div class="w-1/2">
-                        <h1 class="my-5 text-4xl font-bold text-black">
+                        <x-header>
                             We’re here to help you reach your academic goals!
-                        </h1>
+                        </x-header>
                         <p class="my-5 text-lg font-normal text-gray-500">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae dapibus nunc, in tristique lorem.
                         </p>
@@ -90,7 +90,7 @@
                             </a>
                         </x-primary-button>
                     </div>
-                    <div class="absolute top-1 left-2/3">
+                    <div class="absolute top-2/6 left-2/3">
                         <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current scale-150">
                     </div>
                 </div>
