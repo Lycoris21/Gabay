@@ -47,7 +47,41 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('complete-profile.show');
     }
 
+
+    /**
+     * Display the profile completion view.
+     */
+
+    public function showProfileCompletion(): View
+    {
+        return view('auth.complete-profile');
+    }
+
+    /**
+     * Handle profile completion submission.
+     */
+    public function completeProfile(Request $request): RedirectResponse
+    {
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'gender' => ['required', 'in:Male,Female,Other'],
+            'year_of_birth' => ['required', 'integer', 'digits:4'],
+        ]);
+
+        // Fetch the authenticated user
+        $user = Auth::user();
+
+        // Assign the validated values to the user's attributes
+        $user->gender = $validatedData['gender'];
+        $user->year_of_birth = $validatedData['year_of_birth'];
+
+        // Save the user with the updated attributes
+        $user->save();
+
+        // Redirect to dashboard with a success message
+        return redirect()->route('dashboard')->with('status', 'Profile updated successfully.');
+    }
 }

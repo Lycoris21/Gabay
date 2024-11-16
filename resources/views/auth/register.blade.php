@@ -54,7 +54,7 @@
         <div class="flex flex-col items-center justify-end mt-6">
 
             <x-primary-button class="mt-2 w-full">
-                {{ __('Register') }}
+                {{ __('Next') }}
             </x-primary-button>
 
             <a class="mt-10 flex flex-row text-sm font-semibold text-blue-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">

@@ -12,7 +12,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="bg-gray-50 text-black/50"}>
+    <div class="bg-gray-50 text-black/50">
         {{-- <img id="background" class="absolute -left-20 top-0 max-w-[877px]" src="https://laravel.com/assets/img/welcome/background.svg" alt="Laravel background" /> --}}
         
         <header class="h-auto w-full">
