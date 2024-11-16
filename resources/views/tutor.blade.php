@@ -24,7 +24,9 @@
                             <x-header>
                                 Confirm Details
                             </x-header>
-                            <x-text-input/>
+                            <p>Details 1</p>
+                            <p>Details 2</p>
+                            <p>Details 3</p>
                         @endif
                     </x-page-section>
                 
