@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageSectionController;
 
 // Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/tutor/{pageNumber?}', [PageSectionController::class, 'showPage'])->name('pageSection.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/complete-profile', [RegisteredUserController::class, 'showProfileCompletion'])->name('complete-profile.show');
