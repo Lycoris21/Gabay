@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageSectionController;
 
@@ -39,5 +40,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//these are weird
+Route::post('/save-subject', [ApplicationController::class, 'saveSubject'])->name('application.save.subject');
+Route::post('/tutor/resume/upload', [ApplicationController::class, 'uploadResume'])->name('applcation.resume.upload');
+Route::post('/tutor/hourly-rate', [ApplicationController::class, 'setHourlyRate'])->name('applcation.set.hourly.rate');
+Route::post('/tutor', [ApplicationController::class, 'store'])->name('applications.store');
 
 require __DIR__.'/auth.php';

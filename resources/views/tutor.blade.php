@@ -7,26 +7,42 @@
                     <x-page-section :currentPage="$currentPage">
                         @if ($currentPage === 1)
                             <x-header>
-                                1
+                                Which subject would you like to teach?
                             </x-header>
-                            <x-text-input/>
+                            <x-text-input placeholder="Subject" name="subject" id="subject" class="w-1/2"></x-text-input>
                         @elseif ($currentPage === 2)
                             <x-header>
-                                2
+                                Upload Resume
                             </x-header>
-                            <x-text-input/>
+                            <x-sub-header>
+                                Upload your latest updated resume in PDF format
+                            </x-sub-header>
+
+                            <form id="resume-upload-form" action="{{ route('applcation.resume.upload') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <x-file-input name="resume" class="w-1/2" accept=".pdf"></x-file-input>
+                            </form>
                         @elseif ($currentPage === 3)
                             <x-header>
-                                3
+                                What is your hourly rate?
                             </x-header>
                             <x-text-input/>
                         @else
                             <x-header>
                                 Confirm Details
                             </x-header>
-                            <p>Details 1</p>
-                            <p>Details 2</p>
-                            <p>Details 3</p>
+                            <div class="items-center w-1/2 bg-white p-6 rounded-md shadow">
+                                <p><strong>Subject:</strong> {{ session('subject', 'Not specified') }}</p>
+                                <p><strong>Resume:</strong> 
+                                    @if(session('resume_path'))
+                                        <a href="{{ asset('storage/' . session('resume_path')) }}" target="_blank" class="text-blue-500 underline">View Resume</a>
+                                    @else
+                                        Not uploaded
+                                    @endif
+                                </p>
+                                <p><strong>Hourly Rate:</strong> {{ session('hourly_rate', 'Not specified') }} {{ session('currency', '') }}</p>
+                            </div>
+                            
                         @endif
                     </x-page-section>
                 
