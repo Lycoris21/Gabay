@@ -18,7 +18,7 @@
         @method('patch')
 
         @if(Auth::user()->profile_picture)
-            <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-16 h-16 rounded-full mb-4">
+        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-16 h-16 rounded-full mb-4">
         @endif
 
         <!-- Profile Picture Input -->
@@ -83,6 +83,13 @@
             <x-input-label for="year_of_birth" :value="__('Year of Birth')" />
             <x-text-input id="year_of_birth" name="year_of_birth" type="number" class="mt-1 block w-full" :value="old('year_of_birth', $user->year_of_birth)" required />
             <x-input-error class="mt-2" :messages="$errors->get('year_of_birth')" />
+        </div>
+
+        <!-- Description -->
+        <div>
+            <x-input-label for="description" :value="__('Description')" />
+            <textarea id="description" name="last_name" type="text" class="mt-1 block w-full" :value="old('description', $user->description)" required> </textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
         </div>
 
         <div class="flex items-center gap-4">

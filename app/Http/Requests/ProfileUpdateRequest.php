@@ -29,6 +29,7 @@ class ProfileUpdateRequest extends FormRequest
             'gender' => ['nullable', 'in:male,female,other'],
             'year_of_birth' => ['nullable', 'integer', 'digits:4'],
             'profile_picture' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

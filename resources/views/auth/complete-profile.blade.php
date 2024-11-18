@@ -9,7 +9,7 @@
         <div class="mt-4">
             <x-input-label for="gender" :value="__('Gender')" />
             <select id="gender" name="gender" class="block mt-1 w-full" required>
-                <option value="">{{ __('Select Gender') }}</option>
+                <option value="" disabled selected>{{ __('Select Gender') }}</option>
                 <option value="Male">{{ __('Male') }}</option>
                 <option value="Female">{{ __('Female') }}</option>
                 <option value="Other">{{ __('Other') }}</option>
