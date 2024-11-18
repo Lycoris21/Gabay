@@ -21,6 +21,16 @@
                     <p class="text-gray-500">
                         {{ Auth::user()->email }}
                     </p>
+
+                    @if(Auth::user()->description)
+                        <p class="text-gray-500">
+                            {{ Auth::user()->description }}
+                        </p>
+                    @else
+                        <p class="text-gray-500">
+                            No description provided.
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>

@@ -88,8 +88,8 @@
         <!-- Description -->
         <div>
             <x-input-label for="description" :value="__('Description')" />
-            <textarea id="description" name="last_name" type="text" class="mt-1 block w-full" :value="old('description', $user->description)" required> </textarea>
-            <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+            <textarea id="description" name="description" class="mt-1 block w-full" rows="3" placeholder="Write a brief description..." maxlength="500">{{ old('description', $user->description) }}</textarea>
+            <x-input-error class="mt-2" :messages="$errors->get('description')" />
         </div>
 
         <div class="flex items-center gap-4">

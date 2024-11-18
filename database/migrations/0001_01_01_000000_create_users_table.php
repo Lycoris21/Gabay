@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
             $table->integer('year_of_birth')->nullable();
             $table->string('profile_picture')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->boolean('is_tutor')->default(false);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
