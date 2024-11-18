@@ -22,7 +22,6 @@ class ApplicationController extends Controller
         ]);;
     }
 
-
     /**
      * Upload the resume and create an application if it doesn't already exist.
      */

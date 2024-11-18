@@ -13,9 +13,19 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data" class="mt-6 space-y-6">
         @csrf
         @method('patch')
+
+        @if(Auth::user()->profile_picture)
+            <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-16 h-16 rounded-full mb-4">
+        @endif
+
+        <!-- Profile Picture Input -->
+        <div class="mt-4">
+            <input id="profile_picture" type="file" name="profile_picture" class="block mt-1 w-full" accept="image/*">
+            <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />
+        </div>
 
         <!-- First Name -->
         <div>
@@ -54,6 +64,25 @@
                 @endif
             </div>
             @endif
+        </div>
+
+        <!-- Gender -->
+        <div>
+            <x-input-label for="gender" :value="__('Gender')" />
+            <select id="gender" name="gender" class="block mt-1 w-full" required>
+                <option value="">{{ __('Select Gender') }}</option>
+                <option value="male" {{ old('gender', $user->gender) === 'male' ? 'selected' : '' }}>{{ __('Male') }}</option>
+                <option value="female" {{ old('gender', $user->gender) === 'female' ? 'selected' : '' }}>{{ __('Female') }}</option>
+                <option value="other" {{ old('gender', $user->gender) === 'other' ? 'selected' : '' }}>{{ __('Other') }}</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('gender')" />
+        </div>
+
+        <!-- Year of Birth -->
+        <div>
+            <x-input-label for="year_of_birth" :value="__('Year of Birth')" />
+            <x-text-input id="year_of_birth" name="year_of_birth" type="number" class="mt-1 block w-full" :value="old('year_of_birth', $user->year_of_birth)" required />
+            <x-input-error class="mt-2" :messages="$errors->get('year_of_birth')" />
         </div>
 
         <div class="flex items-center gap-4">
