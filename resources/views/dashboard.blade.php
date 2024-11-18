@@ -16,6 +16,13 @@
                         Profile ID: {{ Auth::user()->id }}
                     </p>
                     <p class="text-gray-500">
+                        @if(Auth::user()->is_tutor)
+                            {{ __('Tutor') }}
+                        @else
+                            {{ __('Student') }}
+                        @endif
+                    </p>
+                    <p class="text-gray-500">
                         {{ ucfirst(Auth::user()->gender) }}, {{ \Carbon\Carbon::now()->year - Auth::user()->year_of_birth }} Years
                     </p>
                     <p class="text-gray-500">
