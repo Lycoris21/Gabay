@@ -4,9 +4,15 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    @if(Auth::user()->profile_picture)
-                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-16 h-16 rounded-full mb-4">
-                    @endif
+                    <!-- @if(Auth::user()->profile_picture)
+                    <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-16 h-16 rounded-full mb-4">
+                    @else
+                    <img src="{{ asset('storage/profile-picture/default-image.jpg') }}" alt="Default Profile Picture" class="w-16 h-16 rounded-full mb-4">
+                    @endif -->
+
+                    <p>
+                        {{ Auth::user()->profile_picture }}
+                    </p>
 
                     <p class="font-semibold text-3xl">
                         {{ Auth::user()->last_name }}, {{ Auth::user()->first_name }}
@@ -16,9 +22,9 @@
                     </p>
                     <p class="text-gray-500">
                         @if(Auth::user()->is_tutor)
-                            {{ __('Tutor') }}
+                        {{ __('Tutor') }}
                         @else
-                            {{ __('Student') }}
+                        {{ __('Student') }}
                         @endif
                     </p>
                     <p class="text-gray-500">
@@ -29,13 +35,13 @@
                     </p>
 
                     @if(Auth::user()->description)
-                        <p class="text-gray-500">
-                            {{ Auth::user()->description }}
-                        </p>
+                    <p class="text-gray-500">
+                        {{ Auth::user()->description }}
+                    </p>
                     @else
-                        <p class="text-gray-500">
-                            No description provided.
-                        </p>
+                    <p class="text-gray-500">
+                        No description provided.
+                    </p>
                     @endif
                 </div>
             </div>

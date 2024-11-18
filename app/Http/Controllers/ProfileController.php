@@ -29,16 +29,16 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
+        $user->fill($request->validated());
+
         if ($request->hasFile('profile_picture')) {
             if ($user->profile_picture) {
                 Storage::disk('public')->delete($user->profile_picture);
             }
 
-            $path = $request->file('profile_picture')->store('images', 'public');
+            $path = $request->file('profile_picture')->store('profile-picture', 'public');
             $user->profile_picture = $path;
         }
-
-        $user->fill($request->validated());
 
         if ($user->isDirty('email')) {
             $user->email_verified_at = null;
