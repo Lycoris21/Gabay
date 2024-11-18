@@ -10,8 +10,8 @@ class PageSectionController extends Controller
     {
         $pageNumber = max(1, (int)$pageNumber); // Ensure page number is at least 1
 
-        return view('tutor', [
-            'currentPage' => $pageNumber,
+        return view('tutorApplication', [
+            'currentPage' => $pageNumber
         ]);
     }
 }

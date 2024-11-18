@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('tutors', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->string('description');        
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('description');
+            
             $table->float('hourly_rate');
-            $table->foreign('user_id')->references('id')->on('users'); 
+           
         });
     }
 
