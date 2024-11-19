@@ -5,6 +5,8 @@
             <form id = "WHATEVER" action="{{ route('tutorApplication.submitStep') }}" method="POST">
             @csrf
                 <x-page-section :currentPage="$currentPage">
+                    <input type="hidden" name="currentPage" value="{{ $currentPage }}">
+
                     @if ($currentPage === 1)
                         <x-header>
                             Which subject would you like to teach?
