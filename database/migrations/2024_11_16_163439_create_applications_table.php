@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('resume_path')->nullable();
             $table->decimal('hourly_rate', 8, 2)->nullable();
             $table->string('subject', 50)->nullable();
@@ -27,6 +27,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('applications', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        
         Schema::dropIfExists('applications');
     }
 };

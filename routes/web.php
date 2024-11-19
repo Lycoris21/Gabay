@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\TutorApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageSectionController;
 
@@ -16,7 +16,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/tutor/{pageNumber?}', [PageSectionController::class, 'showPage'])->name('pageSection.show');
+Route::get('/tutorApplication/{pageNumber?}', [PageSectionController::class, 'showPage'])->name('pageSection.show');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/complete-profile', [RegisteredUserController::class, 'showProfileCompletion'])->name('complete-profile.show');
@@ -31,9 +31,9 @@ Route::get('/admin', function () {
     return view('admin');
 })->middleware(['auth', 'verified'])->name('admin');
 
-Route::get('/tutor', function () {
-    return view('tutor');
-})->middleware(['auth', 'verified'])->name('tutor');
+Route::get('/tutorApplication', function () {
+    return view('tutorApplication');
+})->middleware(['auth', 'verified'])->name('tutorApplication');
 
 Route::middleware('auth')->group(function () {
     // Route::get('/profile', )
@@ -42,10 +42,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-//these are weird
-Route::post('/save-subject', [ApplicationController::class, 'saveSubject'])->name('application.save.subject');
-Route::post('/tutor/resume/upload', [ApplicationController::class, 'uploadResume'])->name('applcation.resume.upload');
-Route::post('/tutor/hourly-rate', [ApplicationController::class, 'setHourlyRate'])->name('applcation.set.hourly.rate');
-Route::post('/tutor', [ApplicationController::class, 'store'])->name('applications.store');
+Route::post('/tutorApplication', [TutorApplicationController::class, 'submitStep'])->name('tutorApplication.submitStep');
 
 require __DIR__.'/auth.php';

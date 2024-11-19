@@ -10,10 +10,15 @@ class Application extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'resume_path',
-        'hourly_rate',
-        'subject',
+        'user_id', 
+        'resume_path', 
+        'hourly_rate', 
+        'subject', 
         'status'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
