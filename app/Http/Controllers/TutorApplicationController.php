@@ -21,7 +21,7 @@ class TutorApplicationController extends Controller
             $application->subject = $request->subject;
         } elseif ($request->has('resume')) {
             if ($request->file('resume')) {
-                $path = $request->file('resume')->store('resumes');
+                $path = $request->file('resume')->store('resumes', 'public');
                 $application->resume_path = $path;
             }
         } elseif ($request->has('hourly_rate')) {

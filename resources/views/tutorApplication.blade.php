@@ -2,7 +2,7 @@
     <div class="relative flex flex-col items-center justify-start pt-36">
         <section class="h-[calc(100vh-350px)] relative w-full max-w-2xl px-6 lg:max-w-7xl">
             <div>
-            <form id = "WHATEVER" action="{{ route('tutorApplication.submitStep') }}" method="POST">
+            <form id = "WHATEVER" action="{{ route('tutorApplication.submitStep') }}" method="POST" enctype="multipart/form-data">
             @csrf
                 <x-page-section :currentPage="$currentPage">
                     <input type="hidden" name="currentPage" value="{{ $currentPage }}">
@@ -29,11 +29,13 @@
                         <x-text-input placeholder="Hourly Rate" name="hourly_rate" value="{{ old('hourly_rate', session('application.hourly_rate', '')) }}" class="w-1/2"></x-text-input>
                     @else
                         <x-header class="text-4xl py-4">
-                            Confirm Details
+                           Review Application Details:
                         </x-header>
+
                         <div class="items-center w-1/2 bg-white p-6 rounded-md shadow">
-                            <p><strong>Subject:</strong> {{ session('application.subject', 'Not specified') }}</p>
-                            <p><strong>Resume:</strong>
+                           
+                            <p><strong>Subject: {{ session('application.subject', 'Not specified') }}</p>
+                            <p><strong>Resume:
                                 @if(session('application.resume_path'))
                                     <a href="{{ asset('storage/' . session('application.resume_path')) }}" target="_blank" class="text-blue-500 underline">View Resume</a>
                                 @else
