@@ -6,14 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class page-section extends Component
+class ExternalLogos extends Component
 {
+    public $src;
+    public $alt;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($src, $alt = 'ExternalLogos')
     {
-        //
+        $this->src = $src;
+        $this->alt = $alt;
     }
 
     /**
@@ -21,6 +24,6 @@ class page-section extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.page-section');
+        return view('components.external-logos');
     }
 }
