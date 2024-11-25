@@ -8,28 +8,28 @@
                     <input type="hidden" name="currentPage" value="{{ $currentPage }}">
 
                     @if ($currentPage === 1)
-                        <x-header>
+                        <x-header class="text-4xl py-4">
                             Which subject would you like to teach?
                         </x-header>
                         
                         <x-text-input placeholder="Subject" name="subject" value="{{ old('subject', session('application.subject', '')) }}" class="w-1/2"></x-text-input>
                     @elseif ($currentPage === 2)
-                        <x-header>
+                        <x-header class="text-4xl py-4">
                             Upload Resume
                         </x-header>
-                        <x-sub-header>
+                        <x-sub-header class="my-2 text-2xl">
                             Upload your latest updated resume in PDF format
                         </x-sub-header>
 
                         <x-file-input name="resume" class="w-1/2" accept=".pdf"></x-file-input>
                     @elseif ($currentPage === 3)
-                        <x-header>
+                        <x-header class="text-4xl py-4">
                             What is your hourly rate?
                         </x-header>
                         <x-text-input placeholder="Hourly Rate" name="hourly_rate" value="{{ old('hourly_rate', session('application.hourly_rate', '')) }}" class="w-1/2"></x-text-input>
                     @else
-                        <x-header>
-                                Review Application Details:
+                        <x-header class="text-4xl py-4">
+                           Review Application Details:
                         </x-header>
 
                         <div class="items-center w-1/2 bg-white p-6 rounded-md shadow">
