@@ -2,38 +2,40 @@
     <div class="relative flex flex-col items-center justify-start pt-32">
         <section class="h-[calc(100vh-350px)] relative w-full max-w-2xl px-6 lg:max-w-7xl">
             <div>
-            <form id = "WHATEVER" action="{{ route('tutorApplication.submitStep') }}" method="POST">
+            <form id = "WHATEVER" action="{{ route('tutorApplication.submitStep') }}" method="POST" enctype="multipart/form-data">
             @csrf
                 <x-page-section :currentPage="$currentPage">
                     <input type="hidden" name="currentPage" value="{{ $currentPage }}">
 
                     @if ($currentPage === 1)
-                        <x-header>
+                        <x-header class="text-4xl py-4">
                             Which subject would you like to teach?
                         </x-header>
                         
                         <x-text-input placeholder="Subject" name="subject" value="{{ old('subject', session('application.subject', '')) }}" class="w-1/2"></x-text-input>
                     @elseif ($currentPage === 2)
-                        <x-header>
+                        <x-header class="text-4xl py-4">
                             Upload Resume
                         </x-header>
-                        <x-sub-header>
+                        <x-sub-header class="my-2 text-2xl">
                             Upload your latest updated resume in PDF format
                         </x-sub-header>
 
                         <x-file-input name="resume" class="w-1/2" accept=".pdf"></x-file-input>
                     @elseif ($currentPage === 3)
-                        <x-header>
+                        <x-header class="text-4xl py-4">
                             What is your hourly rate?
                         </x-header>
                         <x-text-input placeholder="Hourly Rate" name="hourly_rate" value="{{ old('hourly_rate', session('application.hourly_rate', '')) }}" class="w-1/2"></x-text-input>
                     @elseif ($currentPage === 4)
-                        <x-header>
-                            Confirm Details
+                        <x-header class="text-4xl py-4">
+                           Review Application Details:
                         </x-header>
+
                         <div class="items-center w-1/2 bg-white p-6 rounded-md shadow">
-                            <p><strong>Subject:</strong> {{ session('application.subject', 'Not specified') }}</p>
-                            <p><strong>Resume:</strong>
+                           
+                            <p><strong>Subject: {{ session('application.subject', 'Not specified') }}</p>
+                            <p><strong>Resume:
                                 @if(session('application.resume_path'))
                                     <a href="{{ asset('storage/' . session('application.resume_path')) }}" target="_blank" class="text-blue-500 underline">View Resume</a>
                                 @else
@@ -64,6 +66,6 @@
             </div>
         </section>
 
-        <div class="bg-customOrange w-full h-32 mt-3"/>
+        <div class="bg-customOrange w-full h-32 mt-3">
     </div>
 </x-app-layout>

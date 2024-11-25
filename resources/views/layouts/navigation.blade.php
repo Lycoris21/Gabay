@@ -20,7 +20,7 @@
                     </x-nav-link>
                     
                     <!-- Remove LATER -->
-                    <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin')">
                         {{ __('Admin') }}
                     </x-nav-link>
                 </div>

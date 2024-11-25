@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\TutorApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageSectionController;
+use App\Http\Controllers\Admin\DashboardController;
 
 // Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
@@ -27,9 +28,7 @@ Route::middleware(['auth'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/admin', function () {
-    return view('admin');
-})->middleware(['auth', 'verified'])->name('admin');
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/tutorApplication', function () {
     return view('tutorApplication');
