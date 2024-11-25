@@ -17,9 +17,9 @@
                     <img src="{{ asset('storage/profile-picture/default-image.jpg') }}" alt="Default Profile Picture" class="w-28 h-28 rounded-full shadow-xl">
                 @endif
                 <div class="p-6 text-gray-900">
-                    <p class="font-semibold text-3xl">
+                    <x-header class="text-2xl py-4">
                         {{ Auth::user()->last_name }}, {{ Auth::user()->first_name }}
-                    </p>
+                    </x-header>
                     <p class="text-gray-500">
                         Profile ID: {{ Auth::user()->id }}
                     </p>

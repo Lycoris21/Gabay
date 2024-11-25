@@ -77,7 +77,7 @@
             <section class="{{-- bg-blue-100 --}} h-[calc(100vh-350px)] relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <div class="flex flex-row">
                     <div class="w-1/2">
-                        <x-header>
+                        <x-header class="text-4xl py-4">
                             We’re here to help you reach your academic goals!
                         </x-header>
                         <p class="my-5 text-lg font-normal text-gray-500">
