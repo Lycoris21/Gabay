@@ -14,22 +14,24 @@
         </x-header>
     </div>
     <div class="mt-5">
-        @if ($currentPage > 1)
-            <a href="{{ route('pageSection.show', ['pageNumber' => $currentPage - 1]) }}">
-                <x-secondary-button class="mr-5">
-                    Previous
-                </x-secondary-button>
+        @if ($currentPage < 5)
+            @if ($currentPage > 1)
+                <a href="{{ route('pageSection.show', ['pageNumber' => $currentPage - 1]) }}">
+                    <x-secondary-button class="mr-5">
+                        Previous
+                    </x-secondary-button>
+                </a>
+            @endif
+            
+            <a href="{{ route('pageSection.show', ['pageNumber' => $currentPage + 1]) }}">
+                <x-primary-button>
+                    @if ($currentPage < 4)
+                        Next
+                    @else
+                        Submit
+                    @endif
+                </x-primary-button>
             </a>
         @endif
-        
-        <a href="{{ route('pageSection.show', ['pageNumber' => $currentPage + 1]) }}">
-            <x-primary-button>
-                @if ($currentPage <4)
-                    Next
-                @else
-                    Submit
-                @endif
-            </x-primary-button>
-        </a>
     </div>
 </div>

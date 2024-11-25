@@ -1,5 +1,5 @@
 <x-app-layout name="tutor/1">
-    <div class="relative flex flex-col items-center justify-start pt-36">
+    <div class="relative flex flex-col items-center justify-start pt-32">
         <section class="h-[calc(100vh-350px)] relative w-full max-w-2xl px-6 lg:max-w-7xl">
             <div>
             <form id = "WHATEVER" action="{{ route('tutorApplication.submitStep') }}" method="POST">
@@ -27,7 +27,7 @@
                             What is your hourly rate?
                         </x-header>
                         <x-text-input placeholder="Hourly Rate" name="hourly_rate" value="{{ old('hourly_rate', session('application.hourly_rate', '')) }}" class="w-1/2"></x-text-input>
-                    @else
+                    @elseif ($currentPage === 4)
                         <x-header>
                             Confirm Details
                         </x-header>
@@ -41,6 +41,19 @@
                                 @endif
                             </p>
                             <p><strong>Hourly Rate:</strong> {{ session('application.hourly_rate', 'Not specified') }}</p>
+                        </div>
+                    @else
+                        <div class="items-center justify-items-center w-1/2 bg-white p-6 p ml-40 rounded-md shadow">
+                            <img src="{{ asset('storage/images/sent.png') }}" alt="sent" class="w-28 h-28">
+                            <x-header class="text-2xl mb-4">
+                                Application Sent!
+                            </x-header>
+                            <x-sub-header class="text-lg text-center mb-4">
+                                You will be notified of the status of your application.
+                            </x-sub-header>
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Back to Dashboard') }}
+                            </x-nav-link>
                         </div>
                     @endif
                 </x-page-section>
