@@ -109,7 +109,7 @@
     @endphp 
     <div class="py-5">
         <div class="flex max-w-7xl mx-auto sm:px-6 lg:px-8 h-[calc(100vh-120px)]">
-            <div class="mr-5 h-full w-1/3 flex-col items-center">
+            <div class="mr-5 h-full w-[28.50%] flex-col items-center">
                 <div class="mb-2 h-1/2 p-5 pb-12 bg-white overflow-hidden shadow-sm sm:rounded-lg w-full">
                     Notifications
                     <div class="overflow-y-scroll mt-2 h-full"> {{-- div for all notifications --}}
@@ -190,7 +190,6 @@
                     </p>
                     @endif
                 </div>
-                <!-- TODO: Create working redirect links -->
                 <div class="flex w-1/4 items-start justify-end">
                     <x-external-logos src="{{ asset('storage/images/Github_Logo.png') }}" alt="External app logo"/>
                     <x-external-logos src="{{ asset('storage/images/Gmail_Logo.png') }}" alt="External app logo"/>
