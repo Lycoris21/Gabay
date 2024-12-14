@@ -106,7 +106,7 @@
             ],
         ];
 
-        $subjectTags = ['Mathematics', 'English', 'Programming 2', 'Data Structures and Algorithms', 'Web Development 2'];
+        $subjectTags = ['Mathematics', 'English', 'Programming'];
 
     @endphp 
     <div class="py-5">
