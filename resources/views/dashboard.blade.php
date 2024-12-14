@@ -128,7 +128,7 @@
                 <div class="mb-2 h-1/2 p-5 pb-12 bg-white overflow-hidden shadow-sm sm:rounded-lg w-full">
                     <p> Upcoming Sessions </p>
                     <div class="h-3/4">
-                        <div class="overflow-y-scroll overflow-x-clip mt-2 h-full"> {{-- div for all upcoming sessions --}}
+                        <div class="overflow-y-scroll mt-2 h-full"> {{-- div for all upcoming sessions --}}
                             @foreach ($upcomingSessions as $upcomingSession)
                                 {{-- call the upcomingSessions component here --}}
                                 <x-upcoming-session-item 
@@ -190,7 +190,6 @@
                     </p>
                     @endif
                 </div>
-                <!-- TODO: Create working redirect links -->
                 <div class="flex w-1/4 items-start justify-end">
                     <x-external-logos src="{{ asset('storage/images/Github_Logo.png') }}" alt="External app logo"/>
                     <x-external-logos src="{{ asset('storage/images/Gmail_Logo.png') }}" alt="External app logo"/>
