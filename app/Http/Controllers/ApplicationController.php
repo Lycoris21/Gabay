@@ -7,26 +7,51 @@ use App\Models\Application;
 
 class ApplicationController extends Controller
 {
-    public function deny(Request $request, $id)
+    public function view($id)
+    {
+        $application = Application::with('user')->findOrFail($id);
+
+        // Store the application in the session
+        session(['showApplication' => $application]);
+
+        // Redirect back to the dashboard
+        return redirect()->route('admin.dashboard');
+    }
+
+    public function confirm(Request $request, $id)
     {
         $application = Application::findOrFail($id);
-        $application->status = 'Denied';
+
+        if ($request->input('action') === 'approve') {
+            // Handle approval logic
+
+            $application->status = 'approved';
+
+            $user = $application->user; // Assuming the Application model has a `user` relationship
+            if (!$user->is_tutor) {
+                $user->is_tutor = true;
+                $user->save();
+            }
+            
+        } elseif ($request->input('action') === 'deny') {
+            // Handle denial logic
+            $application->status = 'denied';
+        }
+
         $application->save();
-    
-        return redirect()->route('applications.index')->with('success', 'Application denied successfully.');
+        session()->forget('showApplication');
+
+        // Redirect back to the dashboard with a success message
+        return redirect()->route('admin.dashboard')->with('success', 'Application status updated successfully.');
     }
-    
-    public function approve(Request $request, $id)
+
+    public function closePopup()
     {
-        $application = Application::findOrFail($id);
-        $application->status = 'Approved';
-        $application->save();
-
-        // Change the user's role to 'tutor'
-        $user = $application->user;
-        $user->role = 'tutor';
-        $user->save();
-
-        return redirect()->route('applications.index')->with('success', 'Application approved and user role updated to tutor successfully.');
+        // Forget the session variable
+        session()->forget('showApplication');
+        
+        // Redirect to the dashboard explicitly with GET
+        return redirect()->route('admin.dashboard')->with('success', 'Popup closed successfully.');
     }
+
 }

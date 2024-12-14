@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('resume_path')->nullable();
             $table->decimal('hourly_rate', 8, 2)->nullable();
             $table->string('subject', 50)->nullable();
-            $table->enum('status', ['Pending', 'Deleted', 'Approved'])->default('pending');
+            $table->enum('status', ['Pending', 'Denied', 'Approved'])->default('pending');
             $table->timestamps();
         });
     }

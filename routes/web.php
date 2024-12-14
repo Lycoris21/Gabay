@@ -51,8 +51,9 @@ Route::middleware('auth')->group(function () {
 Route::post('/tutorApplication', [TutorApplicationController::class, 'submitStep'])->name('tutorApplication.submitStep');
 
 //Admin Stuff
-Route::patch('/applications/{id}/deny', [ApplicationController::class, 'deny'])->name('applications.deny');
-Route::patch('/applications/{id}/approve', [ApplicationController::class, 'approve'])->name('applications.approve');
+Route::get('/applications/{id}/view', [ApplicationController::class, 'view'])->name('applications.view');
+Route::post('/applications/{id}/confirm', [ApplicationController::class, 'confirm'])->name('applications.confirm');
+Route::post('/applications/popup/close', [ApplicationController::class, 'closePopup'])->name('applications.popup.close');
 
 
 require __DIR__.'/auth.php';
