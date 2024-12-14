@@ -167,7 +167,7 @@
                     <x-user-dashboard-navigation :currentSection="$section" />
                 
                     <!-- Dynamic Content -->
-                    <div class="w-3/4 p-4">
+                    <div class="m-5 h-full">
                         @include($content)
                     </div>                        
                 </div>

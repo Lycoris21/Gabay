@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class application-popup extends Component
+class ApplicationPopup extends Component
 {
     /**
      * Create a new component instance.

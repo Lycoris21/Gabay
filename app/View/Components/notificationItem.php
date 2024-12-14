@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class notificationItem extends Component
+class NotificationItem extends Component
 {
     public $name;
     public $action;

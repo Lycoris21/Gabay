@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class application-table extends Component
+class RequestItem extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class application-table extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.application-table');
+        return view('components.request-item');
     }
 }
