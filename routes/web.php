@@ -51,8 +51,8 @@ Route::middleware('auth')->group(function () {
 Route::post('/tutorApplication', [TutorApplicationController::class, 'submitStep'])->name('tutorApplication.submitStep');
 
 //Admin Stuff
-Route::delete('/applications/{id}/deny', [ApplicationController::class, 'deny'])->name('applications.deny');
-Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
+Route::patch('/applications/{id}/deny', [ApplicationController::class, 'deny'])->name('applications.deny');
+Route::patch('/applications/{id}/approve', [ApplicationController::class, 'approve'])->name('applications.approve');
 
 
 require __DIR__.'/auth.php';

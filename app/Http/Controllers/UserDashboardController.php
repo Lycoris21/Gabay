@@ -26,17 +26,36 @@ class UserDashboardController extends Controller
     
     public function profile()
     {
+        $upcomingSessions = Booking::where('tutee_id', Auth::id())
+            ->whereDate('date', '>=', now())
+            ->orderBy('date', 'asc')
+            ->get();
+
+        $subjectTags = ['Mathematics', 'English', 'Programming'];
+
         return view('dashboard', [
             'section' => 'profile',
             'content' => 'dashboard.userProfile',
+            'upcomingSessions' => $upcomingSessions,
+            'subjectTags' => $subjectTags
         ]);
+
     }
 
     public function requests()
     {
+        $upcomingSessions = Booking::where('tutee_id', Auth::id())
+        ->whereDate('date', '>=', now())
+        ->orderBy('date', 'asc')
+        ->get();
+    
+        $subjectTags = ['Mathematics', 'English', 'Programming'];
+        
         return view('dashboard', [
             'section' => 'requests',
             'content' => 'dashboard.requests',
+            'upcomingSessions' => $upcomingSessions, 
+            'subjectTags' => $subjectTags
         ]);
     }
 
