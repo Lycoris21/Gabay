@@ -125,10 +125,11 @@
                     </div>
                 </div>
 
+                
                 <div class="mb-2 h-1/2 p-5 pb-12 bg-white overflow-hidden shadow-sm sm:rounded-lg w-full">
                     <p> Upcoming Sessions </p>
-                    <div class="h-3/4">
-                        <div class="overflow-y-scroll mt-2 h-full"> {{-- div for all upcoming sessions --}}
+                    <div class="h-full flex flex-col">
+                        <div class="overflow-y-scroll mt-2 flex-grow"> {{-- div for all upcoming sessions --}}
                             @foreach ($upcomingSessions as $upcomingSession)
                                 {{-- call the upcomingSessions component here --}}
                                 <x-upcoming-session-item 
@@ -140,12 +141,17 @@
                                 />
                             @endforeach
                         </div>
+                    
+                        @unless (Auth::user()->is_tutor)
+                            <div class="mt-4 h-1/4">
+                                <x-primary-button class="w-full">
+                                    Book a session
+                                </x-primary-button>
+                            </div>
+                        @endunless
+
                     </div>
-                    <div class="mt-4">
-                        <x-primary-button class="w-full">
-                            Book a session
-                        </x-primary-button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="w-3/4 h-40 p-10 flex items-center relative bg-white overflow-hidden shadow-sm sm:rounded-lg">
