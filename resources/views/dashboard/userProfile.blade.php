@@ -40,7 +40,18 @@
                 <x-input-error :messages="$errors->get('gender')" class="mt-2" />
             </div>
         </div>
-        <x-primary-button class="w-[35%] h-9 mt-2 text-sm items-center justify-center">
+        <!-- Profile Picture Input -->
+        
+        <div class="w-full">
+                <x-input-label>
+                    Upload Profile Picture
+                </x-input-label>
+            <div class="border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-gray-700 h-9 w-full mt-0.5 text-xs ">
+                <input id="profile_picture" type="file" name="profile_picture" class=" pl-3 pt-1 block mt-1 w-full" accept="image/*">
+                <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />    
+            </div>
+        </div>
+        <x-primary-button class="w-[35%] h-9 mt-4 text-sm items-center justify-center">
             Save Changes
         </x-primary-button>
     </div>
