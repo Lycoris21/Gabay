@@ -113,23 +113,85 @@
                     <h1 class="-my-16 -mb-28 text-4xl font-bold text-black">
                         How it works
                     </h1>
-                    <div class="w-full flex flex-wrap justify-evenly h-1/2">
-                        <div class="flex flex-col flex-wrap justify-evenly items-center border-2 border-black w-1/4">
-                            something here
+                    <div class="w-10/12 flex flex-wrap justify-evenly h-1/2">
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-1/4">
+                            <img src="{{ asset('/storage/images/step1.png') }}" alt="step1" class="block w-48 fill-current">
+                            <x-header class="text-2xl py-3 text-sky-900">
+                                Pick a tutor
+                            </x-header>
+                            <p class="text-md font-normal text-sky-900 text-center mb-8">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            </p>
                         </div>
-                        <div class=" flex flex-col flex-wrap justify-evenly items-center border-2 border-black w-1/4">
-                            something here
+                        <div class=" flex flex-col flex-wrap justify-evenly items-center w-1/4">
+                            <img src="{{ asset('/storage/images/step2.png') }}" alt="step2" class="block w-48 fill-current">
+                            <x-header class="text-2xl py-3 text-sky-900">
+                                Choose a course
+                            </x-header>
+                            <p class="text-md font-normal text-sky-900 text-center mb-8">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            </p>
                         </div>
-                        <div class="flex flex-col flex-wrap justify-evenly items-center border-2 border-black w-1/4">
-                            something here
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-1/4">
+                            <img src="{{ asset('/storage/images/step3.png') }}" alt="step2" class="block w-48 fill-current">
+                            <x-header class="text-2xl py-3 text-sky-900">
+                                Join session
+                            </x-header>
+                            <p class="text-md font-normal text-sky-900 text-center mb-8">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="{{-- bg-blue-100 --}} h-screen relative w-full max-w-2xl px-6 lg:max-w-7xl">
+                <div class="h-full flex flex-col flex-wrap justify-evenly items-center">
+                    <div class="w-5/12 flex flex-wrap justify-evenly h-2/5 border-4 border-sky-900 rounded-2xl">
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-3/4 text-center text-sky-900 mt-7 mb-5">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ullamcorper mollis dapibus. Sed at laoreet dui. Proin tristique eros ligula, vel sollicitudin diam ullamcorper aliquam. Integer sed aliquam quam, vel porta lacus.
+                        </div>
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-3/4 text-center text-sky-900 mb-7">
+                            <b>Xianne Jeon</b>
+                            a 2-year GABAY user
                         </div>
                     </div>
                 </div>
             </section>
             
-            {{--<footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
-            </footer>--}} 
+            <footer class="bg-customOrange text-center text-sm text-black dark:text-white/70 w-full">
+                <div class="h-full flex flex-col flex-wrap justify-evenly items-center">
+                    <div class="w-8/12 flex flex-wrap justify-evenly h-2/5">
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-1/8">
+                            <a
+                                href="{{ route('login') }}"
+                                class="hover:underline  hover:duration-500 underline-offset-4">
+                                Courses
+                            </a>
+                        </div>
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-1/8">
+                            <a
+                                href="{{ route('login') }}"
+                                class="hover:underline  hover:duration-500 underline-offset-4">
+                                How It Works
+                            </a>
+                        </div>
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-1/8">
+                            <a
+                                href="{{ route('login') }}"
+                                class="hover:underline  hover:duration-500 underline-offset-4">
+                                Contact Us
+                            </a>
+                        </div>
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-1/8">
+                            <img src="{{ asset('/storage/images/footer.png') }}" alt="footer" class="block w-32 fill-current">
+                        </div>
+                        <div class="flex flex-col flex-wrap justify-evenly items-center w-1/8">
+                            Copyright © 2024. Gabay. All rights reserved.
+                        </div>
+                    </div>
+                </div>
+                {{-- Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }}) --}}
+            </footer>
         </div>
     </div>
 </body>
