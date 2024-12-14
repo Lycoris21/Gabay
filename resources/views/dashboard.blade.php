@@ -106,6 +106,8 @@
             ],
         ];
 
+        $subjectTags = ['Mathematics', 'English', 'Programming 2', 'Data Structures and Algorithms', 'Web Development 2'];
+
     @endphp 
     <div class="py-5">
         <div class="flex max-w-7xl mx-auto sm:px-6 lg:px-8 h-[calc(100vh-120px)]">
@@ -194,6 +196,21 @@
                     <p class="text-sm italic text-gray-800">
                         No description provided.
                     </p>
+                    @endif
+
+                    @if(Auth::user()->is_tutor)
+                        <div class="flex items-center mt-0.5">
+                            <p class=" text-sm text-gray-800">
+                                P200/hour
+                            </p>
+
+                            <p class="mx-3">|</p>
+                            <div class="flex items-center flex-wrap">
+                                @foreach ($subjectTags as $subjectTag)
+                                    <x-subject-tag :tag="$subjectTag"/>
+                                @endforeach
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <div class="flex w-1/4 items-start justify-end">
