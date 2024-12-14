@@ -29,9 +29,9 @@ Route::middleware(['auth'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::middleware(['auth'])->get('/tutors', function () {
-    return view('tutors');
-})->name('tutors');
+Route::middleware(['auth'])->get('/browse', function () {
+    return view('browse');
+})->name('browse');
 
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
