@@ -36,12 +36,71 @@
                 </div>
             </div>
 
-            <!-- Tutors -->
-            <div class="items-start">
-                <div class="rounded-xl p-10 shadow-lg bg-white">
-                    <p>for loop here</p>
+            <!-- Temporary copy paste -->
+            <div class="flex flex-col gap-3 items-start">
+                <div class="rounded-xl p-5 shadow-lg bg-white">
+                    <div class="w-[50rem] h-40 p-5 flex items-center bg-white shadow-sm sm:rounded-lg">
+                        @if(Auth::user()->profile_picture)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-28 h-28 rounded-full shadow-xl">
+                        @else
+                        <img src="{{ asset('storage/profile-picture/default-image.jpg') }}" alt="Default Profile Picture" class="w-28 h-28 rounded-full shadow-xl">
+                        @endif
+                        <div class="w-3/4 flex-col p-6 text-gray-900">
+                            <div class="flex items-center">
+                                <p class="text-2xl font-bold">
+                                    {{ Auth::user()->last_name }}, {{ Auth::user()->first_name }}
+                                </p>
+                            </div>
+                            <p class="text-sm text-gray-500">
+                                {{ ucfirst(Auth::user()->gender) }}, {{ \Carbon\Carbon::now()->year - Auth::user()->year_of_birth }} Years
+                            </p>
+
+
+
+                            @if(Auth::user()->description)
+                            <p class="text-sm italic text-gray-800">
+                                {{ Auth::user()->description }}
+                            </p>
+                            @else
+                            <p class="text-sm italic text-gray-800">
+                                No description provided.
+                            </p>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rounded-xl p-5 shadow-lg bg-white">
+                    <div class="max-w-[50rem] h-40 p-5 flex items-center bg-white shadow-sm sm:rounded-lg">
+                        @if(Auth::user()->profile_picture)
+                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="w-28 h-28 rounded-full shadow-xl">
+                        @else
+                        <img src="{{ asset('storage/profile-picture/default-image.jpg') }}" alt="Default Profile Picture" class="w-28 h-28 rounded-full shadow-xl">
+                        @endif
+                        <div class="w-3/4 flex-col p-6 text-gray-900">
+                            <div class="flex items-center">
+                                <p class="text-2xl font-bold">
+                                    {{ Auth::user()->last_name }}, {{ Auth::user()->first_name }}
+                                </p>
+                            </div>
+                            <p class="text-sm text-gray-500">
+                                {{ ucfirst(Auth::user()->gender) }}, {{ \Carbon\Carbon::now()->year - Auth::user()->year_of_birth }} Years
+                            </p>
+
+
+
+                            @if(Auth::user()->description)
+                            <p class="text-sm italic text-gray-800">
+                                {{ Auth::user()->description }}
+                            </p>
+                            @else
+                            <p class="text-sm italic text-gray-800">
+                                No description provided.
+                            </p>
+                            @endif
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </x-app-layout>
