@@ -70,19 +70,19 @@
                             <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 <div class="px-4 py-5 sm:p-6">
                                     <dt class="text-sm font-medium text-gray-500">Name</dt>
-                                    <dd class="mt-1 text-sm text-gray-900" id="popup-name">Gretchen Marie Calisto</dd>
+                                    <dd class="mt-1 text-sm text-gray-900" id="popup-name">Default Name</dd>
                                 </div>
                                 <div class="px-4 py-5 sm:p-6">
                                     <dt class="text-sm font-medium text-gray-500">Email</dt>
-                                    <dd class="mt-1 text-sm text-gray-900" id="popup-email">gretchen@example.com</dd>
+                                    <dd class="mt-1 text-sm text-gray-900" id="popup-email">default@email.com</dd>
                                 </div>
                                 <div class="px-4 py-5 sm:p-6">
-                                    <dt class="text-sm font-medium text-gray-500">Phone</dt>
-                                    <dd class="mt-1 text-sm text-gray-900" id="popup-phone">(123) 456-7890</dd>
+                                    <dt class="text-sm font-medium text-gray-500">Gender</dt>
+                                    <dd class="mt-1 text-sm text-gray-900" id="popup-gender">Unknown</dd>
                                 </div>
                                 <div class="px-4 py-5 sm:p-6">
-                                    <dt class="text-sm font-medium text-gray-500">Address</dt>
-                                    <dd class="mt-1 text-sm text-gray-900" id="popup-address">123 Main St, Anytown, USA</dd>
+                                    <dt class="text-sm font-medium text-gray-500">Year of Birth</dt>
+                                    <dd class="mt-1 text-sm text-gray-900" id="popup-birth-year">0000</dd>
                                 </div>
                             </dl>
                         </div>
@@ -144,18 +144,18 @@
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <a href="#" class="text-blue-500 hover:text-blue-700" 
                                                 onclick="togglePopup(); 
-                                                        document.getElementById('popup-name').innerText = '{{ $application->user->first_name }} {{ $application->user->last_name }}'; 
-                                                        document.getElementById('popup-email').innerText = '{{ $application->user->email }}'; 
-                                                        document.getElementById('popup-phone').innerText = '{{ $application->user->phone }}'; 
-                                                        document.getElementById('popup-address').innerText = '{{ $application->user->address }}'; 
-                                                        document.getElementById('popup-subject').innerText = '{{ $application->subject }}'; 
-                                                        document.getElementById('popup-hourly-rate').innerText = 'PHP {{ $application->hourly_rate }}/hr'; 
-                                                        document.getElementById('popup-resume-link').href = '{{ asset('storage/' . $application->resume_path) }}'; 
-                                                        @if(Auth::user()->profile_picture)
-                                                            document.getElementById('popup-pfp').src = '{{ asset('storage/' . $application->user->profile_picture) }}';
-                                                        @else
-                                                            document.getElementById('popup-pfp').src = '{{ asset('storage/profile-picture/default-image.jpg') }}';
-                                                        @endif">{{ $application->user->first_name }} {{ $application->user->last_name }}</a>
+                                                document.getElementById('popup-name').innerText = '{{ $application->user->first_name }} {{ $application->user->last_name }}'; 
+                                                document.getElementById('popup-email').innerText = '{{ $application->user->email }}'; 
+                                                document.getElementById('popup-gender').innerText = '{{ $application->user->gender }}'; 
+                                                document.getElementById('popup-birth-year').innerText = '{{ $application->user->year_of_birth }}'; 
+                                                document.getElementById('popup-subject').innerText = '{{ $application->subject }}'; 
+                                                document.getElementById('popup-hourly-rate').innerText = 'PHP {{ $application->hourly_rate }}/hr'; 
+                                                document.getElementById('popup-resume-link').href = '{{ asset('storage/' . $application->resume_path) }}'; 
+                                                @if(Auth::user()->profile_picture)
+                                                    document.getElementById('popup-pfp').src = '{{ asset('storage/' . $application->user->profile_picture) }}';
+                                                @else
+                                                    document.getElementById('popup-pfp').src = '{{ asset('storage/profile-picture/default-image.jpg') }}';
+                                                @endif">{{ $application->user->first_name }} {{ $application->user->last_name }}</a>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium 

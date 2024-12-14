@@ -71,9 +71,9 @@
             <x-input-label for="gender" :value="__('Gender')" />
             <select id="gender" name="gender" class="block mt-1 w-full" required>
                 <option value="">{{ __('Select Gender') }}</option>
-                <option value="male" {{ old('gender', $user->gender) === 'male' ? 'selected' : '' }}>{{ __('Male') }}</option>
-                <option value="female" {{ old('gender', $user->gender) === 'female' ? 'selected' : '' }}>{{ __('Female') }}</option>
-                <option value="other" {{ old('gender', $user->gender) === 'other' ? 'selected' : '' }}>{{ __('Other') }}</option>
+                <option value="Male" {{ old('gender', $user->gender) === 'Male' ? 'selected' : '' }}>{{ __('Male') }}</option>
+                <option value="Female" {{ old('gender', $user->gender) === 'Female' ? 'selected' : '' }}>{{ __('Female') }}</option>
+                <option value="Other" {{ old('gender', $user->gender) === 'Other' ? 'selected' : '' }}>{{ __('Other') }}</option>
             </select>
             <x-input-error class="mt-2" :messages="$errors->get('gender')" />
         </div>

@@ -54,4 +54,5 @@ Route::post('/tutorApplication', [TutorApplicationController::class, 'submitStep
 Route::delete('/applications/{id}/deny', [ApplicationController::class, 'deny'])->name('applications.deny');
 Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
 
+
 require __DIR__.'/auth.php';
