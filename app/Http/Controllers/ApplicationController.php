@@ -7,24 +7,26 @@ use App\Models\Application;
 
 class ApplicationController extends Controller
 {
-    public function deny($id)
+    public function deny(Request $request, $id)
     {
-        // Find the application by ID
         $application = Application::findOrFail($id);
-
-        // Delete the application
-        $application->delete();
-
-        // Redirect back with a success message
-        return redirect()->route('dashboard')->with('success', 'Application denied and deleted.');
+        $application->status = 'Denied';
+        $application->save();
+    
+        return redirect()->route('applications.index')->with('success', 'Application denied successfully.');
     }
-
-    public function destroy(Application $application)
+    
+    public function approve(Request $request, $id)
     {
-        // Perform the deletion
-        $application->delete();
+        $application = Application::findOrFail($id);
+        $application->status = 'Approved';
+        $application->save();
 
-        // Redirect to the applications page with a success message
-        return redirect()->route('applications.index')->with('success', 'Application deleted successfully.');
+        // Change the user's role to 'tutor'
+        $user = $application->user;
+        $user->role = 'tutor';
+        $user->save();
+
+        return redirect()->route('applications.index')->with('success', 'Application approved and user role updated to tutor successfully.');
     }
 }
