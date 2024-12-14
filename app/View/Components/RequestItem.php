@@ -8,12 +8,22 @@ use Illuminate\View\Component;
 
 class RequestItem extends Component
 {
+    public $name;
+    public $subject;
+    public $date;
+    public $time;
+    public $status;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($name, $subject, $date, $time, $status)
     {
-        //
+        $this->name = $name;
+        $this->subject = $subject;
+        $this->date = $date;
+        $this->time = $time;
+        $this->status = $status;
     }
 
     /**
