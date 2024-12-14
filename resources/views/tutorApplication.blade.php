@@ -1,4 +1,13 @@
 <x-app-layout name="tutor/1">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .owl-logo {
+            position: absolute;
+            top: 60%;
+            left: 75%;
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+    </style>
     <div class="relative flex flex-col items-center justify-start pt-32">
         <section class="h-[calc(100vh-350px)] relative w-full max-w-2xl px-6 lg:max-w-7xl">
             <div>
@@ -60,8 +69,8 @@
                     @endif
                 </x-page-section>
                 
-                <div class="absolute top-1 left-2/3">
-                    <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current scale-150">
+                <div class="owl-logo">
+                    <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current">
                 </div>
             </div>
         </section>
