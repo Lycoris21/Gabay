@@ -1,3 +1,5 @@
+@props(['currentId'])
+
 <div id="popup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
     <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex my-2 flex-col space-y-4">
         <div class="flex">
@@ -51,7 +53,7 @@
         </div>
         <div class="flex justify-end space-x-2">
             <button class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Approve</button>
-            <button onclick="openConfirmPopup({{ 2 }})" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Deny</button>
+            <button onclick="openConfirmPopup({{ $currentId }})" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Deny</button>
             <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" onclick="togglePopup()">Close</button>
         </div>
     </div>
