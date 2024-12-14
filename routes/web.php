@@ -6,6 +6,7 @@ use App\Http\Controllers\TutorApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageSectionController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\ApplicationController;
 
 // Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
@@ -28,6 +29,10 @@ Route::middleware(['auth'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::middleware(['auth'])->get('/tutors', function () {
+    return view('tutors');
+})->name('tutors');
+
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/tutorApplication', function () {
@@ -42,5 +47,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/tutorApplication', [TutorApplicationController::class, 'submitStep'])->name('tutorApplication.submitStep');
+
+//Admin Stuff
+Route::delete('/applications/{id}/deny', [ApplicationController::class, 'deny'])->name('applications.deny');
+Route::delete('/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
 
 require __DIR__.'/auth.php';
