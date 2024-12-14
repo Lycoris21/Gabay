@@ -106,6 +106,8 @@
             ],
         ];
 
+        $subjectTags = ['Mathematics', 'English', 'Programming'];
+
     @endphp 
     <div class="py-5">
         <div class="flex max-w-7xl mx-auto sm:px-6 lg:px-8 h-[calc(100vh-120px)]">
@@ -125,10 +127,11 @@
                     </div>
                 </div>
 
+                
                 <div class="mb-2 h-1/2 p-5 pb-12 bg-white overflow-hidden shadow-sm sm:rounded-lg w-full">
                     <p> Upcoming Sessions </p>
-                    <div class="h-3/4">
-                        <div class="overflow-y-scroll mt-2 h-full"> {{-- div for all upcoming sessions --}}
+                    <div class="h-full flex flex-col">
+                        <div class="overflow-y-scroll mt-2 flex-grow"> {{-- div for all upcoming sessions --}}
                             @foreach ($upcomingSessions as $upcomingSession)
                                 {{-- call the upcomingSessions component here --}}
                                 <x-upcoming-session-item 
@@ -140,12 +143,17 @@
                                 />
                             @endforeach
                         </div>
+                    
+                        @unless (Auth::user()->is_tutor)
+                            <div class="mt-4 h-1/4">
+                                <x-primary-button class="w-full">
+                                    Book a session
+                                </x-primary-button>
+                            </div>
+                        @endunless
+
                     </div>
-                    <div class="mt-4">
-                        <x-primary-button class="w-full">
-                            Book a session
-                        </x-primary-button>
-                    </div>
+                    
                 </div>
             </div>
             <div class="w-3/4 h-40 p-10 flex items-center relative bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -188,6 +196,21 @@
                     <p class="text-sm italic text-gray-800">
                         No description provided.
                     </p>
+                    @endif
+
+                    @if(Auth::user()->is_tutor)
+                        <div class="flex items-center mt-0.5">
+                            <p class=" text-sm text-gray-800">
+                                P200/hour
+                            </p>
+
+                            <p class="mx-3">|</p>
+                            <div class="flex items-center flex-wrap">
+                                @foreach ($subjectTags as $subjectTag)
+                                    <x-subject-tag :tag="$subjectTag"/>
+                                @endforeach
+                            </div>
+                        </div>
                     @endif
                 </div>
                 <div class="flex w-1/4 items-start justify-end">
