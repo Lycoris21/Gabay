@@ -2,8 +2,8 @@
  
 <x-app-layout>
     <div class="py-5">
-        <div class="flex max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mr-5 w-1/3 flex-col items-center">
+        <div class="flex max-w-7xl mx-auto sm:px-6 lg:px-8 h-[calc(100vh-120px)]">
+            <div class="mr-5 h-full w-1/3 flex-col items-center">
                 <div class="mb-2 h-40 p-10 bg-white overflow-hidden shadow-sm sm:rounded-lg w-full">
                     NOTIFICATIONS
                 </div>
