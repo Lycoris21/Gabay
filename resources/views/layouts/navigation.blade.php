@@ -19,7 +19,11 @@
                         {{ __('Browse') }}
                     </x-nav-link>
                     <x-nav-link :href="route('tutorApplication')" :active="request()->routeIs('tutorApplication')">
-                        {{ __('Become a Tutor') }}
+                        @if(Auth::user()->is_tutor)
+                            {{ __('Teach More Subjects') }}
+                        @else    
+                            {{ __('Become a Tutor') }}
+                        @endif
                     </x-nav-link>
                     
                     <!-- Remove LATER -->

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageSectionController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\UserDashboardController;
 
 // Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
@@ -23,11 +24,12 @@ Route::get('/tutorApplication/{pageNumber?}', [PageSectionController::class, 'sh
 Route::middleware(['auth'])->group(function () {
     Route::get('/complete-profile', [RegisteredUserController::class, 'showProfileCompletion'])->name('complete-profile.show');
     Route::post('/complete-profile', [RegisteredUserController::class, 'completeProfile'])->name('complete-profile.store');
+    
+    Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/profile', [UserDashboardController::class, 'profile'])->name('dashboard.userProfile');
+    Route::get('/dashboard/requests', [UserDashboardController::class, 'requests'])->name('dashboard.requests');
 });
 
-Route::middleware(['auth'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 Route::middleware(['auth'])->get('/browse', function () {
     return view('browse');
