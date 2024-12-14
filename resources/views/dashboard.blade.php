@@ -1,38 +1,5 @@
 <x-app-layout>
     @php
-        $notifications = [
-            [
-                'name' => 'Mr. Alex Tan',
-                'action' => 'approved',
-                'booking' => 'SAT PREP',
-                'time' => '2h'
-            ],
-            [
-                'name' => 'Ms. Maya Crimson',
-                'action' => 'canceled',
-                'booking' => 'Theology',
-                'time' => '12h'
-            ],
-            [
-                'name' => 'Mr. James Teo',
-                'action' => 'rejected',
-                'booking' => 'Chemistry',
-                'time' => '1d'
-            ],
-            [
-                'name' => 'Mr. James Teo',
-                'action' => 'rejected',
-                'booking' => 'Chemistry',
-                'time' => '1d'
-            ],
-            [
-                'name' => 'Mr. James Teo',
-                'action' => 'rejected',
-                'booking' => 'Chemistry',
-                'time' => '1d'
-            ],
-        ];
-
         function formatSession($booking) {
             $date = \Carbon\Carbon::parse($booking->date);
             $startTime = \Carbon\Carbon::parse($booking->start_time)->format('H:i');
