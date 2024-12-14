@@ -9,6 +9,16 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .owl-logo {
+            position: absolute;
+            top: 60%;
+            left: 75%;
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+    </style>
+
 </head>
 
 <body class="font-sans antialiased">
@@ -90,8 +100,8 @@
                             </a>
                         </x-primary-button>
                     </div>
-                    <div class="absolute top-2/6 left-2/3">
-                        <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current scale-150">
+                    <div class="owl-logo">
+                        <img src="{{ asset('storage/images/owl.png') }}" alt="Owl" class="block w-auto fill-current">
                     </div>
                 </div>
             </section>
