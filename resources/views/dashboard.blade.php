@@ -33,81 +33,21 @@
             ],
         ];
 
-        $upcomingSessions = [
-            [
-                'dayOfWeek' => 'Mon',
-                'day' => '14',
-                'subject' => 'Math',
-                'topic' => 'Algebra Basics',
-                'time' => '10:00AM - 12:00PM',
-            ],
-            [
-                'dayOfWeek' => 'Tue',
-                'day' => '15',
-                'subject' => 'Science',
-                'topic' => 'Introduction to Physics',
-                'time' => '1:00PM - 3:00PM',
-            ],
-            [
-                'dayOfWeek' => 'Wed',
-                'day' => '16',
-                'subject' => 'English',
-                'topic' => 'Essay Writing Skills',
-                'time' => '9:00AM - 11:00AM',
-            ],
-            [
-                'dayOfWeek' => 'Thu',
-                'day' => '17',
-                'subject' => 'History',
-                'topic' => 'World War II',
-                'time' => '2:00PM - 4:00PM',
-            ],
-            [
-                'dayOfWeek' => 'Fri',
-                'day' => '18',
-                'subject' => 'Math',
-                'topic' => 'Calculus Basics',
-                'time' => '10:00AM - 12:00PM',
-            ],
-            [
-                'dayOfWeek' => 'Mon',
-                'day' => '21',
-                'subject' => 'Chemistry',
-                'topic' => 'Organic Chemistry Fundamentals',
-                'time' => '1:00PM - 3:00PM',
-            ],
-            [
-                'dayOfWeek' => 'Tue',
-                'day' => '22',
-                'subject' => 'Physics',
-                'topic' => 'Electromagnetism',
-                'time' => '11:00AM - 1:00PM',
-            ],
-            [
-                'dayOfWeek' => 'Wed',
-                'day' => '23',
-                'subject' => 'Biology',
-                'topic' => 'Human Anatomy',
-                'time' => '3:00PM - 5:00PM',
-            ],
-            [
-                'dayOfWeek' => 'Thu',
-                'day' => '24',
-                'subject' => 'Math',
-                'topic' => 'Statistics and Probability',
-                'time' => '9:00AM - 11:00AM',
-            ],
-            [
-                'dayOfWeek' => 'Fri',
-                'day' => '25',
-                'subject' => 'English',
-                'topic' => 'Literary Analysis',
-                'time' => '2:00PM - 4:00PM',
-            ],
-        ];
+        function formatSession($booking) {
+            $date = \Carbon\Carbon::parse($booking->date);
+            $startTime = \Carbon\Carbon::parse($booking->start_time)->format('H:i');
+            $endTime = \Carbon\Carbon::parse($booking->end_time)->format('H:i');
 
-        $subjectTags = ['Mathematics', 'English', 'Programming'];
+            return [
+                'dayOfWeek' => $date->format('D'),
+                'day' => $date->format('d'),
+                'subject' => $booking->subject_name,
+                'topic' => $booking->subject_topic,
+                'time' => $startTime . ' - ' . $endTime,
+            ];
+        }
 
+        $upcomingSessions = $upcomingSessions->map(fn($b) => formatSession($b))->toArray();
     @endphp 
 
     <div class="py-5">
