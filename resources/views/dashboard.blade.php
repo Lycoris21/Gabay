@@ -52,6 +52,7 @@
                     </p>
                     @endif
                 </div>
+                <!-- TODO: Create working redirect links -->
                 <div class="flex w-1/4 items-start justify-end">
                     <x-external-logos src="{{ asset('storage/images/Github_Logo.png') }}" alt="External app logo"/>
                     <x-external-logos src="{{ asset('storage/images/Gmail_Logo.png') }}" alt="External app logo"/>
