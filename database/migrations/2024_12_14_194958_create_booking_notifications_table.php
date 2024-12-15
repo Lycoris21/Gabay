@@ -34,6 +34,10 @@ class CreateBookingNotificationsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookingnotifications');
+        Schema::table('booking_notifications', function (Blueprint $table) {
+            $table->dropForeign(['user_id']); // Drop the foreign key
+        });
+
+        Schema::dropIfExists('booking_notifications'); // Drop the table
     }
 }

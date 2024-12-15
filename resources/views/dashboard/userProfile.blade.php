@@ -64,10 +64,9 @@
             <x-primary-button class="w-[35%] h-9 mt-4 text-sm items-center justify-center">
                     {{ __('Save Changes') }}
             </x-primary-button>
-        </form>
-    </div> 
-
-    <!-- Divider -->
+        </div>
+    </form>
+        <!-- Divider -->
     <div class="border-l-2 mt-2 border-gray-300 h-[80%] w-1 mx-8"></div>
 
     <!-- Password Section -->

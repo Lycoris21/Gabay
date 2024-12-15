@@ -28,7 +28,8 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/profile', [UserDashboardController::class, 'profile'])->name('dashboard.userProfile');
-    Route::patch('/dashboard/profile', [ProfileController::class, 'update'])->name('dashboard.userProfile');
+    Route::patch('/dashboard/profile', [ProfileController::class, 'update'])->name('dashboard.update');
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/dashboard/requests', [UserDashboardController::class, 'requests'])->name('dashboard.requests');
     
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
@@ -40,15 +41,14 @@ Route::get('/tutorApplication', function () {
     return view('tutorApplication');
 })->middleware(['auth', 'verified'])->name('tutorApplication');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 Route::post('/tutorApplication', [TutorApplicationController::class, 'submitStep'])->name('tutorApplication.submitStep');
 
-// Admin Stuff
 Route::get('/applications/{id}/view', [ApplicationController::class, 'view'])->name('applications.view');
 Route::post('/applications/{id}/confirm', [ApplicationController::class, 'confirm'])->name('applications.confirm');
 Route::post('/applications/popup/close', [ApplicationController::class, 'closePopup'])->name('applications.popup.close');

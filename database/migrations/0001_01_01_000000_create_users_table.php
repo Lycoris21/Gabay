@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tutor_id')->nullable();
+            $table->foreign('tutor_id')->references('id')->on('tutors')->onDelete('cascade');
             $table->string('first_name');
             $table->string('last_name');
             $table->enum('gender', ['Male', 'Female', 'Other'])->nullable();
@@ -51,5 +53,10 @@ return new class extends Migration
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign(['tutor_id']);
+            $table->dropColumn('tutor_id');
+        });
     }
 };

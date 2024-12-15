@@ -15,12 +15,12 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
-    {
-        return view('dashboard.userProfile', [
-            'user' => $request->user(),
-        ]);
-    }
+    // public function edit(Request $request): View
+    // {
+    //     return view('dashboard.userProfile', [
+    //         'user' => $request->user(),
+    //     ]);
+    // }
 
     /**
      * Update the user's profile information.
@@ -48,7 +48,7 @@ class ProfileController extends Controller
 
         error_log(Auth::user()->first_name);
 
-        return Redirect::route('dashboard.userProfile') -> with('status', 'Profile updated!');
+        return Redirect::route('dashboard.userProfile')->with('status', 'Profile updated!');
     }
 
     /**
