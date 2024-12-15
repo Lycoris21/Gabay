@@ -62,7 +62,7 @@
                             <x-sub-header class="text-lg text-center mb-4">
                                 You will be notified of the status of your application.
                             </x-sub-header>
-                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            <x-nav-link :href="route('dashboard.userProfile')" :active="request()->routeIs('dashboard')">
                                 {{ __('Back to Dashboard') }}
                             </x-nav-link>
                         </div>

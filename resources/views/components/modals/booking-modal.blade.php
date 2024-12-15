@@ -8,20 +8,20 @@
     })">
         <!-- Step 1: Booking Form -->
         <div x-show="step === 1">
-            <form method="POST" action="{{ route('book.tutor') }}">
+            <form method="POST" action="{{ route('booking.store') }}">
                 @csrf
                 <!-- Session Title -->
                 <div class="w-full mb-1">
-                    <x-input-label for="session_title" :value="__('Session Title')" />
-                    <x-text-input id="session_title" name="session_title" type="text" class="h-9 w-full mt-0.5" />
-                    <x-input-error :messages="$errors->get('session_title')" class="mt-2" />
+                    <x-input-label for="subject_topic" :value="__('Subject Topic')" />
+                    <x-text-input id="subject_topic" name="subject_topic" type="text" class="h-9 w-full mt-0.5" />
+                    <x-input-error :messages="$errors->get('subject_topic')" class="mt-2" />
                 </div>
 
                 <!-- Subject -->
                 <div class="w-full mb-1">
-                    <x-input-label for="subject" :value="__('Subject')" />
-                    <x-text-input id="subject" name="subject" type="text" class="h-9 w-full mt-0.5" />
-                    <x-input-error :messages="$errors->get('subject')" class="mt-2" />
+                    <x-input-label for="subject_name" :value="__('Subject')" />
+                    <x-text-input id="subject_name" name="subject_name" type="text" class="h-9 w-full mt-0.5" />
+                    <x-input-error :messages="$errors->get('subject_name')" class="mt-2" />
                 </div>
 
                 <!-- Date -->
