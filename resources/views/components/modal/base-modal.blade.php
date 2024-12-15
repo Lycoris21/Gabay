@@ -7,9 +7,9 @@
     </x-primary-button>
 
     <!-- Modal Background -->
-    <div x-show="open" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" style="display: none;">
+    <div x-show="open" class="fixed inset-0 bg-gray-600 flex items-center bg-opacity-50 overflow-y-auto h-full w-full z-50" style="display: none;">
         <!-- Modal Content -->
-        <div class="relative top-20 mx-auto p-10 border w-[35%] shadow-lg rounded-md bg-white">
+        <div class="relative mx-auto p-10 border w-[35%] shadow-lg rounded-2xl bg-white">
             <!-- Modal Header -->
             <div class="flex justify-between items-center pb-2">
                 <p class="text-2xl font-bold" x-text="title"></p>
