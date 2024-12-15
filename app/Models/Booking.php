@@ -12,6 +12,7 @@ class Booking extends Model
         'subject_name', 
         'subject_topic', 
         'date', 
+        'status', 
         'start_time', 
         'end_time'
     ];

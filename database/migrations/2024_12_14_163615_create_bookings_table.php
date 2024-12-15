@@ -22,13 +22,13 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('platform');
             $table->string('link');
+            $table->string('status')->default('pending'); // Added status column
             $table->timestamps();
-        
+
             // Foreign keys
             $table->foreign('tutee_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('tutor_id')->references('id')->on('users')->onDelete('cascade');
         });
-        
     }
 
     /**

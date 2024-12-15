@@ -6,38 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBookingNotificationsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up(): void
     {
         Schema::create('booking_notifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');  // Foreign key to associate the notification with a user
-            $table->string('name');
+            $table->unsignedBigInteger('sender_id');
+            $table->unsignedBigInteger('receiver_id');
             $table->string('action');
             $table->string('booking');
-            $table->string('time');
+            $table->timestamp('time_created');
             $table->timestamps();
 
-            // Optional: Add a foreign key constraint if 'users' table exists
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down(): void
     {
         Schema::table('booking_notifications', function (Blueprint $table) {
-            $table->dropForeign(['user_id']); // Drop the foreign key
+            $table->dropForeign(['sender_id']);
+            $table->dropForeign(['receiver_id']);
         });
 
-        Schema::dropIfExists('booking_notifications'); // Drop the table
+        Schema::dropIfExists('booking_notifications');
     }
 }

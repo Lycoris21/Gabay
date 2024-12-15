@@ -16,7 +16,7 @@ class UserDashboardController extends Controller
         $content = 'dashboard.userProfile';
 
         if (Auth::check()) {
-            $notifications = BookingNotification::where('user_id', Auth::user() -> id)->get();
+            $notifications = BookingNotification::where('receiver_id', Auth::user() -> id)->get();
         } else {
             $notifications = collect();
         }
@@ -44,7 +44,7 @@ class UserDashboardController extends Controller
         $subjectTags = ['Mathematics', 'English', 'Programming'];
 
         if (Auth::check()) {
-            $notifications = BookingNotification::where('user_id', Auth::user() -> id)->get();
+            $notifications = BookingNotification::where('receiver_id', Auth::user() -> id)->get();
         } else {
             $notifications = collect();
         }
@@ -71,7 +71,7 @@ class UserDashboardController extends Controller
         $subjectTags = ['Mathematics', 'English', 'Programming'];
 
         if (Auth::check()) {
-            $notifications = BookingNotification::where('user_id', Auth::user() -> id)->get();
+            $notifications = BookingNotification::where('receiver_id', Auth::user() -> id)->get();
         } else {
             $notifications = collect();
         }
