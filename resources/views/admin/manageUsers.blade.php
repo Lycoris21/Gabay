@@ -1,3 +1,6 @@
-<div>
-    <!-- Because you are alive, everything is possible. - Thich Nhat Hanh -->
-</div>
+<x-app-layout>
+    <div class="flex">
+        <x-sidebar />
+       
+    </div>
+</x-app-layout>
