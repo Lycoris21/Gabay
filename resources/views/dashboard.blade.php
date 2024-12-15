@@ -70,7 +70,7 @@
                     <x-user-dashboard-navigation :currentSection="$section" />
 
                     <!-- Dynamic Content -->
-                    <div class="m-5 h-full">
+                    <div class="m-2 h-full">
                         @include($content, ['user' => $user])
                     </div>
                 </div>

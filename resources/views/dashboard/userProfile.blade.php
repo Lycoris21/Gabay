@@ -7,7 +7,7 @@
             @method('PATCH')
 
             <!-- First Name and Last Name -->
-            <div class="flex w-full gap-4 mb-3">
+            <div class="flex w-full gap-4 mb-1">
                 <div class="w-1/2">
                     <x-input-label for="first_name" :value="__('First Name')" />
                     <x-text-input id="first_name" name="first_name" type="text" class="h-9 w-full mt-0.5" :value="old('first_name', $user->first_name)" required autofocus autocomplete="given-name" />
@@ -21,7 +21,7 @@
             </div>
 
             <!-- Email -->
-            <div class="flex w-full gap-4 mb-3">
+            <div class="flex w-full gap-4 mb-1">
                 <div class="w-full">
                     <x-input-label for="email" :value="__('Email')" />
                     <x-text-input id="email" name="email" type="email" class="h-9 w-full mt-0.5" :value="old('email', $user->email)" required autocomplete="username" />
@@ -30,7 +30,7 @@
             </div>
 
             <!-- Year of Birth and Gender -->
-            <div class="flex w-full gap-4 mb-3">
+            <div class="flex w-full gap-4 mb-1">
                 <div class="w-1/2">
                     <x-input-label for="year_of_birth" :value="__('Year of Birth')" />
                     <x-text-input id="year_of_birth" name="year_of_birth" type="number" class="h-9 w-full mt-0.5 text-xs" :value="old('year_of_birth', $user->year_of_birth)" required />
@@ -48,7 +48,14 @@
                 </div>
             </div>
 
-            <!-- Save Changes Button -->
+            <div class="flex w-full gap-4 mb-1">
+                <div class="w-full">
+                    <x-input-label for="description" :value="__('Description')" />
+                    <textarea id="description" name="description" class="mt-1 block w-full h-10 resize-none" rows="3" placeholder="Write a brief description..." maxlength="500">{{ old('description', $user->description) }}</textarea>
+                    <x-input-error class="mt-2" :messages="$errors->get('description')" />
+                </div>
+            </div>
+            
             <!-- Profile Picture Input -->
         
             <div class="w-full">
@@ -60,12 +67,13 @@
                     <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />    
                 </div>
             </div>
-
-            <x-primary-button class="w-[35%] h-9 mt-4 text-sm items-center justify-center">
+            <!-- Save Changes Button -->
+            <x-primary-button class="w-[35%] h-9 mt-2 text-sm items-center justify-center">
                     {{ __('Save Changes') }}
             </x-primary-button>
-        </div>
-    </form>
+        
+        </form>
+    </div>
         <!-- Divider -->
     <div class="border-l-2 mt-2 border-gray-300 h-[80%] w-1 mx-8"></div>
 
