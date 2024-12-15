@@ -39,7 +39,7 @@
                 <p class="mx-3">|</p>
                 <div class="flex items-center flex-wrap">
                     @foreach ($subjectTags as $subjectTag)
-                        <x-subject-tag :tag="$subjectTag"/>
+                        <x-subject-tag :tag="$subjectTag -> subject"/>
                     @endforeach
                 </div>
             </div>
