@@ -5,11 +5,11 @@
     <!-- Modal Background -->
     <div x-show="open" class="fixed inset-0 bg-gray-600 flex items-center bg-opacity-50 overflow-y-auto h-full w-full z-50" style="display: none;">
         <!-- Modal Content -->
-        <div class="relative mx-auto p-10 border w-[35%] shadow-lg rounded-2xl bg-white">
+        <div {{ $attributes->merge(['class' => 'relative mx-auto p-10 border w-[35%] shadow-lg rounded-2xl bg-white']) }}>
             <!-- Modal Body -->
-            <div class="my-1">
+            
                 {{ $slot }}
-            </div>
+            
         </div>
     </div>
 
