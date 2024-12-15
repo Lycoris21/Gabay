@@ -12,5 +12,3 @@
             <span>{{ $time }}</span>
         </p>
     </div>
-
-</div>
