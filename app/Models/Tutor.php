@@ -14,4 +14,10 @@ class Tutor extends Model
     {
         return $this->hasMany(TutorSubject::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
