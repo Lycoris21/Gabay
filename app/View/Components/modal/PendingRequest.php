@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class PendringRequest extends Component
+class PendingRequest extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class PendringRequest extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.modal.pendring-request');
+        return view('components.modal.pending-request');
     }
 }

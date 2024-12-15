@@ -1,5 +1,5 @@
 <!-- filepath: resources/views/components/modals/booking-modal.blade.php -->
-<x-modal.base-modal triggerText="Book Tutor" title="Book a session">
+<x-modal.base-modal :triggerText="'Book Now'" :title="'Booking Modal Title'">
     <div x-data="{ step: 1, title: 'Book a session' }" x-init="$watch('step', value => {
         if (value === 1) title = 'Book a session';
         if (value === 2) title = 'Confirm details';
@@ -58,7 +58,7 @@
                 </div>
 
                 <!-- Hidden Tutor ID -->
-                <input type="hidden" name="tutor_id" id="tutor_id" value="{{ $tutorId }}" />
+                {{-- <input type="hidden" name="tutor_id" id="tutor_id" value="{{ $tutorId }}" /> --}}
 
                 <div class="text-right">
                     <x-primary-button type="submit" class="mt-2 px-4 py-2 bg-green-500 text-white text-xs rounded">Book session</x-primary-button>
