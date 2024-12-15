@@ -13,7 +13,7 @@ class UserDashboardController extends Controller
     public function index()
     {
         $section = 'profile'; 
-        $content = 'dashboard.userProfile'; 
+        $content = 'dashboard.userProfile';
 
         if (Auth::check()) {
             $notifications = BookingNotification::where('user_id', Auth::user() -> id)->get();
@@ -34,6 +34,8 @@ class UserDashboardController extends Controller
     
     public function profile()
     {
+        $user = Auth::user();
+
         $upcomingSessions = Booking::where('tutee_id', Auth::id())
             ->whereDate('date', '>=', now())
             ->orderBy('date', 'asc')
@@ -53,11 +55,14 @@ class UserDashboardController extends Controller
             'upcomingSessions' => $upcomingSessions,
             'subjectTags' => $subjectTags,
             'notifications' => $notifications,
+            'user' => $user
         ]);
     }
 
     public function requests()
     {
+        $user = Auth::user();
+
         $upcomingSessions = Booking::where('tutee_id', Auth::id())
             ->whereDate('date', '>=', now())
             ->orderBy('date', 'asc')
@@ -77,6 +82,7 @@ class UserDashboardController extends Controller
             'upcomingSessions' => $upcomingSessions,
             'subjectTags' => $subjectTags,
             'notifications' => $notifications,
+            'user' => $user
         ]);
     }
 
