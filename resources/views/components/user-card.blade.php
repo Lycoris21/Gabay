@@ -45,9 +45,25 @@
             </div>
         @endif
     </div>
-    <div class="flex flex-row flex-wrap w-44 -mt-20 -mr-4">
-        <x-external-logos src="{{ asset('storage/images/Github_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
-        <x-external-logos src="{{ asset('storage/images/Gmail_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
-        <x-external-logos src="{{ asset('storage/images/LinkedIn_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
-    </div>
+    @if (Route::is('browse.index'))
+        <div class="flex-col h-full justify-between">
+            <div class="flex flex-row flex-wrap w-44 -mr-4">
+                <x-external-logos src="{{ asset('storage/images/Github_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
+                <x-external-logos src="{{ asset('storage/images/Gmail_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
+                <x-external-logos src="{{ asset('storage/images/LinkedIn_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
+            </div>
+            <div class="flex flex-row flex-wrap w-36 mt-8 -mr-4">
+                <x-primary-button class="block h-8 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-[12px] text-gray-700 appearance-none py-0 pl-2" 
+                style="line-height: 1.5; padding-top: 0; padding-bottom: 0;">
+                    Book Tutor
+                </x-primary-button>
+            </div>
+        </div>
+    @else
+        <div class="flex flex-row flex-wrap w-44 -mt-20 -mr-4">
+            <x-external-logos src="{{ asset('storage/images/Github_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
+            <x-external-logos src="{{ asset('storage/images/Gmail_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
+            <x-external-logos src="{{ asset('storage/images/LinkedIn_Logo.png') }}" alt="External app logo" class="w-8 h-8"/>
+        </div>
+    @endif
 </div>
