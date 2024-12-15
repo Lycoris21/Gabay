@@ -75,6 +75,7 @@
             </div>
         </section>
 
-        <div class="bg-customOrange w-full h-32 mt-3"/>
+        
     </div>
+    <div class="bg-customOrange w-full h-32 mt-7"/>
 </x-app-layout>

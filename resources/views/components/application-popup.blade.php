@@ -1,5 +1,5 @@
 @if($application)
-    <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75">
+    <div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50">
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex my-2 flex-col space-y-4">
             <div class="flex">
                 <div class="mr-4">

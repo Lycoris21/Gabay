@@ -24,32 +24,44 @@ class AdminController extends Controller
        return view('admin.dashboard', compact('totalStudents', 'totalTutors', 'pendingApplications'));
     }
 
-    public function manageTutorApplications()
+    public function manageTutorApplications(Request $request)
     {
-        // Fetch all applications or add any necessary filtering
-       $applications = Application::all(); 
+        // Get the search query and sort parameters from the request
+        $searchQuery = $request->input('searchQuery', '');
+        $sortOrder = $request->input('sortOrder', 'Newest');
 
-        // Logic for managing users
+        // Query the applications and join with the users table
+        $applications = Application::query()
+            ->join('users', 'applications.user_id', '=', 'users.id')  // Join with users table
+            ->select('applications.*', 'users.first_name', 'users.last_name')  // Select necessary columns
+            ->where('applications.status', 'Pending')  // Show only pending applications by default
+            // Search by User ID or Name
+            ->when($searchQuery, function ($query, $searchQuery) {
+                $query->where('applications.id', 'LIKE', "%{$searchQuery}%")
+                    ->orWhere('users.first_name', 'LIKE', "%{$searchQuery}%")
+                    ->orWhere('users.last_name', 'LIKE', "%{$searchQuery}%");
+            })
+            // Sort by Newest or Oldest
+            ->when($sortOrder, function ($query, $sortOrder) {
+                if ($sortOrder === 'Newest') {
+                    $query->orderBy('applications.created_at', 'desc');
+                } elseif ($sortOrder === 'Oldest') {
+                    $query->orderBy('applications.created_at', 'asc');
+                }
+            })
+            // Get the results
+            ->get();
+
+        // Return the view with the applications data
         return view('admin.manageTutorApplications', compact('applications'));
     }
 
-    public function manageUsers()
+    public function manageUsers(Request $request)
     {
-        // Fetch all applications or add any necessary filtering
-       $users = User::all(); 
-
-        // Logic for managing users
-        return view('admin.manageUsers', compact('users'));
-    }
-
-    public function analytics()
-    {
-        /*// Get the search query, filter, and sort parameters from the request
         $searchQuery = $request->input('searchQuery', '');
-        $filter = $request->input('filter', 'students');
         $sortOrder = $request->input('sortOrder', 'Newest');
+        $roleFilter = $request->input('roleFilter', '');
 
-        // Query the users with the requested filters and search criteria
         $users = User::query()
             // Search by User ID or Name
             ->when($searchQuery, function ($query, $searchQuery) {
@@ -57,11 +69,11 @@ class AdminController extends Controller
                     ->orWhere('first_name', 'LIKE', "%{$searchQuery}%")
                     ->orWhere('last_name', 'LIKE', "%{$searchQuery}%");
             })
-            // Filter by Role (Students or Tutors)
-            ->when($filter, function ($query, $filter) {
-                if ($filter === 'students') {
+            // Filter by Tutor, Student, or All based on roleFilter
+            ->when($roleFilter, function ($query, $roleFilter) {
+                if ($roleFilter == 'Student') {
                     $query->where('is_tutor', 0);
-                } elseif ($filter === 'tutors') {
+                } elseif ($roleFilter == 'Tutor') {
                     $query->where('is_tutor', 1);
                 }
             })
@@ -69,15 +81,14 @@ class AdminController extends Controller
             ->when($sortOrder, function ($query, $sortOrder) {
                 if ($sortOrder === 'Newest') {
                     $query->orderBy('created_at', 'desc');
-                } else {
+                } elseif ($sortOrder === 'Oldest') {
                     $query->orderBy('created_at', 'asc');
                 }
             })
-            // Pagination (optional, adjust per page if needed)
-            ->paginate(5);
+            // Get the results
+            ->get();
 
-        // Pass the data to the view
-        return view('admin.analytics', compact('users'));*/
+        return view('admin.manageUsers', compact('users', 'searchQuery'));
     }
 
     public function settings()

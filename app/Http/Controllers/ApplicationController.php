@@ -15,8 +15,8 @@ class ApplicationController extends Controller
         // Store the application in the session
         session(['showApplication' => $application]);
 
-        // Redirect back to the dashboard
-        return redirect()->route('admin.dashboard');
+        // Redirect back to the previous page (either dashboard or manage tutor applications)
+        return redirect()->back();
     }
 
     public function confirm(Request $request, $id)
@@ -71,7 +71,7 @@ class ApplicationController extends Controller
         session()->forget('showApplication');
 
         // Redirect back to the dashboard with a success message
-        return redirect()->route('admin.dashboard')->with('success', 'Application status updated successfully.');
+        return redirect()->back()->with('success', 'Application status updated successfully.');
     }
 
     public function closePopup()
@@ -80,7 +80,7 @@ class ApplicationController extends Controller
         session()->forget('showApplication');
         
         // Redirect to the dashboard explicitly with GET
-        return redirect()->route('admin.dashboard')->with('success', 'Popup closed successfully.');
+        return redirect()->back()->with('success', 'Popup closed successfully.');
     }
 
 }
