@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/profile', [UserDashboardController::class, 'profile'])->name('dashboard.userProfile');
+    Route::patch('/dashboard/profile', [ProfileController::class, 'update'])->name('dashboard.userProfile');
     Route::get('/dashboard/requests', [UserDashboardController::class, 'requests'])->name('dashboard.requests');
     
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
