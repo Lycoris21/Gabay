@@ -11,9 +11,12 @@ class ApplicationPopup extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $application;
+
+    public function __construct($application)
     {
         //
+        $this->application = $application;
     }
 
     /**
