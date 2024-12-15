@@ -26,7 +26,9 @@ class UserDashboardController extends Controller
             ->where('status', '!=', 'Pending')
             ->get(['tutor_id', 'status', 'updated_at', 'id', 'subject_name'])
             ->map(function ($booking) {
-                $booking->name = User::find($booking->tutor_id)->first_name . ' ' . User::find($booking->tutor_id)->last_name;
+                $tutor = User::find($booking->tutor_id);
+                $booking->name = $tutor->first_name . ' ' . $tutor->last_name;
+                $booking->profile_picture = $tutor->profile_picture;
                 
                 if ($booking->status === 'Approved') {
                     $booking->action = ' approved your booking for ';
@@ -51,12 +53,11 @@ class UserDashboardController extends Controller
         $user = Auth::user();
 
         if ($user->is_tutor == 1) {
-            return Tutor::where('user_id', $user->id)->first()->subjects();
+            return Tutor::where('user_id', $user->id)->first()->subjects;
         }
 
         return collect();
     }
-
 
     public function index()
     {
