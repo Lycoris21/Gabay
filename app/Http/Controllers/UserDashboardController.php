@@ -59,6 +59,26 @@ class UserDashboardController extends Controller
         return collect();
     }
 
+    public function getRequests()
+    {
+        $requests = Booking::where('tutor_id', auth()->id())
+            //->where('status', 'Pending')
+            ->get(['tutee_id', 'subject_name', 'date', 'start_time', 'end_time', 'status'])
+            ->map(function ($booking) {
+                $tutee = User::find($booking->tutee_id);
+                return [
+                    'name' => $tutee->first_name . ' ' . $tutee->last_name,
+                    'subject' => $booking->subject_name,
+                    'date' => \Carbon\Carbon::parse($booking->date)->format('F j, Y'),
+                    'time' => \Carbon\Carbon::parse($booking->start_time)->format('H:i') . '-' . \Carbon\Carbon::parse($booking->end_time)->format('H:i'),
+                    'status' => $booking->status
+                ];
+            });
+
+        return $requests;
+    }
+
+
     public function index()
     {
         $section = 'profile'; 
@@ -79,8 +99,6 @@ class UserDashboardController extends Controller
         $notifications = $this -> getNotifications();
         $subjectTags = $this -> getSubjectTags();
 
-        
-
         return view('dashboard', [
             'section' => 'profile',
             'content' => 'dashboard.userProfile',
@@ -97,12 +115,14 @@ class UserDashboardController extends Controller
         $upcomingSessions = $this -> getUpcomingSessions();
         $notifications = $this -> getNotifications();
         $subjectTags = $this -> getSubjectTags();
+        $requests = $this -> getRequests();
 
         return view('dashboard', [
             'section' => 'requests',
             'content' => 'dashboard.requests',
             'upcomingSessions' => $upcomingSessions,
             'subjectTags' => $subjectTags,
+            'requests' => $requests,
             'notifications' => $notifications,
             'user' => $user
         ]);
