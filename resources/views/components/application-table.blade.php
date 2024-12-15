@@ -17,11 +17,7 @@
                     @foreach($applications as $application)
                         <tr class="border-t border-gray-200">
                             <td class="px-6 py-4 whitespace-nowrap">{{ $application->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('applications.view', ['id' => $application->id]) }}" class="text-black">
-                                    {{ $application->user->first_name }} {{ $application->user->last_name }}
-                                </a>
-                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $application->user->first_name }} {{ $application->user->last_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-black 
                                     @if($application->status == 'Pending') bg-yellow-100 text-yellow-800
