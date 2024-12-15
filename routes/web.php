@@ -35,15 +35,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/requests', [UserDashboardController::class, 'requests'])->name('dashboard.requests');
     
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
-
-    Route::post('/book-tutor', [BookingController::class, 'store'])->name('book.tutor');
 });
 
 Route::post('/book-tutor', [BrowseController::class, 'book'])->name('book.tutor');
+Route::post('/booking/send', [BookingController::class, 'store'])->name('booking.store');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/manage-users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
+    Route::get('/manage-tutor-applications', [AdminController::class, 'manageTutorApplications'])->name('admin.manageTutorApplications');
     Route::get('/analytics', [AdminController::class, 'analytics'])->name('admin.analytics');
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });
@@ -64,8 +63,5 @@ Route::post('/applications/{id}/confirm', [ApplicationController::class, 'confir
 Route::post('/applications/popup/close', [ApplicationController::class, 'closePopup'])->name('applications.popup.close');
 
 Route::get('/users/{id}/manageView', [UserController::class, 'manageView'])->name('users.manageView');
-Route::post('/users/{id}/update', [UserController::class, 'update'])->name(name: 'users.update');
-Route::post('/users/{id}/delete', [UserController::class, 'delete'])->name(name: 'users.delete');
-Route::post('/users/popup/close', [UserController::class, 'closePopup'])->name('users.popup.close');
 
 require __DIR__.'/auth.php';
