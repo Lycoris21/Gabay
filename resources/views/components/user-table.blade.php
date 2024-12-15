@@ -11,22 +11,26 @@
                         <th class="px-6 py-3 text-left text-black font-black">Email</th>
                         <th class="px-6 py-3 text-left text-black font-black">Role</th>
                         <th class="px-6 py-3 text-left text-black font-black">Year Of Birth</th>
+                        <th class="px-6 py-3 text-left text-black font-black">Actions</th> <!-- New Actions column -->
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
                         <tr class="border-t border-gray-200">
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('users.manageView', ['id' => $user->id]) }}" class="text-black hover:underline hover:underline-offset-2">
-                                    {{ $user->first_name }} {{ $user->last_name }}
-                                </a>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $user->first_name }} {{ $user->last_name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {{ $user->is_tutor ? 'Tutor' : 'Student' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->year_of_birth }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <a href="{{ route('users.manageView', ['id' => $user->id]) }}" 
+                                   class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                                    View Details
+                                </a>
+                            </td> <!-- View Details Button -->
                         </tr>
                     @endforeach
                 </tbody>
