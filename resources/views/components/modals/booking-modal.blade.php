@@ -1,5 +1,5 @@
 <!-- filepath: resources/views/components/modals/booking-modal.blade.php -->
-<x-modals.base-modal title="Book Tutor" triggerText="Book Tutor">
+<x-modals.base-modal title="Book a session" triggerText="Book Tutor">
     <form method="POST" action="{{ route('book.tutor') }}">
         @csrf
         <!-- Form fields for booking a tutor -->
