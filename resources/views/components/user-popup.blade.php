@@ -33,33 +33,30 @@
                     </div>
                 </div>
             </div>
-            @if($user->is_tutor)
-                    <div class="bg-gray-100 p-4 rounded-md">
-                        <h2 class="text-lg font-medium text-gray-900">Tutor Details</h2>
-                        <div class="mt-2 space-y-2">
-                            @if($tutor && $tutor->subjects->isNotEmpty())
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Subjects to Teach</dt>
-                                    <dd class="text-sm text-gray-900">
-                                        @foreach($tutor->subjects as $subject)
-                                            {{ $subject->subject }}<br>
-                                        @endforeach
-                                    </dd>
-                                </div>
-                                <div>
-                                    <dt class="text-sm font-medium text-gray-500">Hourly Rate</dt>
-                                    <dd class="text-sm text-gray-900">
-                                        @foreach($tutor->subjects as $subject)
-                                            PHP {{ $subject->pivot->hourly_rate }}/hr<br>
-                                        @endforeach
-                                    </dd>
-                                </div>
-                            @else
-                                <p class="text-sm text-gray-500">No subjects or hourly rate information available.</p>
-                            @endif
+            @if($user->tutor)
+                <div class="bg-gray-100 p-4 rounded-md">
+                    <h2 class="text-lg font-medium text-gray-900">Tutor Details</h2>
+                    <div class="mt-2 space-y-2">
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Subjects to Teach</dt>
+                            <dd class="text-sm text-gray-900">
+                                @foreach($user->tutor->subjects as $subject)
+                                    {{ $subject->subject }}<br>
+                                @endforeach
+                            </dd>
+                        </div>
+                        <div>
+                            <dt class="text-sm font-medium text-gray-500">Hourly Rate</dt>
+                            <dd class="text-sm text-gray-900">
+                                @foreach($user->tutor->subjects as $subject)
+                                    PHP {{ $subject->hourly_rate }}/hr<br>
+                                @endforeach
+                            </dd>
                         </div>
                     </div>
-                @endif
+                </div>
+            @endif
+
                 <div class="flex justify-end space-x-2">
                 <form method="POST" action="{{ route('users.update', ['id' => $user->id]) }}">
                     @csrf

@@ -61,5 +61,8 @@ Route::post('/applications/{id}/confirm', [ApplicationController::class, 'confir
 Route::post('/applications/popup/close', [ApplicationController::class, 'closePopup'])->name('applications.popup.close');
 
 Route::get('/users/{id}/manageView', [UserController::class, 'manageView'])->name('users.manageView');
+Route::post('/users/{id}/update', [UserController::class, 'update'])->name(name: 'users.update');
+Route::post('/users/{id}/delete', [UserController::class, 'delete'])->name(name: 'users.delete');
+Route::post('/users/popup/close', [UserController::class, 'closePopup'])->name('users.popup.close');
 
 require __DIR__.'/auth.php';
