@@ -9,14 +9,13 @@ class TutorApplicationController extends Controller
 {
     public function submitStep(Request $request)
     {
-        error_log('YOU CANT MISS THIS');
+        if ($request->input('currentPage') == 1) {
+            $application = new Application();
+            $application->user_id = auth()->id();
+        } else {
+            $application = session('application');
+        }
 
-        // Retrieve or create the application for the current authenticated user
-        $application = Application::firstOrCreate(
-            ['user_id' => auth()->id()]
-        );
-
-        // Update the application data based on the submitted fields
         if ($request->has('subject')) {
             $application->subject = $request->subject;
         } elseif ($request->has('resume')) {
@@ -28,14 +27,14 @@ class TutorApplicationController extends Controller
             $application->hourly_rate = $request->hourly_rate;
         }
 
-        // Save the application data to the database
-        $application->save();
-
-        // Store the application in the session
         session(['application' => $application]);
         $currentPage = $request->input('currentPage', 1);
-      
-        // Redirect to the next page
+
+        if ($currentPage == 4) {
+            $application->save();
+        }
+
         return redirect()->route('pageSection.show', ['pageNumber' => $currentPage + 1]);
     }
 }
+

@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tutors', function (Blueprint $table) {
+        Schema::create('tutor_subjects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->timestamps(); // Automatically adds created_at and updated_at fields
+            $table->foreignId('tutor_id')->constrained()->onDelete('cascade');
+            $table->string('subject', 50);
+            $table->float('hourly_rate');
+            $table->timestamps();  // Optional: track when the subject rate was added or updated
         });
     }
 
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tutors');
+        Schema::dropIfExists('tutor_subjects');
     }
 };
