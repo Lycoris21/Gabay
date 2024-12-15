@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Application;
+use App\Models\Tutor;
 
 class ApplicationController extends Controller
 {
@@ -32,6 +33,34 @@ class ApplicationController extends Controller
                 $user->is_tutor = true;
                 $user->save();
             }
+
+            $tutor = Tutor::where('user_id', $user->id)->first();
+
+            if (!$tutor) {
+                // If no tutor record exists, create a new one
+                $tutor = Tutor::create([
+                    'user_id' => $user->id,
+                ]);
+            } else {
+                $tutor->save();
+            }
+            
+            $tutorSubject = $tutor->subjects()->first();
+
+            if ($tutorSubject) {
+                if ($tutorSubject->subject !== $application->subject || $tutorSubject->hourly_rate !== $application->hourly_rate) {
+                    $tutor->subjects()->create([
+                        'subject' => $application->subject,
+                        'hourly_rate' => $application->hourly_rate,
+                    ]);
+                }
+            } else {
+                $tutor->subjects()->create([
+                    'subject' => $application->subject,
+                    'hourly_rate' => $application->hourly_rate,
+                ]);
+            }
+
             
         } elseif ($request->input('action') === 'deny') {
             // Handle denial logic
