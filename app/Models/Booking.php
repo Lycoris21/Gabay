@@ -17,6 +17,8 @@ class Booking extends Model
         'end_time'
     ];
 
+    protected $dates = ['created_at', 'updated_at'];
+
     public function tutee()
     {
         return $this->belongsTo(User::class, 'tutee_id');
