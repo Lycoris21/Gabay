@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
 });
 
+Route::post('/book-tutor', [BrowseController::class, 'book'])->name('book.tutor');
+
 Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/tutorApplication', function () {

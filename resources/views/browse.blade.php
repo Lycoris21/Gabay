@@ -1,3 +1,4 @@
+<!-- filepath: resources/views/browse.blade.php -->
 <x-app-layout>
     <div class="py-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 h-[calc(100vh-250px)]">
@@ -16,8 +17,6 @@
                     </select>
                     <x-input-error :messages="$errors->get('gender')" class="mt-2" />
                 </div>
-                
-                
             </div>
             <div class="flex flex-col gap-5 w-full h-full overflow-y-scroll">
                 @foreach ($tutors as $tutor)
