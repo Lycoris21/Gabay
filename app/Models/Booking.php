@@ -14,7 +14,9 @@ class Booking extends Model
         'date', 
         'status', 
         'start_time', 
-        'end_time'
+        'end_time',
+        'platform',
+        'link'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
