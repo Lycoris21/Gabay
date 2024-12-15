@@ -10,6 +10,15 @@ class Tutor extends Model
         'user_id'
     ];
 
+    public function getHourlyRateRangeAttribute()
+    {
+        $minRate = $this->subjects()->min('hourly_rate');
+        $maxRate = $this->subjects()->max('hourly_rate');
+
+        return $minRate === $maxRate ? $minRate : "{$minRate} - {$maxRate}";
+    }
+
+
     public function subjects()
     {
         return $this->hasMany(TutorSubject::class);
