@@ -1,10 +1,11 @@
-<form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
-    @csrf
-    @method('PATCH')
 
-    <!-- Profile Section -->
-    <div class="flex h-full">
-        <div class="w-[55%] h-full">
+<!-- Profile Section -->
+<div class="flex h-full">
+    <div class="w-[55%] h-full">
+        <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+
             <!-- First Name and Last Name -->
             <div class="flex w-full gap-4 mb-3">
                 <div class="w-1/2">
@@ -50,55 +51,56 @@
             <!-- Save Changes Button -->
             <!-- Profile Picture Input -->
         
-        <div class="w-full">
-                <x-input-label>
-                    Upload Profile Picture
-                </x-input-label>
-            <div class="border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-gray-700 h-9 w-full mt-0.5 text-xs ">
-                <input id="profile_picture" type="file" name="profile_picture" class=" pl-3 pt-1 block mt-1 w-full" accept="image/*">
-                <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />    
+            <div class="w-full">
+                    <x-input-label>
+                        Upload Profile Picture
+                    </x-input-label>
+                <div class="border border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-gray-700 h-9 w-full mt-0.5 text-xs ">
+                    <input id="profile_picture" type="file" name="profile_picture" class=" pl-3 pt-1 block mt-1 w-full" accept="image/*">
+                    <x-input-error :messages="$errors->get('profile_picture')" class="mt-2" />    
+                </div>
             </div>
-        </div>
-        <x-primary-button class="w-[35%] h-9 mt-4 text-sm items-center justify-center">
-                {{ __('Save Changes') }}
+
+            <x-primary-button class="w-[35%] h-9 mt-4 text-sm items-center justify-center">
+                    {{ __('Save Changes') }}
             </x-primary-button>
-        </div>
+        </form>
+    </div> 
 
-        <!-- Divider -->
-        <div class="border-l-2 mt-2 border-gray-300 h-[80%] w-1 mx-8"></div>
+    <!-- Divider -->
+    <div class="border-l-2 mt-2 border-gray-300 h-[80%] w-1 mx-8"></div>
 
-        <!-- Password Section -->
-        <div class="w-[40%] h-full">
-            <form method="post" action="{{ route('password.update') }}">
-                @csrf
-                @method('put')
+    <!-- Password Section -->
+    <div class="w-[40%] h-full">
+        <form method="post" action="{{ route('password.update') }}">
+            @csrf
+            @method('put')
 
-                <!-- Old Password -->
-                <div class="w-full mb-4">
-                    <x-input-label for="current_password" :value="__('Old Password')" />
-                    <x-text-input id="current_password" name="current_password" type="password" class="h-8 w-full mt-0.5" autocomplete="current-password" />
-                    <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-                </div>
+            <!-- Old Password -->
+            <div class="w-full mb-4">
+                <x-input-label for="current_password" :value="__('Old Password')" />
+                <x-text-input id="current_password" name="current_password" type="password" class="h-8 w-full mt-0.5" autocomplete="current-password" />
+                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+            </div>
 
-                <!-- New Password -->
-                <div class="w-full mb-4">
-                    <x-input-label for="password" :value="__('New Password')" />
-                    <x-text-input id="password" name="password" type="password" class="h-9 w-full mt-0.5" autocomplete="new-password" />
-                    <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-                </div>
+            <!-- New Password -->
+            <div class="w-full mb-4">
+                <x-input-label for="password" :value="__('New Password')" />
+                <x-text-input id="password" name="password" type="password" class="h-9 w-full mt-0.5" autocomplete="new-password" />
+                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            </div>
 
-                <!-- Confirm Password -->
-                <div class="w-full">
-                    <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-                    <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="h-9 w-full mt-0.5" autocomplete="new-password" />
-                    <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-                </div>
+            <!-- Confirm Password -->
+            <div class="w-full">
+                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="h-9 w-full mt-0.5" autocomplete="new-password" />
+                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+            </div>
 
-                <!-- Change Password Button -->
-                <x-primary-button class="w-[60%] h-9 mt-4 text-sm items-center justify-center">
-                    {{ __('Change Password') }}
-                </x-primary-button>
-            </form>
-        </div>
+            <!-- Change Password Button -->
+            <x-primary-button class="w-[60%] h-9 mt-4 text-sm items-center justify-center">
+                {{ __('Change Password') }}
+            </x-primary-button>
+        </form>
     </div>
-</form>
+</div>

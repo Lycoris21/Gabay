@@ -48,7 +48,7 @@ class ProfileController extends Controller
 
         error_log(Auth::user()->first_name);
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('dashboard.userProfile') -> with('status', 'Profile updated!');
     }
 
     /**
