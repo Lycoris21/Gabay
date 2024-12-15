@@ -81,6 +81,7 @@ class UserDashboardController extends Controller
 
     public function index()
     {
+        $user = Auth::user();
         $section = 'profile'; 
         $content = 'dashboard.userProfile';
 
@@ -89,7 +90,7 @@ class UserDashboardController extends Controller
         $subjectTags = $this -> getSubjectTags();
 
 
-        return view('dashboard', compact('section', 'content', 'notifications', 'upcomingSessions', 'subjectTags'));
+        return view('dashboard', compact('user', 'section', 'content', 'notifications', 'upcomingSessions', 'subjectTags'));
     }
     
     public function profile()

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Application;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Tutor;
 
 class AdminController extends Controller
 {
@@ -19,8 +20,10 @@ class AdminController extends Controller
 
     public function manageUsers()
     {
+        $users = User::all();
+
         // Logic for managing users
-        return view('admin.manageUsers');
+        return view('admin.manageUsers', compact('users'));
     }
 
     public function analytics()

@@ -10,22 +10,11 @@ class UserController extends Controller
 {
     public function manageView($id)
     {
-        // Retrieve the user with their related information (assuming a 'user' relationship)
-        $user = User::findOrFail($id);
-
-         // Get tutor details if the user is a tutor
-        if ($user->is_tutor) {
-            $tutor = Tutor::where('user_id', $user->id)->first();
-        } else {
-            $tutor = null;
-        }
-
-
-        // Store the user in the session
+        $users = User::all();
+        $user = User::with('tutor.subjects')->findOrFail($id);
         session(['showUser' => $user]);
 
-        // Redirect back to the dashboard
-        return view('admin.manageUsers', compact('user', 'tutor'));
+        return view('admin.manageUsers', compact('user', 'users'));
     }
 
     public function closePopup()
