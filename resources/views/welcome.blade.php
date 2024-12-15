@@ -49,7 +49,7 @@
                         Courses
                     </a>
                     <a
-                        href="{{ route('login') }}"
+                        href="#how-it-works"
                         class="px-5 py-2 text-sky-900 ring-1 ring-transparent hover:underline  hover:duration-500 focus:outline-none focus-visible:ring-[#FF2D20] mr-5 active:underline underline-offset-4">
                         How it Works
                     </a>
@@ -108,7 +108,7 @@
 
             <div class="bg-customOrange w-full h-32">
             </div>
-            <section class="{{-- bg-blue-100 --}} h-screen relative w-full max-w-2xl px-6 lg:max-w-7xl">
+            <section id="how-it-works" class="{{-- bg-blue-100 --}} h-screen relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <div class="h-full flex flex-col flex-wrap justify-evenly items-center">
                     <h1 class="-my-16 -mb-28 text-4xl font-bold text-black">
                         How it works
@@ -194,6 +194,16 @@
             </footer>
         </div>
     </div>
+
+    <script>
+        document.querySelector('a[href="#how-it-works"]').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector('#how-it-works').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+
 </body>
 
 </html>
