@@ -39,6 +39,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/book-tutor', [BrowseController::class, 'book'])->name('book.tutor');
 Route::post('/booking/send', [BookingController::class, 'store'])->name('booking.store');
+Route::patch('/booking/{id}/reject', [BookingController::class, 'reject'])->name('booking.reject');
+Route::patch('/booking/{id}/approve', [BookingController::class, 'approve'])->name('booking.approve');
+Route::patch('/booking/{id}/cancel', [BookingController::class, 'cancel'])->name(name: 'booking.cancel');
+Route::patch('/booking/{id}/delete', [BookingController::class, 'delete'])->name(name: 'booking.delete');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
