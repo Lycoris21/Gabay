@@ -3,11 +3,10 @@
     <div x-data="{ step: 1, title: 'View details' }" x-init="$watch('step', value => {
         if (value === 1) title = 'View details';
         if (value === 2) title = 'Provide session link';
-        if (value > 2) title = 'Confirm details';
-        if (value === 4) title = '';
-        if (value === 5) title = '';
+        if (value === 3) title = 'Confirm details';
+        if (value > 3) title = '';
         $dispatch('update-title', title);
-    })" class="m-5">
+    })">
     
 
     {{-- 1 = View details

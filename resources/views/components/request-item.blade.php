@@ -19,6 +19,10 @@
             @endif
     </td>
     <td class="py-3">
-        <x-modal.pending-request/>
+        @if ($status === 'pending')
+            <x-modal.pending-request/>
+        @elseif ($status === 'approved')
+            <x-modal.approved-request/>
+        @endif
     </td>
 </tr>
