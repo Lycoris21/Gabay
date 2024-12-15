@@ -42,6 +42,8 @@
                     </div>
                 </div>
                 
+                
+                
                 {{-- HAS SOME ERROR RENDERING THE IF IDK WHY PLS FIX --}}
                 <!-- Tutor-Specific Details -->
                 @if($user->tutor)
@@ -83,8 +85,8 @@
             <div x-show="step === 2">
                 <div class="flex mt-7">
                     <!-- Profile Picture -->
-                    <div class="w-35% flex-row">
-                        <div class="flex-grow -mt-10 mb-8">
+                    <div class="w-35% flex flex-col self-center items-center">
+                        <div class="flex -mt-10 mb-8">
                             <div class="text-xl font-extrabold text-gray-800 px-4 justify-self-center">Edit Profile</div>
                         </div>
                         <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('storage/profile-picture/default-image.jpg') }}" 
@@ -143,6 +145,15 @@
                             </div>
                         </div>
 
+                        <div class="flex w-full gap-4 mb-1">
+                            <div class="w-full">
+                                <x-input-label for="email" :value="__('Subjects')" />
+                                <x-text-input id="email" name="email" type="email" class="h-9 w-full mt-0.5" :value="old('email', $user->email)" required autocomplete="username" />
+                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            </div>
+                        </div>
+
+                        
                         {{-- HAS SOME ERROR RENDERING THE IF IDK WHY PLS FIX --}}
                         @if ($user->tutor)
                             <!-- Subjects ====NEEDS HANDLING====== -->
