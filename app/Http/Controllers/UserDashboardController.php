@@ -10,22 +10,49 @@ use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
+    public function getUpcomingSessions(){
+        $daUpcomingSessions = Booking::where('tutee_id', Auth::id())
+        ->whereDate('date', '>=', now())
+        ->orderBy('date', 'asc')
+        ->get();
+
+        return $daUpcomingSessions;
+    }
+
+    public function getNotifications(){
+        if (Auth::check()) {
+            $daNotifications = Booking::where('tutee_id', Auth::user()->id)
+            ->where('status', '!=', 'Pending')
+            ->get(['tutor_id', 'status', 'updated_at', 'id', 'subject_name'])
+            ->map(function ($booking) {
+                $booking->name = User::find($booking->tutor_id)->first_name . ' ' . User::find($booking->tutor_id)->last_name;
+                
+                if ($booking->status === 'Approved') {
+                    $booking->action = ' approved your booking for ';
+                }
+
+                if ($booking->status === 'Rescheduled') {
+                    $booking->action = ' rescheduled your booking for ';
+                }
+
+                return $booking;
+            });
+        } else {
+            $daNotifications = collect();
+        }
+        
+
+        return $daNotifications;
+    }
+
     public function index()
     {
         $section = 'profile'; 
         $content = 'dashboard.userProfile';
 
-        if (Auth::check()) {
-            $notifications = BookingNotification::where('user_id', Auth::user() -> id)->get();
-        } else {
-            $notifications = collect();
-        }
-
-        $upcomingSessions = Booking::where('tutee_id', Auth::id())
-            ->whereDate('date', '>=', now())
-            ->orderBy('date', 'asc')
-            ->get();
-
+        $upcomingSessions = $this -> getUpcomingSessions();
+        $notifications = $this -> getNotifications();
+        
         $subjectTags = ['Mathematics', 'English', 'Programming'];
 
 
@@ -35,19 +62,12 @@ class UserDashboardController extends Controller
     public function profile()
     {
         $user = Auth::user();
-
-        $upcomingSessions = Booking::where('tutee_id', Auth::id())
-            ->whereDate('date', '>=', now())
-            ->orderBy('date', 'asc')
-            ->get();
+        $upcomingSessions = $this -> getUpcomingSessions();
+        $notifications = $this -> getNotifications();
 
         $subjectTags = ['Mathematics', 'English', 'Programming'];
 
-        if (Auth::check()) {
-            $notifications = BookingNotification::where('user_id', Auth::user() -> id)->get();
-        } else {
-            $notifications = collect();
-        }
+        
 
         return view('dashboard', [
             'section' => 'profile',
@@ -62,19 +82,10 @@ class UserDashboardController extends Controller
     public function requests()
     {
         $user = Auth::user();
-
-        $upcomingSessions = Booking::where('tutee_id', Auth::id())
-            ->whereDate('date', '>=', now())
-            ->orderBy('date', 'asc')
-            ->get();
+        $upcomingSessions = $this -> getUpcomingSessions();
+        $notifications = $this -> getNotifications();
 
         $subjectTags = ['Mathematics', 'English', 'Programming'];
-
-        if (Auth::check()) {
-            $notifications = BookingNotification::where('user_id', Auth::user() -> id)->get();
-        } else {
-            $notifications = collect();
-        }
 
         return view('dashboard', [
             'section' => 'requests',

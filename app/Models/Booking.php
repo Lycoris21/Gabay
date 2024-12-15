@@ -12,9 +12,12 @@ class Booking extends Model
         'subject_name', 
         'subject_topic', 
         'date', 
+        'status', 
         'start_time', 
         'end_time'
     ];
+
+    protected $dates = ['created_at', 'updated_at'];
 
     public function tutee()
     {

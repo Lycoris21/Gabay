@@ -28,8 +28,8 @@
                         <x-notification-item
                             :name="$notification['name']"
                             :action="$notification['action']"
-                            :booking="$notification['booking']"
-                            :time="$notification['time']" />
+                            :booking="$notification['subject_name']"
+                            :time="$notification['updated_at']" />
                         @endforeach
                     </div>
                 </div>

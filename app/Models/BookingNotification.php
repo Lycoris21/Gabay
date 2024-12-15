@@ -4,26 +4,44 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class BookingNotification extends Model
 {
     use HasFactory;
 
-    // Table name is bookingnotifications
     protected $table = 'booking_notifications'; 
 
-    // Fillable fields to allow mass assignment
     protected $fillable = [
-        'user_id',
-        'name',
+        'sender_id',
+        'receiver_id',
         'action',
         'booking',
-        'time',
+        'time_created',
     ];
 
-    // Define the relationship to the User model
-    public function user()
+    public function sender()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
+    public function receiver()
+    {
+        return $this->belongsTo(User::class, 'receiver_id');
+    }
+
+    public function getTimeSinceAttribute()
+    {
+        return Carbon::parse($this->time_created)->diffForHumans();
+    }
+
+    public function getSenderIdAttribute()
+    {
+        return $this->sender_id;
+    }
+
+    public function getReceiverIdAttribute()
+    {
+        return $this->receiver_id;
     }
 }

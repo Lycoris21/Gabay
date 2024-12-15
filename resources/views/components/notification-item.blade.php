@@ -5,7 +5,7 @@
     <div class="flex-col ml-2">
         <p class="text-sm">
             {{ $name }}
-            {{ $action }} your booking for 
+            {{ $action }}
             {{ $booking }}. 
         </p>
         <p class="font-light text-xs">
