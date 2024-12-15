@@ -29,7 +29,7 @@
 
         <div class="flex items-center mt-0.5">
             <p class="text-sm text-gray-800">
-                P{{ $tutor->hourly_rate }}/hour
+                P{{ $tutor->hourly_rate_range }}/hour
             </p>
             <p class="mx-3">|</p>
             <div class="flex items-center flex-wrap">
