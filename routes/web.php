@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageSectionController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\BrowseController;
 
@@ -58,5 +59,7 @@ Route::post('/tutorApplication', [TutorApplicationController::class, 'submitStep
 Route::get('/applications/{id}/view', [ApplicationController::class, 'view'])->name('applications.view');
 Route::post('/applications/{id}/confirm', [ApplicationController::class, 'confirm'])->name('applications.confirm');
 Route::post('/applications/popup/close', [ApplicationController::class, 'closePopup'])->name('applications.popup.close');
+
+Route::get('/users/{id}/manageView', [UserController::class, 'manageView'])->name('users.manageView');
 
 require __DIR__.'/auth.php';
