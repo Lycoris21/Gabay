@@ -18,9 +18,7 @@
                 </span>
             @endif
     </td>
-    <td class="px-1 py-3 border-b w-32">
-        <x-primary-button class="h-8 w-full text-xs">
-            View Details
-        </x-primary-butto>
+    <td class="py-3">
+        <x-modals.pending-request-modal :name="$name" :subject="$subject" :date="$date" :time="$time" :status="$status"/>
     </td>
 </tr>

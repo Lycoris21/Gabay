@@ -128,4 +128,5 @@ class UserDashboardController extends Controller
             'user' => $user
         ]);
     }
+    
 }

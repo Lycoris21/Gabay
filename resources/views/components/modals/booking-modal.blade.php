@@ -85,7 +85,7 @@
                     <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> Lycoris Ann </p>
                 </div>
                 <div class="flex gap-2 mb-2">
-                    <img src="{{ asset('storage/images/meet.png') }}" alt="people" class="pl-1 block h-6 fill-current">
+                    <img src="{{ asset('storage/images/meet.png') }}" alt="meet" class="pl-1 block h-6 fill-current">
                     <p class="text-sm"> Google Meet </p>
                 </div>
             </div>
