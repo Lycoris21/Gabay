@@ -10,6 +10,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\BrowseController;
+use App\Http\Controllers\BookingController;
 
 // Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
@@ -34,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/requests', [UserDashboardController::class, 'requests'])->name('dashboard.requests');
     
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
+
+    Route::post('/book-tutor', [BookingController::class, 'store'])->name('book.tutor');
 });
 
 Route::post('/book-tutor', [BrowseController::class, 'book'])->name('book.tutor');

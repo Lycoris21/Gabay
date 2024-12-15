@@ -22,7 +22,7 @@
             {{ ucfirst(Auth::user()->gender) }}, {{ \Carbon\Carbon::now()->year - Auth::user()->year_of_birth }} Years
         </p>
         @if(Auth::user()->description)
-        <p class="text-sm italic text-gray-800">
+        <p class="text-sm text-gray-800">
             {{ Auth::user()->description }}
         </p>
         @else

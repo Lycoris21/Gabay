@@ -38,7 +38,7 @@ class BrowseController extends Controller
 
         return view('browse', compact('subjectTags', 'tutors'));
     }
-
+    
     public function book(Request $request)
     {
         // Handle the booking logic here

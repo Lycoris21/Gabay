@@ -15,10 +15,10 @@
             </p>
         </div>
         <p class="text-sm text-gray-500">
-            {{ ucfirst($tutor->user->gender) }}, {{ \Carbon\Carbon::now()->year - $tutor->user->year_of_birth }} Years
+            {{ ucfirst($tutor->user->gender) }}, {{ \Carbon\Carbon::now()->year - $tutor->user->year_of_birth }} Years Old
         </p>
         @if($tutor->user->description)
-        <p class="text-sm italic text-gray-800">
+        <p class="text-sm text-gray-800">
             {{ $tutor->user->description }}
         </p>
         @else
@@ -48,7 +48,7 @@
             <x-external-logos src="{{ asset('storage/images/LinkedIn_Logo.png') }}" alt="External app logo" class="w-8 h-8" />
         </div>
         <div class="flex flex-row flex-wrap w-36 mt-8 -mr-4">
-            <x-modals.booking-modal />
+            <x-modals.booking-modal :tutorId="$tutor->id" />
         </div>
     </div>
     @else

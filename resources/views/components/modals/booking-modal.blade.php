@@ -10,60 +10,58 @@
         <div x-show="step === 1">
             <form method="POST" action="{{ route('book.tutor') }}">
                 @csrf
-                <!-- Form fields for booking a tutor -->
-                <!-- Email -->
-                <div class="flex-row">
-                    <div class="w-full mb-1">
-                        <x-input-label for="title" :value="__('SessionTitle')" />
-                        <x-text-input id="title" name="title" type="text" class="h-9 w-full mt-0.5" />
-                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
+                <!-- Session Title -->
+                <div class="w-full mb-1">
+                    <x-input-label for="session_title" :value="__('Session Title')" />
+                    <x-text-input id="session_title" name="session_title" type="text" class="h-9 w-full mt-0.5" />
+                    <x-input-error :messages="$errors->get('session_title')" class="mt-2" />
+                </div>
+
+                <!-- Subject -->
+                <div class="w-full mb-1">
+                    <x-input-label for="subject" :value="__('Subject')" />
+                    <x-text-input id="subject" name="subject" type="text" class="h-9 w-full mt-0.5" />
+                    <x-input-error :messages="$errors->get('subject')" class="mt-2" />
+                </div>
+
+                <!-- Date -->
+                <div class="w-full mb-1">
+                    <x-input-label for="date" :value="__('Date')" />
+                    <x-text-input id="date" name="date" type="date" class="h-9 w-full mt-0.5" />
+                    <x-input-error :messages="$errors->get('date')" class="mt-2" />
+                </div>
+
+                <!-- Time Range -->
+                <div class="flex gap-x-2 mb-1">
+                    <div class="w-full">
+                        <x-input-label for="start_time" :value="__('From')" />
+                        <x-text-input id="start_time" name="start_time" type="time" class="h-9 w-full mt-0.5" />
+                        <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
                     </div>
-                    <div class="w-full mb-1">
-                        <x-input-label for="title" :value="__('Subject')" />
-                        <x-text-input id="title" name="title" type="text" class="h-9 w-full mt-0.5" />
-                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                    </div>
-                    <div class="w-full mb-1">
-                        <x-input-label for="title" :value="__('Date')" />
-                        <x-text-input id="title" name="title" type="date" class="h-9 w-full mt-0.5" />
-                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                    </div>
-                    <div class="w-full mb-1">
-                        <x-input-label for="title" :value="__('SessionTitle')" />
-                        <x-text-input id="title" name="title" type="text" class="h-9 w-full mt-0.5" />
-                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                    </div>
-                    <div class="flex gap-x-2 mb-1">
-                        <div class="w-full">
-                            <x-input-label for="title" :value="__('From')" />
-                            <x-text-input id="title" name="title" type="time" class="h-9 w-full mt-0.5" />
-                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                        </div>
-                        <div class="w-full">
-                            <x-input-label for="title" :value="__('To')" />
-                            <x-text-input id="title" name="title" type="time" class="h-9 w-full mt-0.5" />
-                            <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                        </div>
-                    </div>
-                    <div class="w-full mb-1">
-                        <x-input-label for="title" :value="__('Tutor')" />
-                        <x-text-input id="title" name="title" type="text" class="h-9 w-full mt-0.5" />
-                        <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                    </div>
-                    <div class="w-full mb-1">
-                        <x-input-label for="gender" :value="__('Platform')" />
-                        <select id="gender" name="gender" class="block h-9 w-full mt-0.5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm text-gray-700" required>
-                            <option value="" disabled selected>{{ __('Select Platform') }}</option>
-                                <option value="Google Meet">{{ __('A-Z') }}</option>
-                                <option value="Zoom">{{ __('Z-A') }}</option>
-                                <option value="Discord">{{ __('Hourly Rate') }}</option>
-                        </select>
-                        <x-input-error :messages="$errors->get('gender')" class="mt-2" />
+                    <div class="w-full">
+                        <x-input-label for="end_time" :value="__('To')" />
+                        <x-text-input id="end_time" name="end_time" type="time" class="h-9 w-full mt-0.5" />
+                        <x-input-error :messages="$errors->get('end_time')" class="mt-2" />
                     </div>
                 </div>
-                
+
+                <!-- Platform -->
+                <div class="w-full mb-1">
+                    <x-input-label for="platform" :value="__('Platform')" />
+                    <select id="platform" name="platform" class="block h-9 w-full mt-0.5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm text-gray-700" required>
+                        <option value="" disabled selected>{{ __('Select Platform') }}</option>
+                        <option value="Google Meet">{{ __('Google Meet') }}</option>
+                        <option value="Zoom">{{ __('Zoom') }}</option>
+                        <option value="Discord">{{ __('Discord') }}</option>
+                    </select>
+                    <x-input-error :messages="$errors->get('platform')" class="mt-2" />
+                </div>
+
+                <!-- Hidden Tutor ID -->
+                <input type="hidden" name="tutor_id" id="tutor_id" value="{{ $tutorId }}" />
+
                 <div class="text-right">
-                    <x-primary-button  @click="step = 2" class="mt-2 px-4 py-2 bg-green-500 text-white text-xs rounded">Book session</x-primary-button>
+                    <x-primary-button type="submit" class="mt-2 px-4 py-2 bg-green-500 text-white text-xs rounded">Book session</x-primary-button>
                 </div>
             </form>
         </div>
@@ -72,8 +70,12 @@
         <div x-show="step === 2">
             <!-- Display the details for confirmation -->
             <div class="mb-4">
-                <div class="font-medium text-2xl "> <p> Reading Comprehension </p> </div>
-                <div class="font-normal text-sm mb-2"> <p> December 10, 2024 : 12:00 - 13:30 </p> </div>
+                <div class="font-medium text-2xl ">
+                    <p> Reading Comprehension </p>
+                </div>
+                <div class="font-normal text-sm mb-2">
+                    <p> December 10, 2024 : 12:00 - 13:30 </p>
+                </div>
                 <div class="flex  mb-2">
                     <x-subject-tag class="text-xs h-5 mb-0.5 text-gray-800 rounded-xl bg-cyan-400 mr-1.5 py-0.5 px-3" tag="Mathematics" />
                 </div>
