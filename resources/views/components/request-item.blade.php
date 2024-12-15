@@ -23,6 +23,8 @@
             <x-modal.pending-request/>
         @elseif ($status === 'approved')
             <x-modal.approved-request/>
+        @else
+            <x-modal.insignificant :status="$status"/>
         @endif
     </td>
 </tr>
