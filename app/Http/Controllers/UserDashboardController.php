@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\User;
+use App\Models\Tutor;
 use App\Models\BookingNotification;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +46,18 @@ class UserDashboardController extends Controller
         return $daNotifications;
     }
 
+    public function getSubjectTags()
+    {
+        $user = Auth::user();
+
+        if ($user->is_tutor == 1) {
+            return Tutor::where('user_id', $user->id)->first()->subjects();
+        }
+
+        return collect();
+    }
+
+
     public function index()
     {
         $section = 'profile'; 
@@ -52,8 +65,7 @@ class UserDashboardController extends Controller
 
         $upcomingSessions = $this -> getUpcomingSessions();
         $notifications = $this -> getNotifications();
-        
-        $subjectTags = ['Mathematics', 'English', 'Programming'];
+        $subjectTags = $this -> getSubjectTags();
 
 
         return view('dashboard', compact('section', 'content', 'notifications', 'upcomingSessions', 'subjectTags'));
@@ -64,8 +76,7 @@ class UserDashboardController extends Controller
         $user = Auth::user();
         $upcomingSessions = $this -> getUpcomingSessions();
         $notifications = $this -> getNotifications();
-
-        $subjectTags = ['Mathematics', 'English', 'Programming'];
+        $subjectTags = $this -> getSubjectTags();
 
         
 
@@ -84,8 +95,7 @@ class UserDashboardController extends Controller
         $user = Auth::user();
         $upcomingSessions = $this -> getUpcomingSessions();
         $notifications = $this -> getNotifications();
-
-        $subjectTags = ['Mathematics', 'English', 'Programming'];
+        $subjectTags = $this -> getSubjectTags();
 
         return view('dashboard', [
             'section' => 'requests',
