@@ -24,12 +24,12 @@ class BrowseController extends Controller
             ->when($sort, function ($query, $sort) {
                 if ($sort == 'A-Z') {
                     return $query->join('users', 'tutors.user_id', '=', 'users.id')
-                    ->orderBy('users.first_name', 'asc')
-                    ->orderBy('users.last_name', 'asc');
+                    ->orderBy('users.last_name', 'asc')
+                    ->orderBy('users.first_name', 'asc');
                 } elseif ($sort == 'Z-A') {
                     return $query->join('users', 'tutors.user_id', '=', 'users.id')
-                    ->orderBy('users.first_name', 'desc')
-                    ->orderBy('users.last_name', 'desc');
+                    ->orderBy('users.last_name', 'desc')
+                    ->orderBy('users.first_name', 'desc');
                 } elseif ($sort == 'hourly_rate') {
                     return $query->join('tutor_subjects', 'tutors.id', '=', 'tutor_subjects.tutor_id')
                     ->orderBy('tutor_subjects.hourly_rate', 'asc');
