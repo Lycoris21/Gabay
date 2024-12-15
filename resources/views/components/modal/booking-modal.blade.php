@@ -1,5 +1,5 @@
 <!-- filepath: resources/views/components/modals/booking-modal.blade.php -->
-<x-modals.base-modal triggerText="Book Tutor" title="Book a session">
+<x-modal.base-modal triggerText="Book Tutor" title="Book a session">
     <div x-data="{ step: 1, title: 'Book a session' }" x-init="$watch('step', value => {
         if (value === 1) title = 'Book a session';
         if (value === 2) title = 'Confirm details';
@@ -110,4 +110,4 @@
             </div>
         </div>
     </div>
-</x-modals.base-modal>
+</x-modal.base-modal>

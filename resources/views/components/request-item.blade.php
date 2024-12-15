@@ -19,6 +19,6 @@
             @endif
     </td>
     <td class="py-3">
-        <x-modals.pending-request-modal :name="$name" :subject="$subject" :date="$date" :time="$time" :status="$status"/>
+        <x-modal.pending-request :name="$name" :subject="$subject" :date="$date" :time="$time" :status="$status"/>
     </td>
 </tr>
