@@ -46,8 +46,6 @@ class ProfileController extends Controller
 
         $user->save();
 
-        error_log(Auth::user()->first_name);
-
         return Redirect::route('dashboard.userProfile')->with('status', 'Profile updated!');
     }
 
