@@ -29,8 +29,8 @@
                             :name="$notification['name']"
                             :action="$notification['action']"
                             :booking="$notification['subject_name']"
-                            :time="$notification['updated_at']" 
-                            :profile_picture="$notification['profile_pciture']"/>
+                            :time="$notification['updated_at']"
+                            :profile_picture="$notification['profile_pciture']" />
                         @endforeach
                     </div>
                 </div>
@@ -53,7 +53,7 @@
 
                         @unless (Auth::user()->is_tutor)
                         <div class="mt-4 h-1/4">
-                            <x-primary-button class="w-full">
+                            <x-primary-button onclick="window.location.href='{{ route('browse.index') }}'" class=" w-full">
                                 Book a session
                             </x-primary-button>
                         </div>
@@ -65,7 +65,7 @@
             </div>
             <div class="w-3/4 h-[calc(100vh-280px)]">
                 <x-user-card :user="Auth::user()" :subjectTags="$subjectTags" />
-                
+
                 <div class="w-full mt-2 h-full p-5 flex-row items-center relative bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <!-- User Dashboard Navigation -->
                     <x-user-dashboard-navigation :currentSection="$section" />
