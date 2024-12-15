@@ -13,9 +13,13 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        @vite(['resources/js/app.js', 'resources/css/app.css'])
     
         <!-- Include Alpine.js -->
         <script src="//unpkg.com/alpinejs" defer></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+ --}}
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">

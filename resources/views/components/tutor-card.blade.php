@@ -48,7 +48,7 @@
             <x-external-logos src="{{ asset('storage/images/LinkedIn_Logo.png') }}" alt="External app logo" class="w-8 h-8" />
         </div>
         <div class="flex flex-row flex-wrap w-36 mt-8 -mr-4">
-            <x-modals.booking-modal :tutorId="$tutor->id" />
+            <x-modal.booking-modal :tutorId="$tutor->id" />
         </div>
     </div>
     @else

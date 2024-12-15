@@ -1,5 +1,5 @@
 <!-- filepath: resources/views/components/modals/pending-request-modal.blade.php -->
-<x-modals.base-modal triggerText="View Details" title="View details">
+<x-modal.base-modal :triggerText="'View Details'" :title="'View details'">
     <div x-data="{ step: 1, title: 'View details' }" x-init="$watch('step', value => {
         if (value === 1) title = 'Provide session link';
         if (value === 2) title = 'Confirm details';
@@ -102,4 +102,18 @@
             </x-nav-link>
         </div>
     </div>
-</x-modals.base-modal>
+
+    <div x-show="step === 5">
+        <div class="">
+            <x-input-label for="sessionLink" :value="__('Meeting Link')" />
+            <x-text-input id="sessionLink" name="sessionLinke" type="text" class="h-9 w-full mt-0.5" required autofocus/>
+            <x-input-error :messages="$errors->get('sessionLink')" class="mt-2" />
+        </div>
+        <div class="flex justify-between">
+            <x-secondary-button @click="step = 1" class="px-4 py-2 text-left">Back</x-secondary-button>
+            <div>
+                <x-primary-button @click="step = 3" class="px-4 py-2">Next</x-primary-button>
+            </div>
+        </div>
+    </div>
+</x-modal.base-modal>

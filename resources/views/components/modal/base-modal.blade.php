@@ -1,4 +1,5 @@
 <!-- filepath: resources/views/components/modals/base-modal.blade.php -->
+@props(['triggerText', 'title'])
 <div x-data="{ open: false, title: '{{ $title ?? '' }}' }" @update-title.window="title = $event.detail">
     <!-- Trigger Button -->
     <x-primary-button @click="open = true; $dispatch('update-title', '{{ $title ?? '' }}')" class="px-4 py-2 bg-blue-500 text-white rounded">

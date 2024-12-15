@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\modals;
+namespace App\View\Components\modal;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class PendingRequestModal extends Component
+class PendingRequest extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class PendingRequestModal extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.modals.pending-request-modal');
+        return view('components.modal.pending-request');
     }
 }
