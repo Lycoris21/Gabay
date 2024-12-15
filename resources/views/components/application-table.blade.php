@@ -32,10 +32,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $application->updated_at->format('M d, Y, g:i:s A') }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('applications.view', ['id' => $application->id]) }}" 
-                                   class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
-                                    View Details
-                                </a>
+                                <x-admin-modal.application :application="$application" />
                             </td>
                         </tr>
                     @endforeach

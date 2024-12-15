@@ -63,6 +63,7 @@
 
                         {{-- User Table --}}
                         <x-user-table :users="$users" />
+                        
 
                     </div>
                 </div>
