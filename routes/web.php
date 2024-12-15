@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
 });
 
+Route::post('/book-tutor', [BrowseController::class, 'book'])->name('book.tutor');
+
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/manage-users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
