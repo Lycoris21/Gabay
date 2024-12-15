@@ -26,10 +26,12 @@
                         @endif
                     </x-nav-link>
                     
-                    <!-- Remove LATER -->
-                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin')">
-                        {{ __('Admin') }}
-                    </x-nav-link>
+                    <!-- Admin Link with Role Check -->
+                    @if (Auth::check() && Auth::user()->email === env('ADMIN_EMAIL'))
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin')">
+                            {{ __('Admin') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

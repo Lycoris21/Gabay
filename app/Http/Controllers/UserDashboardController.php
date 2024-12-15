@@ -26,7 +26,9 @@ class UserDashboardController extends Controller
             ->where('status', '!=', 'Pending')
             ->get(['tutor_id', 'status', 'updated_at', 'id', 'subject_name'])
             ->map(function ($booking) {
-                $booking->name = User::find($booking->tutor_id)->first_name . ' ' . User::find($booking->tutor_id)->last_name;
+                $tutor = User::find($booking->tutor_id);
+                $booking->name = $tutor->first_name . ' ' . $tutor->last_name;
+                $booking->profile_picture = $tutor->profile_picture;
                 
                 if ($booking->status === 'Approved') {
                     $booking->action = ' approved your booking for ';
@@ -51,10 +53,29 @@ class UserDashboardController extends Controller
         $user = Auth::user();
 
         if ($user->is_tutor == 1) {
-            return Tutor::where('user_id', $user->id)->first()->subjects();
+            return Tutor::where('user_id', $user->id)->first()->subjects;
         }
 
         return collect();
+    }
+
+    public function getRequests()
+    {
+        $requests = Booking::where('tutor_id', auth()->id())
+            //->where('status', 'Pending')
+            ->get(['tutee_id', 'subject_name', 'date', 'start_time', 'end_time', 'status'])
+            ->map(function ($booking) {
+                $tutee = User::find($booking->tutee_id);
+                return [
+                    'name' => $tutee->first_name . ' ' . $tutee->last_name,
+                    'subject' => $booking->subject_name,
+                    'date' => \Carbon\Carbon::parse($booking->date)->format('F j, Y'),
+                    'time' => \Carbon\Carbon::parse($booking->start_time)->format('H:i') . '-' . \Carbon\Carbon::parse($booking->end_time)->format('H:i'),
+                    'status' => $booking->status
+                ];
+            });
+
+        return $requests;
     }
 
 
@@ -78,8 +99,6 @@ class UserDashboardController extends Controller
         $notifications = $this -> getNotifications();
         $subjectTags = $this -> getSubjectTags();
 
-        
-
         return view('dashboard', [
             'section' => 'profile',
             'content' => 'dashboard.userProfile',
@@ -96,12 +115,14 @@ class UserDashboardController extends Controller
         $upcomingSessions = $this -> getUpcomingSessions();
         $notifications = $this -> getNotifications();
         $subjectTags = $this -> getSubjectTags();
+        $requests = $this -> getRequests();
 
         return view('dashboard', [
             'section' => 'requests',
             'content' => 'dashboard.requests',
             'upcomingSessions' => $upcomingSessions,
             'subjectTags' => $subjectTags,
+            'requests' => $requests,
             'notifications' => $notifications,
             'user' => $user
         ]);
