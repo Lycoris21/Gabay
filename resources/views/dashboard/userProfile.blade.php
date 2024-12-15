@@ -2,7 +2,7 @@
 <!-- Profile Section -->
 <div class="flex h-full">
     <div class="w-[55%] h-full">
-        <form method="post" action="{{ route('profile.update') }}" enctype="multipart/form-data">
+        <form method="post" action="{{ route('dashboard.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
