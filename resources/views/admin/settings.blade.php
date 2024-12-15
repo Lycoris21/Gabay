@@ -1,3 +1,6 @@
-<div>
-    <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
-</div>
+<x-app-layout>
+    <div class="flex">
+        <x-sidebar />
+       
+    </div>
+</x-app-layout>
