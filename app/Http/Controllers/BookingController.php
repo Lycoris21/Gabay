@@ -29,14 +29,69 @@ class BookingController extends Controller
             'start_time' => $validated['start_time'],
             'end_time' => $validated['end_time'],
             'platform' => $validated['platform'],
-            'link' => '', // Add logic for generating platform link if needed
+            'link' => '',
             'status' => 'Pending',
         ]);
 
         return redirect()->back()->with('success', 'Your booking request has been sent successfully.');
     }
 
+    public function reject($id)
+    {
+        $booking = Booking::findOrFail($id);
 
+        if ($booking->status !== 'Pending') {
+            return redirect()->back()->with('error', 'This request has already been processed.');
+        }
+
+        $booking->status = 'Denied';
+        $booking->save();
+
+        return redirect()->back()->with('success', 'The request has been denied.');
+    }
+
+    public function approve(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        if ($booking->status !== 'Pending') {
+            return redirect()->back()->with('error', 'This request has already been processed.');
+        }
+
+        if ($request->has('sessionLink')) {
+            $booking->link = $request->input('sessionLink');
+        }
+
+        $booking->status = 'Approved';
+        $booking->save();
+
+        return redirect()->back()->with('success', 'The request has been approved.');
+    }
+
+    public function cancel(Request $request, $id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        if ($booking->status !== 'Approved') {
+            return redirect()->back()->with('error', 'This request is not approved.');
+        }
+
+        $booking->status = 'Canceled';
+        $booking->save();
+
+        return redirect()->back()->with('success', 'The request has been canceled.');
+    }
+
+    public function delete($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        if ($booking->tutee_id !== auth()->id()) {
+            return redirect()->back()->with('error', 'You are not authorized to delete this booking.');
+        }
+
+        $booking->delete();
+
+        return redirect()->back()->with('success', 'The request has been deleted.');
+    }
 }
-
-
