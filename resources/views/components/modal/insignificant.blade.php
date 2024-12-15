@@ -3,7 +3,7 @@
 <x-modal.base-modal :triggerText="'View Details'" :title="'View session'">
     <div x-data="{ title: 'View details' }" x-init="$dispatch('update-title', title)">
     
-
+ 
         <div class="mb-6">
             <div class="font-medium text-2xl text-start"> <p> {{ $subject_topic }} </p> </div>
             <div class="font-normal text-sm mb-2 text-start"> <p> {{ $date." ".$time }} </p> </div>
