@@ -1,6 +1,8 @@
 <!-- filepath: resources/views/components/modals/pending-request-modal.blade.php -->
+@props(['tutor_id', 'request_id', 'subject_topic', 'subject_name', 'date', 'time', 'tutorName', 'tuteeName', 'platform'])
+
 <x-modal.base-modal :triggerText="'View Details'" :title="'View details'">
-    <div x-data="{ step: 1, title: 'View details' }" x-init="$watch('step', value => {
+    <div x-data="{ step: 1, title: 'View details', sessionLink: ''}" x-init="$watch('step', value => {
         if (value === 1) title = 'View details';
         if (value === 2) title = 'Provide session link';
         if (value === 3) title = 'Confirm details';
@@ -19,19 +21,19 @@
         <div x-show="step === 1">
             <div class="mb-4">
                 @csrf
-                <div class="font-medium text-2xl text-start"> <p> Reading Comprehension </p> </div>
-                <div class="font-normal text-sm mb-2 text-start"> <p> December 10, 2024 : 12:00 - 13:30 </p> </div>
+                <div class="font-medium text-2xl text-start"> <p> {{ $subject_topic }} </p> </div>
+                <div class="font-normal text-sm mb-2 text-start"> <p> {{ $date." ".$time }} </p> </div>
                 <div class="flex  mb-2">
-                    <x-subject-tag class="text-xs h-5 mb-0.5 text-gray-800 rounded-xl bg-cyan-400 mr-1.5 py-0.5 px-3" tag="Mathematics" />
+                    <x-subject-tag class="text-xs h-5 mb-0.5 text-gray-800 rounded-xl bg-cyan-400 mr-1.5 py-0.5 px-3" :tag="$subject_name" />
                 </div>
                 <div class="flex gap-2  mb-2">
                     <img src="{{ asset('storage/images/people.png') }}" alt="people" class="block h-8 fill-current">
-                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> John Doe </p>
-                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> Lycoris Ann </p>
+                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> {{ $tuteeName }} </p>
+                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> {{ $tutorName }} </p>
                 </div>
                 <div class="flex gap-2 mb-2">
                     <img src="{{ asset('storage/images/meet.png') }}" alt="people" class="pl-1 block h-6 fill-current">
-                    <p class="text-sm"> Google Meet </p>
+                    <p class="text-sm"> {{ $platform }} </p>
                 </div>
             </div>
             @if(Auth::user()->is_tutor)
@@ -53,7 +55,7 @@
         <div x-show="step === 2">
             <div class="mb-8">
                 <x-input-label for="sessionLink" :value="__('Meeting Link')" class="mb-1 text-left"/>
-                <x-text-input id="sessionLink" name="sessionLinke" type="text" class="h-9 w-full mt-0.5" required autofocus/>
+                <x-text-input id="sessionLink" name="sessionLink" type="text" class="h-9 w-full mt-0.5" x-model="sessionLink" required autofocus/>
                 <x-input-error :messages="$errors->get('sessionLink')" class="mt-2" />
             </div>
             <div class="flex justify-between">
@@ -67,29 +69,35 @@
         <div x-show="step === 3">
             <!-- Display the details for confirmation -->
             <div class="mb-4">
-                <div class="font-medium text-2xl text-start"> <p> Reading Comprehension </p> </div>
-                <div class="font-normal text-sm mb-2 text-start"> <p> December 10, 2024 : 12:00 - 13:30 </p> </div>
+                <div class="font-medium text-2xl text-start"> <p> {{ $subject_topic }} </p> </div>
+                <div class="font-normal text-sm mb-2 text-start"> <p> {{ $date." ".$time }} </p> </div>
                 <div class="flex  mb-2">
-                    <x-subject-tag class="text-xs h-5 mb-0.5 text-gray-800 rounded-xl bg-cyan-400 mr-1.5 py-0.5 px-3" tag="Mathematics" />
+                    <x-subject-tag class="text-xs h-5 mb-0.5 text-gray-800 rounded-xl bg-cyan-400 mr-1.5 py-0.5 px-3" :tag="$subject_name" />
                 </div>
                 <div class="flex gap-2  mb-2">
                     <img src="{{ asset('storage/images/people.png') }}" alt="people" class="block h-8 fill-current">
-                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> John Doe </p>
-                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> Lycoris Ann </p>
+                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> {{ $tuteeName }} </p>
+                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> {{ $tutorName }} </p>
                 </div>
                 <div class="flex gap-2 mb-2">
-                    <img src="{{ asset('storage/images/meet.png') }}" alt="meet" class="pl-1 block h-6 fill-current">
-                    <p class="text-sm"> Google Meet </p>
+                    <img src="{{ asset('storage/images/meet.png') }}" alt="people" class="pl-1 block h-6 fill-current">
+                    <p class="text-sm"> {{ $platform }} </p>
                 </div>
                 <div class="flex gap-2 mb-2">
                     <img src="{{ asset('storage/images/link.png') }}" alt="link" class="pl-1 block h-5 fill-current">
-                    <p class="text-sm">https://meet.google.com/landing</p>
+                    <p class="text-sm" x-text="sessionLink"></p>
                 </div>
             </div>
             <div class="flex justify-between">
                 <x-secondary-button @click="step = 2" class="px-4 py-2 text-left">Back</x-secondary-button>
                 <div>
-                    <x-primary-button @click="step = 4" class="px-4 py-2">Confirm booking </x-primary-button>
+                    <form action="{{ route('booking.approve', ['id' => $request_id]) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+                        <!-- Hidden input to pass sessionLink -->
+                        <input type="hidden" name="sessionLink" :value="sessionLink" />
+                        <x-primary-button @click="step = 4" type="submit" class="px-4 py-2">Confirm booking</x-primary-button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -107,23 +115,30 @@
         <div x-show="step === 5">
             <div class="mb-8">
                 <div class="font-black text-2xl text-start text-red-600 "> 
-                    @if (Auth::user()->is_tutor)
+                    @if (Auth::user()->id === $tutor_id)
                         <p>Reject Request?</p>
                     @else    
                         <p>Delete Request?</p>    
                     @endif
                 </div>
-                <div class="font-normal text-sm mb-2 text-start"> <p>This action cannot be undone.</p> </div>
+                <div class="font-normal text-sm mb-2 text-start"> 
+                    <p>This action cannot be undone.</p>
+                </div>
             </div>
             <div class="flex justify-end gap-3">
                 <div>
-                    <x-primary-button @click="step = 6" class="px-4 py-2">
-                        @if (Auth::user()->is_tutor)
-                            Reject
-                        @else    
-                            Delete                           
-                        @endif
-                    </x-primary-button>
+                    <!-- Form to reject or delete booking -->
+                    <form action="{{ route(Auth::user()->id === $tutor_id ? 'booking.reject' : 'booking.delete', ['id' => $request_id]) }}" method="POST">
+                        @csrf
+                        @method('PATCH') <!-- Use PATCH as you're updating the status -->
+                        <button type="submit" class="px-4 py-2">
+                            @if (Auth::user()->id === $tutor_id)
+                                Reject
+                            @else    
+                                Delete
+                            @endif
+                        </button>
+                    </form>
                 </div>
                 <x-secondary-button @click="open = false" class="px-4 py-2 text-left">Cancel</x-secondary-button>
             </div>

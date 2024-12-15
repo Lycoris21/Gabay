@@ -30,7 +30,7 @@
                             :action="$notification['action']"
                             :booking="$notification['subject_name']"
                             :time="$notification['updated_at']"
-                            :profile_picture="$notification['profile_pciture']" />
+                            :profile_picture="$notification['profile_picture']" />
                         @endforeach
                     </div>
                 </div>
