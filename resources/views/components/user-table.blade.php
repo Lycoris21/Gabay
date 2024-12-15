@@ -4,13 +4,13 @@
     <div class="overflow-x-auto">
         <div class="min-w-full bg-white rounded-lg shadow-md max-h-80 overflow-y-auto">
             <table class="min-w-full bg-white">
-                <thead class="bg-gray-200 text-gray-700 sticky top-0">
+                <thead class="text-gray-700 sticky top-0" style="background-color: #C1CBD1;">
                     <tr>
-                        <th class="px-6 py-3 text-left font-medium">User ID</th>
-                        <th class="px-6 py-3 text-left font-medium">Name</th>
-                        <th class="px-6 py-3 text-left font-medium">Email</th>
-                        <th class="px-6 py-3 text-left font-medium">Role</th>
-                        <th class="px-6 py-3 text-left font-medium">Year Of Birth</th>
+                        <th class="px-6 py-3 text-left text-black font-black">User ID</th>
+                        <th class="px-6 py-3 text-left text-black font-black">Name</th>
+                        <th class="px-6 py-3 text-left text-black font-black">Email</th>
+                        <th class="px-6 py-3 text-left text-black font-black">Role</th>
+                        <th class="px-6 py-3 text-left text-black font-black">Year Of Birth</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -18,7 +18,7 @@
                         <tr class="border-t border-gray-200">
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('users.manageView', ['id' => $user->id]) }}" class="text-blue-500 hover:text-blue-700">
+                                <a href="{{ route('users.manageView', ['id' => $user->id]) }}" class="text-black hover:underline hover:underline-offset-2">
                                     {{ $user->first_name }} {{ $user->last_name }}
                                 </a>
                             </td>

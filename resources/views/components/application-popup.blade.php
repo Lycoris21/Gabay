@@ -56,19 +56,19 @@
             <div class="flex justify-end space-x-2">
                 <form method="POST" action="{{ route('applications.confirm', ['id' => $application->id, 'action' => 'approve']) }}">
                     @csrf
-                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
                         Approve
                     </button>
                 </form>
                 <form method="POST" action="{{ route('applications.confirm', ['id' => $application->id, 'action' => 'deny']) }}">
                     @csrf
-                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
                         Deny
                     </button>
                 </form>
                 <form method="POST" action="{{ route('applications.popup.close') }}">
                     @csrf
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    <button type="submit" class="bg-gray-300 text-gray-500 px-4 py-2 rounded-lg hover:bg-blue-600">
                         Close
                     </button>
                 </form>

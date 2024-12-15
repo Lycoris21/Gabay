@@ -26,9 +26,9 @@
                     <x-pending-applications-card :pendingApplications="$pendingApplications" />
                 </div>
                 {{-- Display First Five Pending Applications --}}
-                <div class="bg-white p-6 rounded-lg shadow-md mt-8">
+                <div class="bg-white p-6 rounded-lg shadow-md mt-4">
                     <h3 class="text-lg font-semibold text-gray-800">Pending Applications</h3>
-                    <div class="mt-4">
+                    <div class="mt-2">
                         <x-application-table :applications="$pendingApplications" />
                     </div>
 

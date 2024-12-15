@@ -5,15 +5,15 @@
                 <!-- Profile Picture -->
                 <div class="mr-4">
                     <img src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('storage/profile-picture/default-image.jpg') }}" 
-                         alt="Profile Picture" class="w-40 h-40 rounded-full" />
+                         alt="Profile Picture" class="w-60 h-60 rounded-full" />
                 </div>
                 <!-- Personal Information -->
-                <div class="flex-grow ml-2">
-                    <div class="text-xl font-bold text-gray-800 px-4">PERSONAL INFORMATION</div>
+                <div class="flex-grow ml-2 mr-7 ml-7">
+                    <div class="text-xl font-extrabold text-gray-800 px-4">PERSONAL INFORMATION</div>
                     <dl class="grid grid-cols-2 py-3 px-4 mb-6">
                         <!-- ID -->
                         <div>
-                            <dt class="mt-1 text-sm font-medium text-gray-500">ID</dt>
+                            <dt class="mt-1 text-sm font-bold text-gray-500">ID</dt>
                             <dt class="mt-1 text-sm font-medium text-gray-500">Name</dt>
                             <dt class="mt-1 text-sm font-medium text-gray-500">Gender</dt>
                             <dt class="mt-1 text-sm font-medium text-gray-500">Year of Birth</dt>

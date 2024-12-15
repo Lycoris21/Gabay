@@ -90,10 +90,4 @@ class AdminController extends Controller
 
         return view('admin.manageUsers', compact('users', 'searchQuery'));
     }
-
-    public function settings()
-    {
-        // Logic for managing users
-        return view('admin.settings');
-    }
 }
