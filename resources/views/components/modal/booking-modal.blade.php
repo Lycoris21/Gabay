@@ -1,33 +1,65 @@
-<!-- filepath: resources/views/components/modals/booking-modal.blade.php -->
-<x-modal.base-modal :triggerText="'Book Now'" :title="'Booking Modal Title'">
-    <div x-data="{ step: 1, title: 'Book a session' }" x-init="$watch('step', value => {
+@props(['tutor'])
+
+<x-modal.base-modal :triggerText="'Book Now'" :title="'Book a session'">
+    <div x-data="{
+        step: 1, 
+        subjectName: '',
+        formData: {
+            subject_topic: '',
+            subject_name: '',
+            date: '',
+            start_time: '',
+            end_time: '',
+            platform: '',
+            tutor_id: '{{ $tutor->id }}'
+        },
+        updateFormData(field, value) {
+            this.formData[field] = value;
+        },
+        submitForm() {
+            this.$refs.submitButton.click();
+        },
+    }" 
+    x-init="$watch('step', value => {
         if (value === 1) title = 'Book a session';
         if (value === 2) title = 'Confirm details';
         if (value === 3) title = ' ';
         $dispatch('update-title', title);
     })">
+        
         <!-- Step 1: Booking Form -->
         <div x-show="step === 1">
-            <form method="POST" action="{{ route('booking.store') }}">
+            <form method="POST" action="{{ route('booking.store') }}" x-ref="bookingForm">
                 @csrf
                 <!-- Session Title -->
                 <div class="w-full mb-1">
                     <x-input-label for="subject_topic" :value="__('Subject Topic')" />
-                    <x-text-input id="subject_topic" name="subject_topic" type="text" class="h-9 w-full mt-0.5" />
+                    <x-text-input id="subject_topic" name="subject_topic" type="text" class="h-9 w-full mt-0.5"
+                        x-model="formData.subject_topic" @input="updateFormData('subject_topic', $event.target.value)" />
                     <x-input-error :messages="$errors->get('subject_topic')" class="mt-2" />
                 </div>
 
                 <!-- Subject -->
                 <div class="w-full mb-1">
                     <x-input-label for="subject_name" :value="__('Subject')" />
-                    <x-text-input id="subject_name" name="subject_name" type="text" class="h-9 w-full mt-0.5" />
+                    <select id="subject_name" name="subject_name" class="block h-9 w-full mt-0.5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm text-gray-700" required
+                    x-model="formData.subject_name" @change="updateFormData('subject_name', $event.target.value)">
+                        <option value="" disabled {{ old('subject_name') === null ? 'selected' : '' }}>{{ __('Select Subject') }}</option>
+                        @foreach($tutor->subjects as $subject)
+                            <option value="{{ $subject->subject }}" {{ old('subject_name') == $subject->subject ? 'selected' : '' }}>
+                                {{ $subject->subject }}
+                            </option>
+                        @endforeach
+                    </select>
                     <x-input-error :messages="$errors->get('subject_name')" class="mt-2" />
                 </div>
+
 
                 <!-- Date -->
                 <div class="w-full mb-1">
                     <x-input-label for="date" :value="__('Date')" />
-                    <x-text-input id="date" name="date" type="date" class="h-9 w-full mt-0.5" />
+                    <x-text-input id="date" name="date" type="date" class="h-9 w-full mt-0.5"
+                        x-model="formData.date" @input="updateFormData('date', $event.target.value)" />
                     <x-input-error :messages="$errors->get('date')" class="mt-2" />
                 </div>
 
@@ -35,12 +67,14 @@
                 <div class="flex gap-x-2 mb-1">
                     <div class="w-full">
                         <x-input-label for="start_time" :value="__('From')" />
-                        <x-text-input id="start_time" name="start_time" type="time" class="h-9 w-full mt-0.5" />
+                        <x-text-input id="start_time" name="start_time" type="time" class="h-9 w-full mt-0.5"
+                            x-model="formData.start_time" @input="updateFormData('start_time', $event.target.value)" />
                         <x-input-error :messages="$errors->get('start_time')" class="mt-2" />
                     </div>
                     <div class="w-full">
                         <x-input-label for="end_time" :value="__('To')" />
-                        <x-text-input id="end_time" name="end_time" type="time" class="h-9 w-full mt-0.5" />
+                        <x-text-input id="end_time" name="end_time" type="time" class="h-9 w-full mt-0.5"
+                            x-model="formData.end_time" @input="updateFormData('end_time', $event.target.value)" />
                         <x-input-error :messages="$errors->get('end_time')" class="mt-2" />
                     </div>
                 </div>
@@ -48,7 +82,8 @@
                 <!-- Platform -->
                 <div class="w-full mb-1">
                     <x-input-label for="platform" :value="__('Platform')" />
-                    <select id="platform" name="platform" class="block h-9 w-full mt-0.5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm text-gray-700" required>
+                    <select id="platform" name="platform" class="block h-9 w-full mt-0.5 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-sm text-gray-700" required
+                        x-model="formData.platform" @change="updateFormData('platform', $event.target.value)">
                         <option value="" disabled selected>{{ __('Select Platform') }}</option>
                         <option value="Google Meet">{{ __('Google Meet') }}</option>
                         <option value="Zoom">{{ __('Zoom') }}</option>
@@ -58,45 +93,50 @@
                 </div>
 
                 <!-- Hidden Tutor ID -->
-                {{-- <input type="hidden" name="tutor_id" id="tutor_id" value="{{ $tutorId }}" /> --}}
+                <input type="hidden" name="tutor_id" id="tutor_id" :value="formData.tutor_id" />
 
                 <div class="text-right">
-                    <x-primary-button type="submit" class="mt-2 px-4 py-2 bg-green-500 text-white text-xs rounded">Book session</x-primary-button>
+                    <!-- Step 1 Button -->
+                    <x-primary-button type="button" @click="step = 2" class="mt-2 px-4 py-2 bg-green-500 text-white text-xs rounded">Next</x-primary-button>
                 </div>
             </form>
         </div>
 
-
+        <!-- Step 2: Confirmation Details -->
         <div x-show="step === 2">
             <!-- Display the details for confirmation -->
             <div class="mb-4">
-                <div class="font-medium text-2xl ">
-                    <p> Reading Comprehension </p>
+                <div class="font-medium text-2xl">
+                    <p x-text="formData.subject_topic"></p>
                 </div>
                 <div class="font-normal text-sm mb-2">
-                    <p> December 10, 2024 : 12:00 - 13:30 </p>
+                    <p x-text="formData.date + ' : ' + formData.start_time + ' - ' + formData.end_time"></p>
                 </div>
-                <div class="flex  mb-2">
-                    <x-subject-tag class="text-xs h-5 mb-0.5 text-gray-800 rounded-xl bg-cyan-400 mr-1.5 py-0.5 px-3" tag="Mathematics" />
+
+                <!-- yeah i gave up and just borrowed the whole class -->
+                <div class="flex mb-2">
+                    <p class="text-xs h-5 w-auto mb-0.5 text-gray-800 rounded-xl bg-cyan-400 mr-1.5 py-0.5 px-3" x-text="formData.subject_name">
+                    </p>
                 </div>
-                <div class="flex gap-2  mb-2">
+
+                <div class="flex gap-2 mb-2">
                     <img src="{{ asset('storage/images/people.png') }}" alt="people" class="block h-8 fill-current">
-                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> John Doe </p>
-                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap"> Lycoris Ann </p>
+                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap" x-text="'{{ auth() -> user()->first_name }} ' + '{{ auth() -> user() -> last_name }}'"></p>
+                    <p class="block h-8 border-2 rounded-md border-gray-500 text-sm p-1 text-wrap" x-text="'{{ $tutor->user->first_name }} ' + '{{ $tutor->user->last_name }}'"></p>
                 </div>
                 <div class="flex gap-2 mb-2">
                     <img src="{{ asset('storage/images/meet.png') }}" alt="meet" class="pl-1 block h-6 fill-current">
-                    <p class="text-sm"> Google Meet </p>
+                    <p class="text-sm" x-text="formData.platform"></p>
                 </div>
             </div>
+
             <div class="flex justify-between">
                 <x-secondary-button @click="step = 1" class="px-4 py-2 text-left">Back</x-secondary-button>
                 <div>
-                    <x-primary-button @click="step = 3" class="px-4 py-2">Confirm booking </x-primary-button>
+                    <x-primary-button @click="step = 3; $refs.bookingForm.submit()" class="px-4 py-2">Confirm booking</x-primary-button>
                 </div>
             </div>
         </div>
-
 
         <!-- Step 3: Confirmation -->
         <div x-show="step === 3" class="flex-row justify-items-center gap-y-2">

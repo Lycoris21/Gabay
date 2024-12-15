@@ -1,3 +1,5 @@
+@props(['request'])
+
 <tr class="mx-5">
     <td class="px-2 py-1 border-b">{{ $name }}</td>
     <td class="px-2 py-1 border-b">{{ $subject }}</td>
@@ -19,12 +21,40 @@
             @endif
     </td>
     <td class="py-3">
-        @if ($status === 'pending')
-            <x-modal.pending-request/>
-        @elseif ($status === 'approved')
-            <x-modal.approved-request/>
+        @if ($status === 'Pending')
+            <x-modal.pending-request
+                :tutor_id="$request['tutor_id']"
+                :request_id="$request['id']" 
+                :subject_topic="$request['subject_topic']" 
+                :subject_name="$request['subject_name']" 
+                :date="$request['date']"
+                :time="$request['time']"
+                :platform="$request['platform']" 
+                :tutorName="$request['tutor_name']"
+                :tuteeName="$request['tutee_name']"
+                />
+        @elseif ($status === 'Approved')
+            <x-modal.approved-request
+                :request_id="$request['id']" 
+                :subject_topic="$request['subject_topic']" 
+                :subject_name="$request['subject_name']" 
+                :date="$request['date']"
+                :time="$request['time']"
+                :platform="$request['platform']" 
+                :link="$request['link']" 
+                :tutorName="$request['tutor_name']"
+                :tuteeName="$request['tutee_name']"/>
         @else
-            <x-modal.insignificant :status="$status"/>
+            <x-modal.insignificant 
+                :status="$status"
+                :request_id="$request['id']" 
+                :subject_topic="$request['subject_topic']" 
+                :subject_name="$request['subject_name']" 
+                :date="$request['date']"
+                :time="$request['time']"
+                :platform="$request['platform']" 
+                :tutorName="$request['tutor_name']"
+                :tuteeName="$request['tutee_name']"/>
         @endif
     </td>
 </tr>

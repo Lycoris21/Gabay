@@ -19,7 +19,8 @@
                         subject="{{ $request['subject'] }}" 
                         date="{{ $request['date'] }}" 
                         time="{{ $request['time'] }}" 
-                        status="{{ $request['status'] }}" 
+                        status="{{ $request['status'] }}"
+                        :request="$request"
                     />  
                 @endforeach
             </tbody>

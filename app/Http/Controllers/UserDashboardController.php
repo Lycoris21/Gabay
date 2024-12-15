@@ -13,6 +13,7 @@ class UserDashboardController extends Controller
 {
     public function getUpcomingSessions(){
         $daUpcomingSessions = Booking::where('tutee_id', Auth::id())
+        ->where('status', 'Approved')
         ->whereDate('date', '>=', now())
         ->orderBy('date', 'asc')
         ->get();
@@ -33,9 +34,17 @@ class UserDashboardController extends Controller
                 if ($booking->status === 'Approved') {
                     $booking->action = ' approved your booking for ';
                 }
-
-                if ($booking->status === 'Rescheduled') {
+                else if ($booking->status === 'Denied') {
+                    $booking->action = ' denied your booking for ';
+                }
+                else if ($booking->status === 'Canceled') {
+                    $booking->action = ' canceled your booking for ';
+                }
+                else if ($booking->status === 'Rescheduled') {
                     $booking->action = ' rescheduled your booking for ';
+                }
+                else{
+                    $booking->action = $booking->status;
                 }
 
                 return $booking;
@@ -62,18 +71,34 @@ class UserDashboardController extends Controller
     public function getRequests()
     {
         $requests = Booking::where('tutor_id', auth()->id())
-            //->where('status', 'Pending')
-            ->get(['tutee_id', 'subject_name', 'date', 'start_time', 'end_time', 'status'])
-            ->map(function ($booking) {
-                $tutee = User::find($booking->tutee_id);
-                return [
-                    'name' => $tutee->first_name . ' ' . $tutee->last_name,
-                    'subject' => $booking->subject_name,
-                    'date' => \Carbon\Carbon::parse($booking->date)->format('F j, Y'),
-                    'time' => \Carbon\Carbon::parse($booking->start_time)->format('H:i') . '-' . \Carbon\Carbon::parse($booking->end_time)->format('H:i'),
-                    'status' => $booking->status
-                ];
-            });
+        //->where('status', 'Pending') // Uncomment if you want to filter by status
+        ->get() // Get all fields
+        ->map(function ($booking) {
+            // Find the tutee and tutor users
+            $tutee = User::find($booking->tutee_id);
+            $tutor = User::find($booking->tutor_id);
+
+            // Make sure tutee and tutor names are available
+            $tuteeName = $tutee ? $tutee->first_name . ' ' . $tutee->last_name : 'Tutee Name Not Found';
+            $tutorName = $tutor ? $tutor->first_name . ' ' . $tutor->last_name : 'Tutor Name Not Found';
+
+            return [
+                'id' => $booking -> id,
+                'name' => $tuteeName,  // name of the tutee
+                'subject_topic' => $booking->subject_topic,
+                'subject_name' => $booking->subject_name,
+                'subject' => $booking->subject_name,
+                'date' => \Carbon\Carbon::parse($booking->date)->format('F j, Y'),
+                'time' => \Carbon\Carbon::parse($booking->start_time)->format('H:i') . '-' . \Carbon\Carbon::parse($booking->end_time)->format('H:i'),
+                'status' => $booking->status,
+                'tutor_id' => $booking->tutor_id,  // Include tutor_id to fetch tutor info in Blade
+                'tutee_id' => $booking->tutee_id,  // Include tutee_id for tutee info in Blade
+                'tutor_name' => $tutorName,  // Include the tutor's name
+                'tutee_name' => $tuteeName,   // Include the tutee's name
+                'platform' => $booking->platform, // Ensure the platform exists in the booking model
+                'link' => $booking->link
+            ];
+        });
 
         return $requests;
     }
