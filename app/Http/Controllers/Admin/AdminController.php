@@ -33,9 +33,18 @@ class AdminController extends Controller
         return view('admin.manageTutorApplications', compact('applications'));
     }
 
+    public function manageUsers()
+    {
+        // Fetch all applications or add any necessary filtering
+       $users = User::all(); 
+
+        // Logic for managing users
+        return view('admin.manageUsers', compact('users'));
+    }
+
     public function analytics()
     {
-        // Get the search query, filter, and sort parameters from the request
+        /*// Get the search query, filter, and sort parameters from the request
         $searchQuery = $request->input('searchQuery', '');
         $filter = $request->input('filter', 'students');
         $sortOrder = $request->input('sortOrder', 'Newest');
@@ -68,7 +77,7 @@ class AdminController extends Controller
             ->paginate(5);
 
         // Pass the data to the view
-        return view('admin.analytics', compact('users'));
+        return view('admin.analytics', compact('users'));*/
     }
 
     public function settings()
