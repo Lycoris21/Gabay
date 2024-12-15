@@ -82,6 +82,6 @@ class RegisteredUserController extends Controller
         $user->save();
 
         // Redirect to dashboard with a success message
-        return redirect()->route('dashboard')->with('status', 'Profile updated successfully.');
+        return redirect()->route('dashboard.userProfile')->with('status', 'Profile updated successfully.');
     }
 }

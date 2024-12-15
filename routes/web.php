@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\TutorApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageSectionController;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\BrowseController;
@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
 });
 
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::get('/tutorApplication', function () {
     return view('tutorApplication');
