@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('bookings', function (Blueprint $table) {
@@ -22,18 +19,15 @@ return new class extends Migration
             $table->time('end_time');
             $table->string('platform');
             $table->string('link');
-            $table->string('status')->default('pending'); // Added status column
+            $table->string('status')->default('Pending');
+            $table->string('reason')->nullable();
             $table->timestamps();
 
-            // Foreign keys
             $table->foreign('tutee_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('tutor_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bookings');
