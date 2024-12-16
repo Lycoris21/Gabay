@@ -70,18 +70,23 @@ class BookingController extends Controller
 
     public function cancel(Request $request, $id)
     {
+        $request->validate([
+            'reason' => 'required|string|max:500',
+        ]);
+    
         $booking = Booking::findOrFail($id);
-
+    
         if ($booking->status !== 'Approved') {
             return redirect()->back()->with('error', 'This request is not approved.');
         }
-
-        $booking->status = 'Canceled';
+    
+        $booking->status = 'Cancelled';
+        $booking->reason = $request->input('reason'); // Save the cancellation reason
         $booking->save();
-
-        return redirect()->back()->with('success', 'The request has been canceled.');
+    
+        return redirect()->back()->with('success', 'The request has been cancelled.');
     }
-
+    
     public function delete($id)
     {
         $booking = Booking::findOrFail($id);

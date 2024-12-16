@@ -12,7 +12,7 @@
             <x-application-popup :application="session('showApplication')" />
         @endif
 
-        <div class="flex-1 ml-64 py-8">
+        <div class="flex-1 ml-64 py-5">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <h1 class="text-4xl font-bold text-gray-800 mb-4">Manage Tutor Applications</h1>
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg min-h-full">

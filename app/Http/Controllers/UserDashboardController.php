@@ -11,20 +11,31 @@ use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
 {
-    public function getUpcomingSessions(){
-        $daUpcomingSessions = Booking::where('tutee_id', Auth::id())
+    public function getUpcomingSessions()
+    {
+        $userId = Auth::id();
+    
+        $daUpcomingSessions = Booking::where(function ($query) use ($userId) {
+            $query->where('tutee_id', $userId)
+                  ->orWhere('tutor_id', $userId);
+        })
         ->where('status', 'Approved')
         ->whereDate('date', '>=', now())
         ->orderBy('date', 'asc')
-        ->get();
-
+        ->get()
+        ->map(function ($booking) use ($userId) {
+            $booking->role = $booking->tutor_id == $userId ? 'Tutor' : 'Tutee';
+            return $booking;
+        });
+    
         return $daUpcomingSessions;
     }
-
+    
     public function getNotifications(){
         if (Auth::check()) {
             $daNotifications = Booking::where('tutee_id', Auth::user()->id)
             ->where('status', '!=', 'Pending')
+            ->orderBy('updated_at', 'desc')
             ->get(['tutor_id', 'status', 'updated_at', 'id', 'subject_name'])
             ->map(function ($booking) {
                 $tutor = User::find($booking->tutor_id);
@@ -37,8 +48,8 @@ class UserDashboardController extends Controller
                 else if ($booking->status === 'Denied') {
                     $booking->action = ' denied your booking for ';
                 }
-                else if ($booking->status === 'Canceled') {
-                    $booking->action = ' canceled your booking for ';
+                else if ($booking->status === 'Cancelled') {
+                    $booking->action = ' cancelled your booking for ';
                 }
                 else if ($booking->status === 'Rescheduled') {
                     $booking->action = ' rescheduled your booking for ';
@@ -74,6 +85,7 @@ class UserDashboardController extends Controller
 
         $requests = Booking::where($column, auth()->id())
         //->where('status', 'Pending') // Uncomment if you want to filter by status
+        ->orderBy('date', 'asc')
         ->get() // Get all fields
         ->map(function ($booking) {
             // Find the tutee and tutor users
@@ -93,12 +105,13 @@ class UserDashboardController extends Controller
                 'date' => \Carbon\Carbon::parse($booking->date)->format('F j, Y'),
                 'time' => \Carbon\Carbon::parse($booking->start_time)->format('H:i') . '-' . \Carbon\Carbon::parse($booking->end_time)->format('H:i'),
                 'status' => $booking->status,
-                'tutor_id' => $booking->tutor_id,  // Include tutor_id to fetch tutor info in Blade
-                'tutee_id' => $booking->tutee_id,  // Include tutee_id for tutee info in Blade
-                'tutor_name' => $tutorName,  // Include the tutor's name
-                'tutee_name' => $tuteeName,   // Include the tutee's name
-                'platform' => $booking->platform, // Ensure the platform exists in the booking model
-                'link' => $booking->link
+                'tutor_id' => $booking->tutor_id,
+                'tutee_id' => $booking->tutee_id, 
+                'tutor_name' => $tutorName, 
+                'tutee_name' => $tuteeName, 
+                'platform' => $booking->platform,
+                'link' => $booking->link,
+                'reason' => $booking->reason
             ];
         });
 

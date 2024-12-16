@@ -27,9 +27,9 @@
                 <img src="{{ asset('storage/images/meet.png') }}" alt="people" class="pl-1 block h-6 fill-current">
                 <p class="text-sm"> {{ $platform }} </p>
             </div>
-            <div class="flex gap-2 mb-2">
+            <div class="flex gap-2 mb-2 justify-start items-center">
                 <img src="{{ asset('storage/images/link.png') }}" alt="link" class="pl-1 block h-5 fill-current">
-                <p class="text-sm">{{ $link }}</p>
+                <p class="text-sm text-start">{{ $link }}</p>
             </div>
         </div>
         <div class="text-end">
@@ -70,9 +70,9 @@
                 <img src="{{ asset('storage/images/meet.png') }}" alt="people" class="pl-1 block h-6 fill-current">
                 <p class="text-sm"> {{ $platform }} </p>
             </div>
-            <div class="flex gap-2 mb-2">
+            <div class="flex gap-2 mb-2 justify-start items-center">
                 <img src="{{ asset('storage/images/link.png') }}" alt="link" class="pl-1 block h-5 fill-current">
-                <p class="text-sm">{{ $link }}</p>
+                <p class="text-sm text-start">{{ $link }}</p>
             </div>
             <div class="font-black text-sm mb-1 mt-5 text-start"> <p> Reason for cancellation </p> </div>
             <div class="font-normal text-sm mb-2 text-start"> <p x-text="reason"> </p> </div>
@@ -83,6 +83,8 @@
                 <form action="{{ route('booking.cancel', ['id' => $request_id]) }}" method="POST">
                     @csrf
                     @method('PATCH')
+                    <input type="hidden" name="reason" :value="reason">
+
                     <x-primary-button @click="step = 4" class="px-4 py-2" style="background-color: #dc2626 !important;">Confirm cancellation</x-primary-button>
                 </form>                
             </div>

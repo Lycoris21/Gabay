@@ -37,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
 
     Route::patch('/admin/manage-users/{id}', [AdminController::class, 'updateUser'])->name('admin.updateUser');
+
+    Route::patch('/applications/{id}/approve', [ApplicationController::class, 'approve'])->name('applications.approve');
+    Route::patch('/applications/{id}/reject', [ApplicationController::class, 'reject'])->name('applications.reject');
 });
 
 Route::post('/book-tutor', [BrowseController::class, 'book'])->name('book.tutor');
