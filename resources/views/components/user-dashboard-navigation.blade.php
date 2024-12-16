@@ -3,7 +3,7 @@
         {{ __('Profile') }}
     </x-nav-link>
     
-    <x-nav-link :href="route('dashboard.bookings')" :active="$currentSection === 'requests'" class="w-25 justify-center mr-2">
+    <x-nav-link :href="route('dashboard.bookings')" :active="$currentSection === 'bookings'" class="w-25 justify-center mr-2">
         {{ __('My Bookings') }}
     </x-nav-link>
 
