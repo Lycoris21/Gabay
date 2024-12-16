@@ -22,7 +22,7 @@
                                 <dt class="mt-1 text-sm font-medium text-gray-500">Year of Birth</dt>
                                 <dt class="mt-1 text-sm font-medium text-gray-500">Email</dt>
                                 <dt class="mt-1 text-sm font-medium text-gray-500">Description</dt>
-                                <dt class="mt-1 text-sm font-medium text-gray-500">Role</dt>
+                                <dt class="mt-1 text-sm font-medium text-gray-500">Tutor</dt>
                                 <dt class="mt-1 text-sm font-medium text-gray-500">Created At</dt>
                                 <dt class="mt-1 text-sm font-medium text-gray-500">Updated At</dt>
                             </div>
@@ -33,7 +33,7 @@
                                 <dd class="mt-1 text-sm text-gray-900">{{ $user->gender }}</dd>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $user->year_of_birth }}</dd>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $user->email }}</dd>
-                                <dd class="mt-1 text-sm text-gray-900">{{ $user->description }}</dd>
+                                <dd class="mt-1 text-sm text-gray-900">{{ $user->description ?? 'No description available' }}</dd>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $user->is_tutor ? 'Yes' : 'No' }}</dd>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $user->created_at }}</dd>
                                 <dd class="mt-1 text-sm text-gray-900">{{ $user->updated_at }}</dd>
