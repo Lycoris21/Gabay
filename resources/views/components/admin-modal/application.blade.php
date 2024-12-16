@@ -4,7 +4,6 @@
         <div x-data="{ step: 1 }">
             <!-- Step 1 -->
             <div x-show="step === 1">
-                <!-- Personal Information and Application Details -->
                 <div class="flex justify-evenly items-center">
                     <div class="w-35%">
                         <img src="{{ $application->user->profile_picture ? asset('storage/' . $application->user->profile_picture) : asset('storage/profile-picture/default-image.jpg')}}"
@@ -67,25 +66,15 @@
                     </div>
                 </div>
 
-                <!-- Buttons to Change Steps -->
                 <div class="mt-4 flex justify-end gap-3">
-                    <form method="POST" action="{{ route('applications.reject', $application->id) }}">
-                        @csrf
-                        @method('PATCH')
-                        <x-primary-button type="submit" class="px-4 py-2" style="background-color: #dc2626 !important;">Reject</x-primary-button>
-                    </form>
-                    <form method="POST" action="{{ route('applications.approve', $application->id) }}">
-                        @csrf
-                        @method('PATCH')
-                        <x-primary-button type="submit" class="px-4 py-2" style="background-color: #26dc29 !important;">Approve</x-primary-button>
-                    </form>
+                    <x-primary-button @click="step = 2" class="px-4 py-2" style="background-color: #dc2626 !important;">Reject</x-primary-button>
+                    <x-primary-button @click="step = 4" class="px-4 py-2" style="background-color: #26dc29 !important;">Approve</x-primary-button>
                     <div>
                         <x-secondary-button @click="open = false" class="px-4 py-2">Cancel</x-secondary-button>
                     </div>
                 </div>
             </div>
 
-            <!-- Additional steps for confirmation -->
             <div x-show="step === 2">
                 <div class="mb-8">
                     <div class="font-black text-2xl text-start text-red-600 ">
@@ -96,11 +85,13 @@
                     </div>
                 </div>
                 <div class="flex justify-end gap-3">
-                    <div>
-                        <x-primary-button @click="step = 3" class="px-4 py-2">
+                    <form method="POST" action="{{ route('applications.reject', $application->id) }}">
+                        @csrf
+                        @method('PATCH')
+                        <x-primary-button type="submit" class="px-4 py-2">
                             Reject
                         </x-primary-button>
-                    </div>
+                    </form>
                     <x-secondary-button @click="open = false, step = 1" class="px-4 py-2 text-left">Cancel</x-secondary-button>
                 </div>
             </div>
@@ -126,11 +117,13 @@
                     </div>
                 </div>
                 <div class="flex justify-end gap-3">
-                    <div>
-                        <x-primary-button @click="step = 5" class="px-4 py-2">
+                    <form method="POST" action="{{ route('applications.approve', $application->id) }}">
+                        @csrf
+                        @method('PATCH')
+                        <x-primary-button type="submit" class="px-4 py-2">
                             Approve Application
                         </x-primary-button>
-                    </div>
+                    </form>
                     <x-secondary-button @click="open = false, step = 1" class="px-4 py-2 text-left">Cancel</x-secondary-button>
                 </div>
             </div>
@@ -147,4 +140,5 @@
             </div>
 
         </div>
+    </div>
 </x-admin-modal.base>

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\User;
 use App\Models\Tutor;
-use App\Models\BookingNotification;
+use App\Models\Application;
 use Illuminate\Support\Facades\Auth;
 
 class UserDashboardController extends Controller
@@ -33,33 +33,58 @@ class UserDashboardController extends Controller
     
     public function getNotifications(){
         if (Auth::check()) {
-            $daNotifications = Booking::where('tutee_id', Auth::user()->id)
-            ->where('status', '!=', 'Pending')
-            ->orderBy('updated_at', 'desc')
-            ->get(['tutor_id', 'status', 'updated_at', 'id', 'subject_name'])
-            ->map(function ($booking) {
-                $tutor = User::find($booking->tutor_id);
-                $booking->name = $tutor->first_name . ' ' . $tutor->last_name;
-                $booking->profile_picture = $tutor->profile_picture;
-                
-                if ($booking->status === 'Approved') {
-                    $booking->action = ' approved your booking for ';
-                }
-                else if ($booking->status === 'Denied') {
-                    $booking->action = ' denied your booking for ';
-                }
-                else if ($booking->status === 'Cancelled') {
-                    $booking->action = ' cancelled your booking for ';
-                }
-                else if ($booking->status === 'Rescheduled') {
-                    $booking->action = ' rescheduled your booking for ';
-                }
-                else{
-                    $booking->action = $booking->status;
-                }
+            $bookingNotifications = Booking::where('tutee_id', Auth::user()->id)
+                ->where('status', '!=', 'Pending')
+                ->orderBy('updated_at', 'desc')
+                ->get(['tutor_id', 'status', 'updated_at', 'id', 'subject_name'])
+                ->map(function ($booking) {
+                    $tutor = User::find($booking->tutor_id);
+                    $booking->name = $tutor->first_name . ' ' . $tutor->last_name;
+                    $booking->profile_picture = $tutor->profile_picture;
 
-                return $booking;
-            });
+                    if ($booking->status === 'Approved') {
+                        $booking->action = ' approved your booking for ';
+                    }
+                    else if ($booking->status === 'Rejected') {
+                        $booking->action = ' rejected your booking for ';
+                    }
+                    else if ($booking->status === 'Cancelled') {
+                        $booking->action = ' cancelled your booking for ';
+                    }
+                    else if ($booking->status === 'Rescheduled') {
+                        $booking->action = ' rescheduled your booking for ';
+                    }
+                    else{
+                        $booking->action = $booking->status;
+                    }
+
+                    return $booking;
+                });
+
+            // Fetch applications where the status is not 'Pending'
+            $applicationNotifications = Application::where('user_id', Auth::user()->id)
+                ->where('status', '!=', 'Pending')
+                ->orderBy('updated_at', 'desc')
+                ->get(['status', 'updated_at', 'id', 'subject'])
+                ->map(function ($application) {
+                    // Optionally append the data you need for each application
+                    $application -> name = "Admin";
+                    $application -> subject_name = $application -> subject;
+                    $application->action = $application->status === 'Approved' 
+                        ? ' approved your application for ' 
+                        : ($application->status === 'Rejected' 
+                            ? ' rejected your application for ' 
+                            : ' updated your application for ');
+
+                    return $application;
+                });
+
+            // Merge applications with the notifications
+            $daNotifications = $bookingNotifications->merge($applicationNotifications);
+
+            // Optionally, you can sort all notifications together by date
+            $daNotifications = $daNotifications->sortByDesc('updated_at');
+
         } else {
             $daNotifications = collect();
         }
