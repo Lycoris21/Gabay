@@ -68,9 +68,11 @@ class UserDashboardController extends Controller
         return collect();
     }
 
-    public function getRequests()
+    public function getRequests(string $role = 'tutor')
     {
-        $requests = Booking::where('tutor_id', auth()->id())
+        $column = $role === 'tutee' ? 'tutee_id' : 'tutor_id';
+
+        $requests = Booking::where($column, auth()->id())
         //->where('status', 'Pending') // Uncomment if you want to filter by status
         ->get() // Get all fields
         ->map(function ($booking) {
@@ -102,7 +104,6 @@ class UserDashboardController extends Controller
 
         return $requests;
     }
-
 
     public function index()
     {
@@ -141,7 +142,8 @@ class UserDashboardController extends Controller
         $upcomingSessions = $this -> getUpcomingSessions();
         $notifications = $this -> getNotifications();
         $subjectTags = $this -> getSubjectTags();
-        $requests = $this -> getRequests();
+        $requests = $this -> getRequests("tutor");
+        $bookings = $this -> getRequests("tutee");
 
         return view('dashboard', [
             'section' => 'requests',
@@ -149,6 +151,7 @@ class UserDashboardController extends Controller
             'upcomingSessions' => $upcomingSessions,
             'subjectTags' => $subjectTags,
             'requests' => $requests,
+            'bookings' => $bookings,
             'notifications' => $notifications,
             'user' => $user
         ]);
