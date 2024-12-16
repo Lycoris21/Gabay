@@ -112,6 +112,4 @@ class ApplicationController extends Controller
         // Redirect to the dashboard explicitly with GET
         return redirect()->back()->with('success', 'Popup closed successfully.');
     }
-    
-
 }

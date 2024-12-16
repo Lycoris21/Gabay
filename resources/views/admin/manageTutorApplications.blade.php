@@ -1,15 +1,15 @@
 <x-app-layout>
     <div class="flex">
         <x-sidebar />
-        
+
         {{-- Confirmation Popup --}}
         @if(session('confirmAction'))
-            <x-confirmation-popup/>
+        <x-confirmation-popup />
         @endif
 
         {{-- Application Popup --}}
         @if(session('showApplication'))
-            <x-application-popup :application="session('showApplication')" />
+        <x-application-popup :application="session('showApplication')" />
         @endif
 
         <div class="flex-1 ml-64 py-5">
@@ -33,8 +33,8 @@
                                 {{-- Sorting Dropdown --}}
                                 <div class="w-24 mr-5">
                                     <select name="sortOrder"
-                                            class="block h-7 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-[12px] text-gray-700 appearance-none py-0 pl-2"
-                                            onchange="this.form.submit()">
+                                        class="block h-7 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-[12px] text-gray-700 appearance-none py-0 pl-2"
+                                        onchange="this.form.submit()">
                                         <option value="" disabled selected>{{ __('Sort by') }}</option>
                                         <option value="Newest" {{ request('sortOrder') == 'Newest' ? 'selected' : '' }}>{{ __('Newest') }}</option>
                                         <option value="Oldest" {{ request('sortOrder') == 'Oldest' ? 'selected' : '' }}>{{ __('Oldest') }}</option>
@@ -45,9 +45,14 @@
 
                         <x-application-table :applications="$applications" />
 
+                        <!-- Rejected Applications Table -->
+                    </div>
+                </div>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg min-h-full mt-6">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mt-6">Rejected Applications</h2>
+                        <x-application-table :applications="$rejectedApplications" />
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 </x-app-layout>
