@@ -7,7 +7,14 @@
         <p class="text-sm text-gray-700 truncate w-11/12"><strong>{{ $subject }}: {{ $topic }}</strong> </p>
         <div class="flex justify-between items-center">
             <p class="text-sm text-gray-700"> {{ $time }}</p>
-            <p class="text-xs font-bold text-gray-700 pr-3"> {{$role}}</p>
+            @if (Auth::user()->is_tutor)
+                @if(1)
+                    <p class="text-xs font-bold text-gray-700 pr-3"> Tutor</p>
+                @else
+                    <p class="text-xs font-bold text-gray-700 pr-3"> Tutee</p>
+                @endif
+            @endif
+            
         </div>
     </div>
 </div>
