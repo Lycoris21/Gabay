@@ -35,6 +35,7 @@ class UserDashboardController extends Controller
         if (Auth::check()) {
             $daNotifications = Booking::where('tutee_id', Auth::user()->id)
             ->where('status', '!=', 'Pending')
+            ->orderBy('updated_at', 'desc')
             ->get(['tutor_id', 'status', 'updated_at', 'id', 'subject_name'])
             ->map(function ($booking) {
                 $tutor = User::find($booking->tutor_id);
@@ -47,8 +48,8 @@ class UserDashboardController extends Controller
                 else if ($booking->status === 'Denied') {
                     $booking->action = ' denied your booking for ';
                 }
-                else if ($booking->status === 'Canceled') {
-                    $booking->action = ' canceled your booking for ';
+                else if ($booking->status === 'Cancelled') {
+                    $booking->action = ' cancelled your booking for ';
                 }
                 else if ($booking->status === 'Rescheduled') {
                     $booking->action = ' rescheduled your booking for ';
@@ -84,6 +85,7 @@ class UserDashboardController extends Controller
 
         $requests = Booking::where($column, auth()->id())
         //->where('status', 'Pending') // Uncomment if you want to filter by status
+        ->orderBy('date', 'asc')
         ->get() // Get all fields
         ->map(function ($booking) {
             // Find the tutee and tutor users

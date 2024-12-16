@@ -83,9 +83,9 @@
                     <img src="{{ asset('storage/images/meet.png') }}" alt="people" class="pl-1 block h-6 fill-current">
                     <p class="text-sm"> {{ $platform }} </p>
                 </div>
-                <div class="flex gap-2 mb-2">
+                <div class="flex gap-2 mb-2 justify-start items-center">
                     <img src="{{ asset('storage/images/link.png') }}" alt="link" class="pl-1 block h-5 fill-current">
-                    <p class="text-sm" x-text="sessionLink"></p>
+                    <p class="text-sm text-start" x-text="sessionLink"></p>
                 </div>
             </div>
             <div class="flex justify-between">
