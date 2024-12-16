@@ -36,18 +36,23 @@ class BookingController extends Controller
         return redirect()->back()->with('success', 'Your booking request has been sent successfully.');
     }
 
-    public function reject($id)
+    public function reject(Request $request, $id)
     {
+        $request->validate([
+            'reason' => 'required|string|max:500',
+        ]);
+
         $booking = Booking::findOrFail($id);
 
         if ($booking->status !== 'Pending') {
             return redirect()->back()->with('error', 'This request has already been processed.');
         }
 
-        $booking->status = 'Denied';
+        $booking->status = 'Rejected';
+        $booking->reason = $request->input('reason'); // Save the cancellation reason
         $booking->save();
 
-        return redirect()->back()->with('success', 'The request has been denied.');
+        return redirect()->back()->with('success', 'The request has been rejected.');
     }
 
     public function approve(Request $request, $id)

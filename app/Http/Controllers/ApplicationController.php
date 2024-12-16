@@ -64,7 +64,7 @@ class ApplicationController extends Controller
             
         } elseif ($request->input('action') === 'deny') {
             // Handle denial logic
-            $application->status = 'rejected';
+            $application->status = 'denied';
         }
 
         $application->save();
@@ -72,36 +72,6 @@ class ApplicationController extends Controller
 
         // Redirect back to the dashboard with a success message
         return redirect()->back()->with('success', 'Application status updated successfully.');
-    }
-
-    public function approve($id)
-    {
-        $application = Application::findOrFail($id);
-        $application->status = 'approved';
-        $application->save();
-
-        $user = $application->user;
-        if (!$user->is_tutor) {
-            $user->is_tutor = true;
-            $user->save();
-        }
-
-        $tutor = Tutor::firstOrCreate(['user_id' => $user->id]);
-        $tutor->subjects()->updateOrCreate(
-            ['subject' => $application->subject],
-            ['hourly_rate' => $application->hourly_rate]
-        );
-
-        return redirect()->back()->with('success', 'Application approved successfully.');
-    }
-
-    public function reject($id)
-    {
-        $application = Application::findOrFail($id);
-        $application->status = 'denied';
-        $application->save();
-
-        return redirect()->back()->with('success', 'Application rejected successfully.');
     }
 
     public function closePopup()
@@ -112,4 +82,6 @@ class ApplicationController extends Controller
         // Redirect to the dashboard explicitly with GET
         return redirect()->back()->with('success', 'Popup closed successfully.');
     }
+    
+
 }
