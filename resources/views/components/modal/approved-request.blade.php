@@ -83,6 +83,8 @@
                 <form action="{{ route('booking.cancel', ['id' => $request_id]) }}" method="POST">
                     @csrf
                     @method('PATCH')
+                    <input type="hidden" name="reason" :value="reason">
+                    
                     <x-primary-button @click="step = 4" class="px-4 py-2" style="background-color: #dc2626 !important;">Confirm cancellation</x-primary-button>
                 </form>                
             </div>

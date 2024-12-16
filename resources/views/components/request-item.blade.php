@@ -53,6 +53,8 @@
                 :date="$request['date']"
                 :time="$request['time']"
                 :platform="$request['platform']" 
+                :link="$request['link']" 
+                :reason="$request['reason']" 
                 :tutorName="$request['tutor_name']"
                 :tuteeName="$request['tutee_name']"/>
         @endif
