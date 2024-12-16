@@ -13,7 +13,7 @@
             </thead>
 
             <tbody class="text-sm text-center">
-                @foreach ($requests as $request)
+                @foreach ($bookings as $request)
                     <x-request-item 
                         name="{{ $request['name'] }}" 
                         subject="{{ $request['subject'] }}" 
