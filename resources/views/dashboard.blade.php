@@ -11,6 +11,7 @@
     'subject' => $booking->subject_name,
     'topic' => $booking->subject_topic,
     'time' => $startTime . ' - ' . $endTime,
+    'role' => $booking->role
     ];
     }
 
@@ -47,7 +48,8 @@
                                 :day="$upcomingSession['day']"
                                 :subject="$upcomingSession['subject']"
                                 :topic="$upcomingSession['topic']"
-                                :time="$upcomingSession['time']" />
+                                :time="$upcomingSession['time']" 
+                                :role="$upcomingSession['role']" />
                             @endforeach
                         </div>
 

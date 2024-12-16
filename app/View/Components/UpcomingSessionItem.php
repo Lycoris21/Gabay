@@ -11,19 +11,21 @@ class UpcomingSessionItem extends Component
     public $subject;
     public $topic;
     public $time;
+    public $role;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($dayOfWeek, $day, $subject, $topic, $time)
+    public function __construct($dayOfWeek, $day, $subject, $topic, $time, $role)
     {
         $this->dayOfWeek = $dayOfWeek;
         $this->day = $day;
         $this->subject = $subject;
         $this->topic = $topic;
         $this->time = $time;
+        $this->role = $role;
     }
 
     /**
