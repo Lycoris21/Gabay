@@ -33,6 +33,24 @@
                             :time="$notification['updated_at']"
                             :profile_picture="$notification['profile_picture']" />
                         @endforeach
+                        @if (Auth::user()->is_tutor == 0 && $status == 'denied')
+                            @props(['profile_picture', 'status'])
+                            <div class="notification flex flex-row items-center p-2 border-b">
+                                <div>
+                                    <img src="{{ asset('storage/' . ($profile_picture ?? 'profile-picture/default-image.jpg')) }}" 
+                                        alt="Tutor Profile Picture" 
+                                        class="mr-2 w-10 h-10 rounded-full shadow-xl">
+                                </div>
+                                <div class="flex-col ml-2">
+                                    <p class="text-sm">
+                                        Admin {{ 'rejected' }} your application for the subject {{ 'Mathematics' }}.
+                                    </p>
+                                    <p class="font-light text-xs">
+                                        <span>{{ \Carbon\Carbon::now()->format('d M, Y H:i') }}</span> 
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
