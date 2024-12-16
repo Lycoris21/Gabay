@@ -156,5 +156,26 @@ class UserDashboardController extends Controller
             'user' => $user
         ]);
     }
+
+    public function bookings()
+    {
+        $user = Auth::user();
+        $upcomingSessions = $this -> getUpcomingSessions();
+        $notifications = $this -> getNotifications();
+        $subjectTags = $this -> getSubjectTags();
+        $requests = $this -> getRequests("tutor");
+        $bookings = $this -> getRequests("tutee");
+
+        return view('dashboard', [
+            'section' => 'bookings',
+            'content' => 'dashboard.bookings',
+            'upcomingSessions' => $upcomingSessions,
+            'subjectTags' => $subjectTags,
+            'requests' => $requests,
+            'bookings' => $bookings,
+            'notifications' => $notifications,
+            'user' => $user
+        ]);
+    }
     
 }
