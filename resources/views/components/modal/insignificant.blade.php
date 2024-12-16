@@ -20,9 +20,9 @@
                 <p class="text-sm"> {{ $platform }} </p>
             </div>
             @if ($status == 'Completed' || $status == 'Cancelled')
-            <div class="flex gap-2 mb-2">
+            <div class="flex gap-2 mb-2 justify-start items-center">
                 <img src="{{ asset('storage/images/link.png') }}" alt="link" class="pl-1 block h-5 fill-current">
-                <p class="text-sm">{{ $link }}</p>
+                <p class="text-sm text-start">{{ $link }}</p>
             </div>
             @endif
             @if ($status == 'Cancelled')
