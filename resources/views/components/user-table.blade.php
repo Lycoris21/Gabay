@@ -26,11 +26,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $user->year_of_birth }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <a href="{{ route('users.manageView', ['id' => $user->id]) }}" 
-                                   class="bg-gray-800 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
-                                    View Details
-                                </a>
-                            </td> <!-- View Details Button -->
+                                <x-admin-modal.user :user="$user" /> 
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

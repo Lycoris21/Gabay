@@ -90,4 +90,27 @@ class AdminController extends Controller
 
         return view('admin.manageUsers', compact('users', 'searchQuery'));
     }
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'year_of_birth' => 'required|integer',
+            'gender' => 'required|string',
+            'description' => 'nullable|string|max:500',
+        ]);
+
+        $user->update($validatedData);
+
+        // Handle tutor-specific fields if user is a tutor
+        if ($user->is_tutor) {
+            $user->tutor->update($request->only(['subjects', 'hourly_rate', 'resume']));
+        }
+
+        return redirect()->back()->with('success', 'User information updated successfully.');
+    }
 }
