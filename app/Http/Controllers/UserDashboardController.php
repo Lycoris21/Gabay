@@ -72,7 +72,7 @@ class UserDashboardController extends Controller
                     $application -> subject_name = $application -> subject;
                     $application->action = $application->status === 'Approved' 
                         ? ' approved your application for ' 
-                        : ($application->status === 'Rejected' 
+                        : ($application->status === 'Denied' 
                             ? ' rejected your application for ' 
                             : ' updated your application for ');
 
