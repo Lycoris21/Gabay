@@ -61,7 +61,8 @@
                             <dt class="text-sm font-medium text-gray-500">Resume</dt>
                             <dd class="text-sm text-gray-900">
                                 <a href="{{ asset('storage/' . $application->resume_path) }}" 
-                                   class="text-blue-500 hover:underline">View Resume</a>
+                                   class="text-blue-500 hover:underline"
+                                   target="_blank">View Resume</a>
                             </dd>
                         </div>
                     </div>
