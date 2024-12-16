@@ -74,7 +74,8 @@ class UserDashboardController extends Controller
                         ? ' approved your application for ' 
                         : ($application->status === 'Denied' 
                             ? ' rejected your application for ' 
-                            : ' updated your application for ');
+                            : ' updated your application for '
+                        );
 
                     return $application;
                 });
