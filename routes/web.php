@@ -55,6 +55,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/manage-users', [AdminController::class, 'manageUsers'])->name('admin.manageUsers');
     Route::get('/rejected-applications', [ApplicationController::class, 'manageRejectedApplications'])->name('admin.manageRejectedApplications');
 });
+
 Route::get('/tutorApplication', function () {
     return view('tutorApplication');
 })->middleware(['auth', 'verified'])->name('tutorApplication');

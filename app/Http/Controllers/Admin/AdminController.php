@@ -52,8 +52,10 @@ class AdminController extends Controller
             // Get the results
             ->get();
 
+        $rejectedApplications = Application::where('status', 'denied')->get();
+
         // Return the view with the applications data
-        return view('admin.manageTutorApplications', compact('applications'));
+        return view('admin.manageTutorApplications', compact('applications', 'rejectedApplications'));
     }
 
     public function manageUsers(Request $request)

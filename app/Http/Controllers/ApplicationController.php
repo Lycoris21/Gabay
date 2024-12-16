@@ -112,10 +112,4 @@ class ApplicationController extends Controller
         // Redirect to the dashboard explicitly with GET
         return redirect()->back()->with('success', 'Popup closed successfully.');
     }
-
-    public function manageRejectedApplications()
-    {
-        $applications = Application::where('status', 'rejected')->get();
-        return view('admin.manageRejectedApplications', compact('applications'));
-    }
 }
