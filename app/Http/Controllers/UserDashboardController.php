@@ -143,7 +143,6 @@ class UserDashboardController extends Controller
         $notifications = $this -> getNotifications();
         $subjectTags = $this -> getSubjectTags();
         $requests = $this -> getRequests("tutor");
-        $bookings = $this -> getRequests("tutee");
 
         return view('dashboard', [
             'section' => 'requests',
@@ -151,6 +150,24 @@ class UserDashboardController extends Controller
             'upcomingSessions' => $upcomingSessions,
             'subjectTags' => $subjectTags,
             'requests' => $requests,
+            'notifications' => $notifications,
+            'user' => $user
+        ]);
+    }
+
+    public function bookings()
+    {
+        $user = Auth::user();
+        $upcomingSessions = $this -> getUpcomingSessions();
+        $notifications = $this -> getNotifications();
+        $subjectTags = $this -> getSubjectTags();
+        $bookings = $this -> getRequests("tutee");
+
+        return view('dashboard', [
+            'section' => 'bookings',
+            'content' => 'dashboard.bookings',
+            'upcomingSessions' => $upcomingSessions,
+            'subjectTags' => $subjectTags,
             'bookings' => $bookings,
             'notifications' => $notifications,
             'user' => $user
