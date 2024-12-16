@@ -5,6 +5,16 @@
     </div>
     <div class="flex-row ml-2 bg-cyan-500 rounded-xl w-10/12 pl-2 justify-center pt-1">
         <p class="text-sm text-gray-700 truncate w-11/12"><strong>{{ $subject }}: {{ $topic }}</strong> </p>
-        <p class="text-sm text-gray-700"> {{ $time }}</p>
+        <div class="flex justify-between items-center">
+            <p class="text-sm text-gray-700"> {{ $time }}</p>
+            @if (Auth::user()->is_tutor)
+                @if(1)
+                    <p class="text-xs font-bold text-gray-700 pr-3"> Tutor</p>
+                @else
+                    <p class="text-xs font-bold text-gray-700 pr-3"> Tutee</p>
+                @endif
+            @endif
+            
+        </div>
     </div>
 </div>
