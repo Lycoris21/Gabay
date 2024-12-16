@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/dashboard/profile', [ProfileController::class, 'update'])->name('dashboard.update');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/dashboard/requests', [UserDashboardController::class, 'requests'])->name('dashboard.requests');
-    
+    Route::get('/dashboard/bookings', [UserDashboardController::class, 'bookings'])->name('dashboard.bookings');
     Route::get('/browse', [BrowseController::class, 'index'])->name('browse.index');
 
     Route::patch('/admin/manage-users/{id}', [AdminController::class, 'updateUser'])->name('admin.updateUser');
